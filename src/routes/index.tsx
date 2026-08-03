@@ -13,6 +13,7 @@ import {
   generateSynthesisFn,
   generateTopicFn,
 } from "@/lib/astro/interpretation.functions";
+import { dict, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
 import { TOPICS, type ChartJson, type Lang, type Topic } from "@/lib/astro/types";
 
 export const Route = createFileRoute("/")({
@@ -75,12 +76,8 @@ const ASPECTS: Array<{ label: string; angle: number }> = [
 
 type Tab = "placement" | "aspect" | "synthesis" | "topic";
 
-const TABS: Array<{ id: Tab; label: string; hint: string }> = [
-  { id: "placement", label: "P1 · Θέση", hint: "πλανήτης σε ζώδιο σε οίκο" },
-  { id: "aspect", label: "P2 · Όψη", hint: "ζεύγος πλανητών" },
-  { id: "synthesis", label: "P3 · Σύνθεση", hint: "ολόκληρος χάρτης" },
-  { id: "topic", label: "P4 · Θέμα", hint: "κλειστή λίστα" },
-];
+const TAB_IDS: Tab[] = ["placement", "aspect", "synthesis", "topic"];
+
 
 const field =
   "w-full rounded-lg border border-input bg-secondary/60 px-3 py-2 text-sm text-foreground outline-none focus:border-primary";
@@ -158,16 +155,15 @@ function Studio() {
     }
   }
 
+  const t = dict(lang);
+
   return (
     <div className="mx-auto w-full max-w-5xl px-5 py-14">
       <header className="mb-10 flex flex-wrap items-end justify-between gap-6">
         <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-primary">Prompt Library v1.0</p>
-          <h1 className="mt-3 text-4xl md:text-5xl">Αστρολογική Ερμηνεία</h1>
-          <p className="mt-3 max-w-xl text-sm text-muted-foreground">
-            Δομημένα prompts για atoms, όψεις, σύνθεση και θέματα εμβάθυνσης — χωρίς ελεύθερο
-            κείμενο από τον χρήστη, με banned-term scan σε κάθε output.
-          </p>
+          <p className="text-xs uppercase tracking-[0.35em] text-primary">{t.eyebrow}</p>
+          <h1 className="mt-3 text-4xl md:text-5xl">{t.title}</h1>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground">{t.intro}</p>
         </div>
         <div className="flex gap-1 rounded-full border border-border bg-card p-1">
           {(["el", "en"] as Lang[]).map((l) => (
@@ -185,21 +181,21 @@ function Studio() {
       </header>
 
       <nav className="mb-6 grid gap-2 sm:grid-cols-4">
-        {TABS.map((t) => (
+        {TAB_IDS.map((id) => (
           <button
-            key={t.id}
+            key={id}
             onClick={() => {
-              setTab(t.id);
+              setTab(id);
               setResult(null);
             }}
             className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-              tab === t.id
+              tab === id
                 ? "border-primary bg-secondary"
                 : "border-border bg-card hover:border-primary/50"
             }`}
           >
-            <span className="block text-sm font-medium">{t.label}</span>
-            <span className="mt-0.5 block text-xs text-muted-foreground">{t.hint}</span>
+            <span className="block text-sm font-medium">{t.tabs[id].label}</span>
+            <span className="mt-0.5 block text-xs text-muted-foreground">{t.tabs[id].hint}</span>
           </button>
         ))}
       </nav>
@@ -207,10 +203,22 @@ function Studio() {
       <section className="panel p-6">
         {tab === "placement" && (
           <div className="grid gap-4 sm:grid-cols-3">
-            <Select label="Πλανήτης" value={planet} onChange={setPlanet} options={PLANETS} />
-            <Select label="Ζώδιο" value={sign} onChange={setSign} options={SIGNS} />
             <Select
-              label="Οίκος"
+              label={t.planet}
+              value={planet}
+              onChange={setPlanet}
+              options={PLANETS}
+              render={(v) => tPlanet(v, lang)}
+            />
+            <Select
+              label={t.sign}
+              value={sign}
+              onChange={setSign}
+              options={SIGNS}
+              render={(v) => tSign(v, lang)}
+            />
+            <Select
+              label={t.house}
               value={String(house)}
               onChange={(v) => setHouse(Number(v))}
               options={Array.from({ length: 12 }, (_, i) => String(i + 1))}
@@ -220,13 +228,26 @@ function Studio() {
 
         {tab === "aspect" && (
           <div className="grid gap-4 sm:grid-cols-3">
-            <Select label="Πλανήτης Α" value={planet} onChange={setPlanet} options={PLANETS} />
-            <Select label="Πλανήτης Β" value={planetB} onChange={setPlanetB} options={PLANETS} />
             <Select
-              label="Όψη"
+              label={t.planetA}
+              value={planet}
+              onChange={setPlanet}
+              options={PLANETS}
+              render={(v) => tPlanet(v, lang)}
+            />
+            <Select
+              label={t.planetB}
+              value={planetB}
+              onChange={setPlanetB}
+              options={PLANETS}
+              render={(v) => tPlanet(v, lang)}
+            />
+            <Select
+              label={t.aspect}
               value={aspect.label}
               onChange={(v) => setAspect(ASPECTS.find((a) => a.label === v)!)}
               options={ASPECTS.map((a) => a.label)}
+              render={(v) => tAspect(v, lang)}
             />
           </div>
         )}
@@ -236,7 +257,7 @@ function Studio() {
             <div className="grid gap-4 sm:grid-cols-3">
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                  Ημερομηνία γέννησης
+                  {t.birthDate}
                 </span>
                 <input
                   type="date"
@@ -247,7 +268,7 @@ function Studio() {
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                  Ώρα γέννησης
+                  {t.birthTime}
                 </span>
                 <input
                   type="time"
@@ -258,54 +279,55 @@ function Studio() {
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                  Τόπος γέννησης
+                  {t.birthPlace}
                 </span>
                 <input
                   type="text"
                   className={field}
                   value={birthPlace}
-                  placeholder="π.χ. Θεσσαλονίκη"
+                  placeholder={t.placePlaceholder}
                   onChange={(e) => setBirthPlace(e.target.value)}
                 />
               </label>
             </div>
-            <p className="text-xs text-muted-foreground">
-              Ο χάρτης υπολογίζεται τοπικά (whole sign) και μόνο οι θέσεις στέλνονται στο μοντέλο.
-            </p>
+            <p className="text-xs text-muted-foreground">{t.chartNote}</p>
           </div>
         )}
 
         {tab === "topic" && (
           <div className="grid gap-4 sm:grid-cols-2">
             <Select
-              label="Θέμα"
+              label={t.topic}
               value={topic}
               onChange={(v) => setTopic(v as Topic)}
               options={TOPICS}
+              render={(v) => t.topics[v as Topic]}
             />
-            <p className="self-end text-xs text-muted-foreground">
-              Κλειστό enum — ο χρήστης δεν πληκτρολογεί ποτέ.
-            </p>
+            <p className="self-end text-xs text-muted-foreground">{t.topicNote}</p>
           </div>
         )}
 
         <div className="mt-6 flex items-center gap-4">
           <Button onClick={run} disabled={loading}>
-            {loading ? "Παράγεται…" : "Παραγωγή"}
+            {loading ? t.generating : t.generate}
           </Button>
-          {error && <span className="text-sm text-destructive">Σφάλμα: {error}</span>}
+          {error && (
+            <span className="text-sm text-destructive">
+              {t.error}: {error}
+            </span>
+          )}
         </div>
       </section>
 
       {tab === "synthesis" && chart && (
         <section className="panel mt-6 p-6">
           <header className="mb-4">
-            <h2 className="text-2xl">Γενέθλιος χάρτης</h2>
+            <h2 className="text-2xl">{t.chartTitle}</h2>
             {placeLabel && <p className="mt-1 text-xs text-muted-foreground">{placeLabel}</p>}
           </header>
           <ChartWheel chart={chart} />
           <div className="mt-8">
-            <ChartTables chart={chart} />
+            <ChartTables chart={chart} lang={lang} />
           </div>
         </section>
       )}
@@ -315,28 +337,25 @@ function Studio() {
           {result.flagged ? (
             <div className="space-y-2">
               <span className="inline-block rounded-full bg-destructive px-3 py-1 text-xs text-destructive-foreground">
-                Χρειάζεται χειροκίνητο γράψιμο
+                {t.flagged}
               </span>
               <p className="text-sm text-muted-foreground">
-                Το κείμενο περιείχε όρους εκτός πλαισίου
-                {result.bannedTerms.length > 0 && ` (${result.bannedTerms.join(", ")})`} και δεν
-                εμφανίζεται.
+                {t.flaggedBody}
+                {result.bannedTerms.length > 0 && ` (${result.bannedTerms.join(", ")})`} {t.flaggedTail}
               </p>
             </div>
           ) : (
             <>
               <h2 className="mb-5 text-2xl">
-                {tab === "synthesis" ? "Ανάλυση χάρτη" : "Ερμηνεία"}
+                {tab === "synthesis" ? t.analysis : t.interpretation}
               </h2>
-              <ResultView kind={tab} data={result.data} />
+              <ResultView kind={tab} data={result.data} lang={lang} />
             </>
           )}
         </section>
       )}
 
-      <footer className="mt-10 text-center text-xs text-muted-foreground">
-        Το περιεχόμενο προορίζεται αποκλειστικά για ψυχαγωγία και αυτογνωσία.
-      </footer>
+      <footer className="mt-10 text-center text-xs text-muted-foreground">{t.footer}</footer>
     </div>
   );
 }
@@ -346,11 +365,13 @@ function Select({
   value,
   onChange,
   options,
+  render,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   options: string[];
+  render?: (value: string) => string;
 }) {
   return (
     <label className="block">
@@ -360,7 +381,7 @@ function Select({
       <select className={field} value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o} value={o}>
-            {o}
+            {render ? render(o) : o}
           </option>
         ))}
       </select>

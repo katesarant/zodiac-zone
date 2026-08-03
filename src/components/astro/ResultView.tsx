@@ -1,24 +1,11 @@
+import { dict, ordinalHouse, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
 import type {
   AtomAspect,
   AtomPlacement,
+  Lang,
   Synthesis,
   TopicExpansion,
 } from "@/lib/astro/types";
-
-const TOPIC_LABELS: Record<string, string> = {
-  relationships: "Σχέσεις",
-  career: "Καριέρα",
-  communication: "Επικοινωνία",
-  emotional_needs: "Συναισθηματικές ανάγκες",
-  strengths: "Δυνατά σημεία",
-  blind_spots: "Τυφλά σημεία",
-};
-
-const INTENSITY_LABELS: Record<string, string> = {
-  low: "χαμηλή ένταση",
-  medium: "μέτρια ένταση",
-  high: "υψηλή ένταση",
-};
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -57,8 +44,17 @@ function Bullets({ items }: { items: string[] }) {
   );
 }
 
-export function ResultView({ kind, data }: { kind: string; data: unknown }) {
+export function ResultView({
+  kind,
+  data,
+  lang,
+}: {
+  kind: string;
+  data: unknown;
+  lang: Lang;
+}) {
   if (!data) return null;
+  const t = dict(lang);
 
   if (kind === "placement") {
     const list = (Array.isArray(data) ? data : [data]) as AtomPlacement[];
@@ -67,13 +63,15 @@ export function ResultView({ kind, data }: { kind: string; data: unknown }) {
         {list.map((a, i) => (
           <article key={i} className="space-y-5">
             <h3 className="text-2xl">
-              {a.planet} στον {a.sign} · {a.house}ος οίκος
+              {tPlanet(a.planet, lang)}
+              {lang === "el" ? " στον " : " in "}
+              {tSign(a.sign, lang)} · {ordinalHouse(a.house, lang)}
             </h3>
-            {a.core && <Block title="Πυρήνας">{a.core}</Block>}
-            {a.arena && <Block title="Πεδίο">{a.arena}</Block>}
-            {a.growth && <Block title="Εξέλιξη">{a.growth}</Block>}
+            {a.core && <Block title={t.core}>{a.core}</Block>}
+            {a.arena && <Block title={t.arena}>{a.arena}</Block>}
+            {a.growth && <Block title={t.growth}>{a.growth}</Block>}
             {a.keywords?.length > 0 && (
-              <Block title="Λέξεις-κλειδιά">
+              <Block title={t.keywords}>
                 <Chips items={a.keywords} />
               </Block>
             )}
@@ -89,17 +87,17 @@ export function ResultView({ kind, data }: { kind: string; data: unknown }) {
       <article className="space-y-5">
         <div className="flex flex-wrap items-center gap-3">
           <h3 className="text-2xl">
-            {a.planet_a} {a.aspect} {a.planet_b}
+            {tPlanet(a.planet_a, lang)} {tAspect(a.aspect, lang)} {tPlanet(a.planet_b, lang)}
           </h3>
           {a.intensity && (
             <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
-              {INTENSITY_LABELS[a.intensity] ?? a.intensity}
+              {t.intensity[a.intensity] ?? a.intensity}
             </span>
           )}
         </div>
-        {a.dynamic && <Block title="Δυναμική">{a.dynamic}</Block>}
-        {a.shows_up && <Block title="Πώς εκδηλώνεται">{a.shows_up}</Block>}
-        {a.work && <Block title="Δουλειά">{a.work}</Block>}
+        {a.dynamic && <Block title={t.dynamic}>{a.dynamic}</Block>}
+        {a.shows_up && <Block title={t.showsUp}>{a.shows_up}</Block>}
+        {a.work && <Block title={t.work}>{a.work}</Block>}
       </article>
     );
   }
@@ -113,39 +111,41 @@ export function ResultView({ kind, data }: { kind: string; data: unknown }) {
         )}
         <div className="grid gap-6 sm:grid-cols-2">
           {s.strengths?.length > 0 && (
-            <Block title="Δυνάμεις">
+            <Block title={t.strengths}>
               <Bullets items={s.strengths} />
             </Block>
           )}
           {s.tensions?.length > 0 && (
-            <Block title="Εντάσεις">
+            <Block title={t.tensions}>
               <Bullets items={s.tensions} />
             </Block>
           )}
         </div>
         {s.life_areas && (
           <div className="grid gap-5 sm:grid-cols-3">
-            <Block title="Σχέσεις">{s.life_areas.relationships}</Block>
-            <Block title="Εργασία">{s.life_areas.work}</Block>
-            <Block title="Εσωτερική ζωή">{s.life_areas.inner_life}</Block>
+            <Block title={t.relationships}>{s.life_areas.relationships}</Block>
+            <Block title={t.workArea}>{s.life_areas.work}</Block>
+            <Block title={t.innerLife}>{s.life_areas.inner_life}</Block>
           </div>
         )}
         {s.one_thing && (
           <div className="rounded-xl border border-primary/40 bg-secondary/50 p-4">
-            <Block title="Ένα πράγμα">{s.one_thing}</Block>
+            <Block title={t.oneThing}>{s.one_thing}</Block>
           </div>
         )}
       </article>
     );
   }
 
-  const t = data as TopicExpansion;
+  const topic = data as TopicExpansion;
   return (
     <article className="space-y-5">
-      <h3 className="text-2xl">{TOPIC_LABELS[t.topic] ?? t.topic}</h3>
-      {t.body && (
+      <h3 className="text-2xl">
+        {t.topics[topic.topic as keyof typeof t.topics] ?? topic.topic}
+      </h3>
+      {topic.body && (
         <div className="space-y-3 text-sm leading-relaxed text-foreground/90">
-          {t.body
+          {topic.body
             .split(/\n{2,}/)
             .filter(Boolean)
             .map((p, i) => (
@@ -153,9 +153,9 @@ export function ResultView({ kind, data }: { kind: string; data: unknown }) {
             ))}
         </div>
       )}
-      {t.placements_used?.length > 0 && (
-        <Block title="Θέσεις που χρησιμοποιήθηκαν">
-          <Chips items={t.placements_used} />
+      {topic.placements_used?.length > 0 && (
+        <Block title={t.placementsUsed}>
+          <Chips items={topic.placements_used} />
         </Block>
       )}
     </article>
