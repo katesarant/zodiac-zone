@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 
+import { ResultView } from "@/components/astro/ResultView";
 import { Button } from "@/components/ui/button";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
 import {
@@ -242,24 +243,20 @@ function Studio() {
 
       {result && (
         <section className="panel mt-6 p-6">
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-xs">
-            <span
-              className={`rounded-full px-3 py-1 ${
-                result.flagged
-                  ? "bg-destructive text-destructive-foreground"
-                  : "bg-secondary text-primary"
-              }`}
-            >
-              {result.flagged ? "Flagged — χειροκίνητο γράψιμο" : "Καθαρό από banned terms"}
-            </span>
-            <span className="text-muted-foreground">προσπάθειες: {result.attempts}</span>
-            {result.bannedTerms.length > 0 && (
-              <span className="text-muted-foreground">όροι: {result.bannedTerms.join(", ")}</span>
-            )}
-          </div>
-          <pre className="max-h-[28rem] overflow-auto whitespace-pre-wrap rounded-lg bg-secondary/50 p-4 text-sm leading-relaxed">
-            {JSON.stringify(result.data, null, 2)}
-          </pre>
+          {result.flagged ? (
+            <div className="space-y-2">
+              <span className="inline-block rounded-full bg-destructive px-3 py-1 text-xs text-destructive-foreground">
+                Χρειάζεται χειροκίνητο γράψιμο
+              </span>
+              <p className="text-sm text-muted-foreground">
+                Το κείμενο περιείχε όρους εκτός πλαισίου
+                {result.bannedTerms.length > 0 && ` (${result.bannedTerms.join(", ")})`} και δεν
+                εμφανίζεται.
+              </p>
+            </div>
+          ) : (
+            <ResultView kind={tab} data={result.data} />
+          )}
         </section>
       )}
 
