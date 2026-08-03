@@ -76,12 +76,8 @@ const ASPECTS: Array<{ label: string; angle: number }> = [
 
 type Tab = "placement" | "aspect" | "synthesis" | "topic";
 
-const TABS: Array<{ id: Tab; label: string; hint: string }> = [
-  { id: "placement", label: "P1 · Θέση", hint: "πλανήτης σε ζώδιο σε οίκο" },
-  { id: "aspect", label: "P2 · Όψη", hint: "ζεύγος πλανητών" },
-  { id: "synthesis", label: "P3 · Σύνθεση", hint: "ολόκληρος χάρτης" },
-  { id: "topic", label: "P4 · Θέμα", hint: "κλειστή λίστα" },
-];
+const TAB_IDS: Tab[] = ["placement", "aspect", "synthesis", "topic"];
+
 
 const field =
   "w-full rounded-lg border border-input bg-secondary/60 px-3 py-2 text-sm text-foreground outline-none focus:border-primary";
