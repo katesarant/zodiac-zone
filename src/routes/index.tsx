@@ -2,8 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 
+import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
 import { ResultView } from "@/components/astro/ResultView";
 import { Button } from "@/components/ui/button";
+import { buildChartFn } from "@/lib/astro/birth.functions";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
 import {
   generateAspectAtomFn,
@@ -11,7 +13,7 @@ import {
   generateSynthesisFn,
   generateTopicFn,
 } from "@/lib/astro/interpretation.functions";
-import { TOPICS, type Lang, type Topic } from "@/lib/astro/types";
+import { TOPICS, type ChartJson, type Lang, type Topic } from "@/lib/astro/types";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -99,6 +101,11 @@ function Studio() {
   const [planetB, setPlanetB] = useState(PLANETS[6]!);
   const [aspect, setAspect] = useState(ASPECTS[2]!);
   const [topic, setTopic] = useState<Topic>("relationships");
+  const [birthDate, setBirthDate] = useState("1990-06-15");
+  const [birthTime, setBirthTime] = useState("12:00");
+  const [birthPlace, setBirthPlace] = useState("Αθήνα");
+  const [chart, setChart] = useState<ChartJson | null>(null);
+  const [placeLabel, setPlaceLabel] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
@@ -107,6 +114,7 @@ function Studio() {
   const aspectFn = useServerFn(generateAspectAtomFn);
   const synthesisFn = useServerFn(generateSynthesisFn);
   const topicFn = useServerFn(generateTopicFn);
+  const chartFn = useServerFn(buildChartFn);
 
   async function run() {
     setLoading(true);
@@ -127,9 +135,20 @@ function Studio() {
           },
         })) as Result;
       } else if (tab === "synthesis") {
-        res = (await synthesisFn({ data: { chart: SAMPLE_CHART, lang } })) as Result;
+        const built = (await chartFn({
+          data: { date: birthDate, time: birthTime, place: birthPlace },
+        })) as {
+          chart: ChartJson;
+          place: { name: string; country: string; timezone: string };
+          local: { utcOffsetHours: number };
+        };
+        setChart(built.chart);
+        setPlaceLabel(
+          `${built.place.name}${built.place.country ? `, ${built.place.country}` : ""} · ${built.place.timezone} (UTC${built.local.utcOffsetHours >= 0 ? "+" : ""}${built.local.utcOffsetHours})`,
+        );
+        res = (await synthesisFn({ data: { chart: built.chart, lang } })) as Result;
       } else {
-        res = (await topicFn({ data: { chart: SAMPLE_CHART, topic, lang } })) as Result;
+        res = (await topicFn({ data: { chart: chart ?? SAMPLE_CHART, topic, lang } })) as Result;
       }
       setResult(res);
     } catch (err) {
@@ -213,10 +232,47 @@ function Studio() {
         )}
 
         {tab === "synthesis" && (
-          <p className="text-sm text-muted-foreground">
-            Τρέχει με το δείγμα χάρτη του contract (§6): μόνο υπολογισμένες θέσεις, χωρίς όνομα,
-            ημερομηνία ή τόπο γέννησης. Temperature 0.4.
-          </p>
+          <div className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-3">
+              <label className="block">
+                <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+                  Ημερομηνία γέννησης
+                </span>
+                <input
+                  type="date"
+                  className={field}
+                  value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value)}
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+                  Ώρα γέννησης
+                </span>
+                <input
+                  type="time"
+                  className={field}
+                  value={birthTime}
+                  onChange={(e) => setBirthTime(e.target.value)}
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+                  Τόπος γέννησης
+                </span>
+                <input
+                  type="text"
+                  className={field}
+                  value={birthPlace}
+                  placeholder="π.χ. Θεσσαλονίκη"
+                  onChange={(e) => setBirthPlace(e.target.value)}
+                />
+              </label>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Ο χάρτης υπολογίζεται τοπικά (whole sign) και μόνο οι θέσεις στέλνονται στο μοντέλο.
+            </p>
+          </div>
         )}
 
         {tab === "topic" && (
@@ -241,6 +297,19 @@ function Studio() {
         </div>
       </section>
 
+      {tab === "synthesis" && chart && (
+        <section className="panel mt-6 p-6">
+          <header className="mb-4">
+            <h2 className="text-2xl">Γενέθλιος χάρτης</h2>
+            {placeLabel && <p className="mt-1 text-xs text-muted-foreground">{placeLabel}</p>}
+          </header>
+          <ChartWheel chart={chart} />
+          <div className="mt-8">
+            <ChartTables chart={chart} />
+          </div>
+        </section>
+      )}
+
       {result && (
         <section className="panel mt-6 p-6">
           {result.flagged ? (
@@ -255,7 +324,12 @@ function Studio() {
               </p>
             </div>
           ) : (
-            <ResultView kind={tab} data={result.data} />
+            <>
+              <h2 className="mb-5 text-2xl">
+                {tab === "synthesis" ? "Ανάλυση χάρτη" : "Ερμηνεία"}
+              </h2>
+              <ResultView kind={tab} data={result.data} />
+            </>
           )}
         </section>
       )}
