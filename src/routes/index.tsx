@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 
+import { ResultView } from "@/components/astro/ResultView";
 import { Button } from "@/components/ui/button";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
 import {
