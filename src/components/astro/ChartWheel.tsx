@@ -1,5 +1,6 @@
 import { SIGNS } from "@/lib/astro/engine";
-import type { ChartJson } from "@/lib/astro/types";
+import { dict, ordinalHouse, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
+import type { ChartJson, Lang } from "@/lib/astro/types";
 
 const GLYPHS: Record<string, string> = {
   Ήλιος: "☉",
@@ -24,11 +25,11 @@ function point(lon: number, asc: number, radius: number) {
   return { x: 200 + radius * Math.cos(a), y: 200 - radius * Math.sin(a) };
 }
 
-export function ChartWheel({ chart }: { chart: ChartJson }) {
+export function ChartWheel({ chart }: { chart: ChartJson; lang?: Lang }) {
   const asc = lonOf(chart.angles.asc.sign, chart.angles.asc.degree);
 
   return (
-    <svg viewBox="0 0 400 400" className="mx-auto w-full max-w-md" role="img" aria-label="Γενέθλιος χάρτης">
+    <svg viewBox="0 0 400 400" className="mx-auto w-full max-w-md" role="img" aria-label="natal chart">
       <circle cx="200" cy="200" r="190" className="fill-card stroke-border" strokeWidth="1" />
       <circle cx="200" cy="200" r="150" className="fill-none stroke-border" strokeWidth="1" />
       <circle cx="200" cy="200" r="95" className="fill-none stroke-border" strokeWidth="1" />
@@ -123,45 +124,46 @@ export function ChartWheel({ chart }: { chart: ChartJson }) {
   );
 }
 
-export function ChartTables({ chart }: { chart: ChartJson }) {
+export function ChartTables({ chart, lang }: { chart: ChartJson; lang: Lang }) {
+  const t = dict(lang);
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <section>
-        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">Πλανήτες</h4>
+        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">{t.planets}</h4>
         <ul className="divide-y divide-border text-sm">
           {chart.planets.map((p) => (
             <li key={p.name} className="flex items-center justify-between py-1.5">
               <span className="text-foreground">
-                {GLYPHS[p.name] ?? ""} {p.name}
+                {GLYPHS[p.name] ?? ""} {tPlanet(p.name, lang)}
                 {p.retrograde && <span className="ml-1 text-xs text-muted-foreground">℞</span>}
               </span>
               <span className="text-muted-foreground">
-                {p.degree.toFixed(1)}° {p.sign} · {p.house}ος οίκος
+                {p.degree.toFixed(1)}° {tSign(p.sign, lang)} · {ordinalHouse(p.house, lang)}
               </span>
             </li>
           ))}
           <li className="flex items-center justify-between py-1.5">
-            <span>Ωροσκόπος</span>
+            <span>{t.asc}</span>
             <span className="text-muted-foreground">
-              {chart.angles.asc.degree.toFixed(1)}° {chart.angles.asc.sign}
+              {chart.angles.asc.degree.toFixed(1)}° {tSign(chart.angles.asc.sign, lang)}
             </span>
           </li>
           <li className="flex items-center justify-between py-1.5">
-            <span>Μεσουράνημα</span>
+            <span>{t.mc}</span>
             <span className="text-muted-foreground">
-              {chart.angles.mc.degree.toFixed(1)}° {chart.angles.mc.sign}
+              {chart.angles.mc.degree.toFixed(1)}° {tSign(chart.angles.mc.sign, lang)}
             </span>
           </li>
         </ul>
       </section>
 
       <section>
-        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">Όψεις</h4>
+        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">{t.aspects}</h4>
         <ul className="divide-y divide-border text-sm">
           {chart.aspects.map((a, i) => (
             <li key={i} className="flex items-center justify-between py-1.5">
               <span>
-                {a.a} {a.type} {a.b}
+                {tPlanet(a.a, lang)} {tAspect(a.type, lang)} {tPlanet(a.b, lang)}
               </span>
               <span className="text-muted-foreground">orb {a.orb.toFixed(1)}°</span>
             </li>
