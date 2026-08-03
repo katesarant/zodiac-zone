@@ -55,7 +55,7 @@ export const BANNED_EN = [
 ];
 
 function normalize(text: string) {
-  return text.toLocaleLowerCase(["el", "en"] as unknown as string);
+  return text.toLowerCase();
 }
 
 /** Collect every banned stem present in the text. */
