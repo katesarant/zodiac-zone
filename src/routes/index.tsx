@@ -251,13 +251,13 @@ function Studio() {
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                   {t.birthDate}
                 </span>
-                <input type="date" className={field} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                <DatePicker value={birthDate} onChange={setBirthDate} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                   {t.birthTime}
                 </span>
-                <input type="time" className={field} value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
+                <TimePicker value={birthTime} onChange={setBirthTime} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
