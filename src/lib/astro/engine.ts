@@ -41,11 +41,15 @@ const norm = (x: number) => ((x % 360) + 360) % 360;
 const sin = (d: number) => Math.sin(d * RAD);
 const cos = (d: number) => Math.cos(d * RAD);
 
+/** Στρογγυλοποίηση εκλειπτικού μήκους στο 2ο δεκαδικό — μία φορά, πριν από κάθε παραγωγή. */
+const round2 = (lon: number) => norm(Math.round(norm(lon) * 100) / 100);
+
 export function signOf(lon: number) {
-  return SIGNS_EL[Math.floor(norm(lon) / 30)]!;
+  return SIGNS_EL[Math.floor(round2(lon) / 30)]!;
 }
+
 export function degreeInSign(lon: number) {
-  return Math.round2((norm(lon) % 30) * 100) / 100;
+  return round2(lon) % 30;
 }
 
 /** Days since 2000 Jan 0.0 TT for a UTC timestamp. */
