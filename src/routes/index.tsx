@@ -28,8 +28,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Prompt Studio — Αστρολογική Ερμηνεία EL/EN" },
       {
         property: "og:description",
-        content:
-          "Δομημένα prompts, JSON contract και φίλτρο απαγορευμένων θεμάτων για ερμηνεία γενέθλιου χάρτη.",
+        content: "Δομημένα prompts, JSON contract και φίλτρο απαγορευμένων θεμάτων για ερμηνεία γενέθλιου χάρτη.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -78,7 +77,6 @@ type Tab = "placement" | "aspect" | "synthesis" | "topic";
 
 const TAB_IDS: Tab[] = ["placement", "aspect", "synthesis", "topic"];
 
-
 const field =
   "w-full rounded-lg border border-input bg-secondary/60 px-3 py-2 text-sm text-foreground outline-none focus:border-primary";
 
@@ -99,7 +97,7 @@ function Studio() {
   const [aspect, setAspect] = useState(ASPECTS[2]!);
   const [topic, setTopic] = useState<Topic>("relationships");
   const [birthDate, setBirthDate] = useState("1990-06-15");
-  const [birthTime, setBirthTime] = useState("12:00");
+  const [birthTime, setBirthTime] = useState("");
   const [birthPlace, setBirthPlace] = useState("Αθήνα");
   const [chart, setChart] = useState<ChartJson | null>(null);
   const [placeLabel, setPlaceLabel] = useState<string | null>(null);
@@ -189,9 +187,7 @@ function Studio() {
               setResult(null);
             }}
             className={`rounded-xl border px-4 py-3 text-left transition-colors ${
-              tab === id
-                ? "border-primary bg-secondary"
-                : "border-border bg-card hover:border-primary/50"
+              tab === id ? "border-primary bg-secondary" : "border-border bg-card hover:border-primary/50"
             }`}
           >
             <span className="block text-sm font-medium">{t.tabs[id].label}</span>
@@ -210,13 +206,7 @@ function Studio() {
               options={PLANETS}
               render={(v) => tPlanet(v, lang)}
             />
-            <Select
-              label={t.sign}
-              value={sign}
-              onChange={setSign}
-              options={SIGNS}
-              render={(v) => tSign(v, lang)}
-            />
+            <Select label={t.sign} value={sign} onChange={setSign} options={SIGNS} render={(v) => tSign(v, lang)} />
             <Select
               label={t.house}
               value={String(house)}
@@ -259,23 +249,13 @@ function Studio() {
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                   {t.birthDate}
                 </span>
-                <input
-                  type="date"
-                  className={field}
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
-                />
+                <input type="date" className={field} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                   {t.birthTime}
                 </span>
-                <input
-                  type="time"
-                  className={field}
-                  value={birthTime}
-                  onChange={(e) => setBirthTime(e.target.value)}
-                />
+                <input type="time" className={field} value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
@@ -346,9 +326,7 @@ function Studio() {
             </div>
           ) : (
             <>
-              <h2 className="mb-5 text-2xl">
-                {tab === "synthesis" ? t.analysis : t.interpretation}
-              </h2>
+              <h2 className="mb-5 text-2xl">{tab === "synthesis" ? t.analysis : t.interpretation}</h2>
               <ResultView kind={tab} data={result.data} lang={lang} />
             </>
           )}
@@ -375,9 +353,7 @@ function Select({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-        {label}
-      </span>
+      <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">{label}</span>
       <select className={field} value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o} value={o}>
