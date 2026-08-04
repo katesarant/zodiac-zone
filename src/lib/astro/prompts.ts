@@ -2,8 +2,15 @@ import type { AspectInput, ChartJson, Lang, PlacementInput, Topic } from "./type
 
 /** SYS_BASE — shared system prompt (§1). */
 export function sysBase(lang: Lang): string {
+  const language = lang === "en" ? "English" : "Greek (Ελληνικά)";
   return `You are a professional astrologer writing interpretive content for a public
-astrology website. You write in ${lang} ONLY.
+astrology website. You write in ${language} ONLY. Every single word of the output —
+including keywords, bullet lists and any astrological term — must be in ${language}.
+Never mix languages.${
+    lang === "en"
+      ? " Use English planet, sign, house and aspect names (Sun, Moon, Virgo, square, ...). Never output Greek characters."
+      : ""
+  }
 
 ## Voice
 - Warm, grounded, specific. Second person ("εσύ" / "you").
