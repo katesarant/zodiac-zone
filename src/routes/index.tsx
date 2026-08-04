@@ -99,7 +99,7 @@ function Studio() {
   const [aspect, setAspect] = useState(ASPECTS[2]!);
   const [topic, setTopic] = useState<Topic>("relationships");
   const [birthDate, setBirthDate] = useState("1990-06-15");
-  const [birthTime, setBirthTime] = useState("");
+  const [birthTime, setBirthTime] = useState("12:00");
   const [birthPlace, setBirthPlace] = useState("Αθήνα");
   const [chart, setChart] = useState<ChartJson | null>(null);
   const [placeLabel, setPlaceLabel] = useState<string | null>(null);
