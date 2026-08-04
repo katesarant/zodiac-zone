@@ -154,6 +154,8 @@ const EN: typeof EL = {
   birthTime: "Time of birth",
   birthPlace: "Place of birth",
   placePlaceholder: "e.g. Thessaloniki",
+  chartName: "Chart name",
+  namePlaceholder: "e.g. Maria",
   chartNote: "The exact time matters: a few minutes can change your Ascendant and your houses.",
 
   generate: "Reveal my chart",
