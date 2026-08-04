@@ -208,7 +208,7 @@
     height: 18px;
     opacity: 0.75;
     cursor: pointer;
-    transition: opacity 0.15s;
+    transition: opacity 0.2s;
   }
 
   input[type="time"]::-webkit-calendar-picker-indicator:hover,
