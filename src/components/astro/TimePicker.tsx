@@ -24,7 +24,7 @@ export function TimePicker({ value, onChange, placeholder = "Pick a time", class
     onChange(`${nextHour}:${nextMinute}`);
   };
 
-  const display = value || placeholder;
+  const display = value ? `${value} (24h)` : placeholder;
 
   return (
     <Popover>
