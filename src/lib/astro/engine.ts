@@ -331,7 +331,21 @@ export interface BirthInput {
   utcOffsetHours: number;
 }
 
-export function computeChart(input: BirthInput): ChartJson {
+/**
+ * SHA-256 fingerprint of the birth moment + coordinates.
+ * Opaque on purpose: the raw timestamp/coordinates must never leak into
+ * URLs, logs or cache keys.
+ */
+export async function chartFingerprint(utcMs: number, lat: number, lon: number): Promise<string> {
+  const payload = `${utcMs}|${lat.toFixed(4)}|${lon.toFixed(4)}`;
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(payload));
+  const hex = Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+  return `sha256:${hex}`;
+}
+
+export async function computeChart(input: BirthInput): Promise<ChartJson> {
   const utcMs =
     Date.UTC(input.year, input.month - 1, input.day, input.hour, input.minute, 0) - input.utcOffsetHours * 3600000;
   const d = daysSinceEpoch(new Date(utcMs));
@@ -385,7 +399,7 @@ export function computeChart(input: BirthInput): ChartJson {
   }
 
   return {
-    chartHash: `local:${utcMs}:${input.latitude.toFixed(2)}:${input.longitude.toFixed(2)}`,
+    chartHash: await chartFingerprint(utcMs, input.latitude, input.longitude),
     houseSystem: "whole_sign",
     angles: {
       asc: { sign: signOf(asc), degree: degreeInSign(asc) },

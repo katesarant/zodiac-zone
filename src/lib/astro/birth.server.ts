@@ -64,7 +64,7 @@ export async function geocodeAndCompute(input: {
   let off = offsetHours(timezone, new Date(guess));
   off = offsetHours(timezone, new Date(guess - off * 3600000));
 
-  const chart = computeChart({
+  const chart = await computeChart({
     year: y,
     month: m,
     day: d,
