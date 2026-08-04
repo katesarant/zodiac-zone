@@ -299,7 +299,7 @@ function angles(d: number, lat: number, lon: number) {
   const ecl = 23.4393 - 3.563e-7 * d;
   let mc = norm(Math.atan2(sin(lst), cos(lst) * cos(ecl)) * DEG);
   let asc = norm(Math.atan2(cos(lst), -(sin(lst) * cos(ecl) + Math.tan(lat * RAD) * sin(ecl))) * DEG);
-  if (norm(asc - mc) < 180) asc = norm(asc + 180);
+  if (norm(asc - mc) > 180) asc = norm(asc + 180);
   return { asc, mc };
 }
 
