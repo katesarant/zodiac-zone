@@ -3,7 +3,9 @@ import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
+import { DatePicker } from "@/components/astro/DatePicker";
 import { ResultView } from "@/components/astro/ResultView";
+import { TimePicker } from "@/components/astro/TimePicker";
 import { Button } from "@/components/ui/button";
 import { buildChartFn } from "@/lib/astro/birth.functions";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
@@ -249,13 +251,13 @@ function Studio() {
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                   {t.birthDate}
                 </span>
-                <input type="date" className={field} value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                <DatePicker value={birthDate} onChange={setBirthDate} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                   {t.birthTime}
                 </span>
-                <input type="time" className={field} value={birthTime} onChange={(e) => setBirthTime(e.target.value)} />
+                <TimePicker value={birthTime} onChange={setBirthTime} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
