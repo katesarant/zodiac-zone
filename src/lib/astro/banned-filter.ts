@@ -24,7 +24,6 @@ export const BANNED_EL = [
   "δολοφον",
   "ασθένει",
   "αρρώστ",
-  "καρκίν",
   "κατάθλιψ",
   "εγκυμοσύν",
 ];
@@ -32,7 +31,6 @@ export const BANNED_EL = [
 export const BANNED_EN = [
   "death",
   "dying",
-  "die",
   "deceased",
   "funeral",
   "fatal",
@@ -49,7 +47,6 @@ export const BANNED_EN = [
   "tragedy",
   "illness",
   "disease",
-  "cancer",
   "depression",
   "pregnancy",
 ];
