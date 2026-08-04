@@ -93,20 +93,65 @@ export function ChartWheel({ chart }: { chart: ChartJson; lang?: Lang }) {
         );
       })}
 
-      {chart.planets.map((p) => {
-        const pt = point(lonOf(p.sign, p.degree), asc, 128);
+      {/* degree ticks: every 5° short, every 10° long */}
+      {Array.from({ length: 72 }, (_, i) => {
+        const lon = i * 5;
+        const long = i % 2 === 0;
+        const outer = point(lon, asc, 150);
+        const inner = point(lon, asc, long ? 140 : 145);
         return (
-          <text
-            key={p.name}
-            x={pt.x}
-            y={pt.y}
-            textAnchor="middle"
-            dominantBaseline="central"
-            className="fill-foreground"
-            fontSize="16"
-          >
-            {GLYPHS[p.name] ?? p.name}
-          </text>
+          <line
+            key={`tick-${i}`}
+            x1={inner.x}
+            y1={inner.y}
+            x2={outer.x}
+            y2={outer.y}
+            className="stroke-border"
+            strokeWidth={long ? 0.9 : 0.5}
+            opacity={long ? 0.9 : 0.6}
+          />
+        );
+      })}
+
+      {chart.planets.map((p) => {
+        const lon = lonOf(p.sign, p.degree);
+        const pt = point(lon, asc, 128);
+        const deg = point(lon, asc, 110);
+        const marker = point(lon, asc, 150);
+        const markerIn = point(lon, asc, 138);
+        return (
+          <g key={p.name}>
+            <line
+              x1={markerIn.x}
+              y1={markerIn.y}
+              x2={marker.x}
+              y2={marker.y}
+              className="stroke-primary"
+              strokeWidth="1"
+              opacity="0.8"
+            />
+            <text
+              x={pt.x}
+              y={pt.y}
+              textAnchor="middle"
+              dominantBaseline="central"
+              className="fill-foreground"
+              fontSize="16"
+            >
+              {GLYPHS[p.name] ?? p.name}
+            </text>
+            <text
+              x={deg.x}
+              y={deg.y}
+              textAnchor="middle"
+              dominantBaseline="central"
+              className="fill-primary"
+              fontSize="9"
+              fontWeight="600"
+            >
+              {Math.floor(p.degree)}°{p.retrograde ? "℞" : ""}
+            </text>
+          </g>
         );
       })}
 
@@ -117,9 +162,27 @@ export function ChartWheel({ chart }: { chart: ChartJson; lang?: Lang }) {
         dominantBaseline="central"
         className="fill-primary"
         fontSize="11"
+        fontWeight="600"
       >
-        AC
+        AC {Math.floor(chart.angles.asc.degree)}°
       </text>
+      {(() => {
+        const mcLon = lonOf(chart.angles.mc.sign, chart.angles.mc.degree);
+        const mc = point(mcLon, asc, 176);
+        return (
+          <text
+            x={mc.x}
+            y={mc.y}
+            textAnchor="middle"
+            dominantBaseline="central"
+            className="fill-primary"
+            fontSize="11"
+            fontWeight="600"
+          >
+            MC {Math.floor(chart.angles.mc.degree)}°
+          </text>
+        );
+      })()}
     </svg>
   );
 }
