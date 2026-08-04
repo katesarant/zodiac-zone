@@ -249,6 +249,18 @@ function Studio() {
 
         {tab === "synthesis" && (
           <div className="space-y-4">
+            <label className="block">
+              <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+                {t.chartName}
+              </span>
+              <input
+                type="text"
+                className={field}
+                value={chartName}
+                placeholder={t.namePlaceholder}
+                onChange={(e) => setChartName(e.target.value)}
+              />
+            </label>
             <div className="grid gap-4 sm:grid-cols-3">
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
