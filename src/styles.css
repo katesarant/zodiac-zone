@@ -123,11 +123,8 @@
   --input: oklch(0.32 0.045 282);
   --ring: oklch(0.82 0.13 85);
 
-  --gradient-night: radial-gradient(
-      120% 90% at 12% 0%,
-      oklch(0.3 0.07 292 / 0.75),
-      transparent 60%
-    ),
+  --gradient-night:
+    radial-gradient(120% 90% at 12% 0%, oklch(0.3 0.07 292 / 0.75), transparent 60%),
     radial-gradient(90% 70% at 95% 10%, oklch(0.38 0.09 85 / 0.28), transparent 62%),
     linear-gradient(180deg, oklch(0.17 0.035 275), oklch(0.14 0.03 272));
   --shadow-glow: 0 0 0 1px oklch(0.82 0.13 85 / 0.16), 0 22px 60px -24px oklch(0.05 0.02 275 / 0.9);
@@ -191,6 +188,32 @@
   h3 {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
+  }
+  input[type="time"],
+  input[type="date"] {
+    /* Λέει στον browser να ζωγραφίσει το native picker σε σκούρο θέμα */
+    color-scheme: dark;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  /* Το εικονίδιο ρολογιού/ημερολογίου σε χρυσό αντί για γκρι */
+  input[type="time"]::-webkit-calendar-picker-indicator,
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e8c48c' stroke-width='1.8' stroke-linecap='round'><circle cx='12' cy='12' r='9'/><path d='M12 7v5l3 2'/></svg>");
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 18px;
+    height: 18px;
+    opacity: 0.75;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  input[type="time"]::-webkit-calendar-picker-indicator:hover,
+  input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
   }
 }
 
