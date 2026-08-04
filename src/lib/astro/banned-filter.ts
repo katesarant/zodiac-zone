@@ -55,12 +55,27 @@ function normalize(text: string) {
   return text.toLowerCase();
 }
 
+function escapeRegex(term: string) {
+  return term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * English matches on whole words (+ common suffixes) so that innocent words are
+ * not caught — e.g. "skills" must not trigger the "kill" stem. Greek keeps
+ * substring stems, because inflection escapes exact matching.
+ */
+function matches(term: string, norm: string, lang: Lang) {
+  if (lang !== "en") return norm.includes(term);
+  return new RegExp(`\\b${escapeRegex(term)}(s|es|ed|ing|ly)?\\b`, "i").test(norm);
+}
+
 /** Collect every banned stem present in the text. */
 export function findBannedTerms(text: string, lang: Lang): string[] {
   const list = lang === "el" ? BANNED_EL : BANNED_EN;
   const norm = normalize(text);
-  return list.filter((term) => norm.includes(term));
+  return list.filter((term) => matches(term, norm, lang));
 }
+
 
 /** Second line of defence (§8) — applies to atoms, synthesis and topics alike. */
 export function isClean(text: string, lang: Lang): boolean {
