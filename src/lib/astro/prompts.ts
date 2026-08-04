@@ -184,7 +184,7 @@ JSON schema:
 
 /** P4 — fixed deep-dive topics, replaces free chat (§5). */
 export function p4Topic(chart: ChartJson, topic: Topic, lang: Lang): string {
-  return `Expand on ONE theme of this natal chart. Answer in ${lang}.
+  return `Expand on ONE theme of this natal chart. Answer in ${lang === "en" ? "English" : "Greek (Ελληνικά)"}.
 
 THEIR CHART:
 ${JSON.stringify(chart)}
