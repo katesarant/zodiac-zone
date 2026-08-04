@@ -142,6 +142,7 @@ function Studio() {
           local: { utcOffsetHours: number };
         };
         setChart(built.chart);
+        setChartLabelName(chartName.trim() || null);
         setPlaceLabel(
           `${built.place.name}${built.place.country ? `, ${built.place.country}` : ""} · ${built.place.timezone} (UTC${built.local.utcOffsetHours >= 0 ? "+" : ""}${built.local.utcOffsetHours})`,
         );
