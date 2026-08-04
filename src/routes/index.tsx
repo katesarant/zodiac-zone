@@ -319,8 +319,10 @@ function Studio() {
       {tab === "synthesis" && chart && (
         <section className="panel mt-6 p-6">
           <header className="mb-4">
-            <h2 className="text-2xl">{t.chartTitle}</h2>
-            {placeLabel && <p className="mt-1 text-xs text-muted-foreground">{placeLabel}</p>}
+            <h2 className="text-2xl">{chartLabelName ?? t.chartTitle}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
+            </p>
           </header>
           <ChartWheel chart={chart} />
           <div className="mt-8">
