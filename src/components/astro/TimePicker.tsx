@@ -44,7 +44,7 @@ export function TimePicker({ value, onChange, placeholder = "Pick a time", class
       <PopoverContent className="w-auto p-3" align="start">
         <div className="pointer-events-auto flex gap-3 rounded-md border border-border bg-card p-3 shadow-glow">
           <div className="flex flex-col gap-1.5">
-            <span className="text-center text-xs font-medium uppercase tracking-widest text-muted-foreground">Hour</span>
+            <span className="text-center text-xs font-medium uppercase tracking-widest text-muted-foreground">Hour (24h)</span>
             <div className="h-56 overflow-y-auto rounded-md border border-border bg-secondary/40 pr-1">
               <div className="flex flex-col p-1">
                 {HOURS.map((h) => (
