@@ -45,7 +45,7 @@ export function signOf(lon: number) {
   return SIGNS_EL[Math.floor(norm(lon) / 30)]!;
 }
 export function degreeInSign(lon: number) {
-  return Math.round((norm(lon) % 30) * 100) / 100;
+  return Math.round2((norm(lon) % 30) * 100) / 100;
 }
 
 /** Days since 2000 Jan 0.0 TT for a UTC timestamp. */

@@ -14,11 +14,33 @@ function NotFoundComponent() {
         viewBox="0 0 400 400"
         className="pointer-events-none absolute h-[min(90vw,620px)] w-[min(90vw,620px)] animate-[spin_120s_linear_infinite] text-primary opacity-[0.13]"
       >
+        <circle cx="200" cy="200" r="196" fill="none" stroke="currentColor" strokeWidth="0.75" />function NotFoundComponent() {
+  const wheelSize = "min(90vw, 620px)";
+  const starsSize = "min(96vw, 680px)";
+
+  return (
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
+      <style>{`@keyframes zz-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+
+      {/* Ζωδιακός τροχός — διακοσμητικός, αργή περιστροφή */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 400 400"
+        preserveAspectRatio="xMidYMid meet"
+        className="pointer-events-none absolute text-primary"
+        style={{
+          width: wheelSize,
+          height: wheelSize,
+          opacity: 0.22,
+          animation: "zz-spin 120s linear infinite",
+        }}
+      >
         <circle cx="200" cy="200" r="196" fill="none" stroke="currentColor" strokeWidth="0.75" />
         <circle cx="200" cy="200" r="168" fill="none" stroke="currentColor" strokeWidth="0.5" />
         <circle cx="200" cy="200" r="118" fill="none" stroke="currentColor" strokeWidth="0.5" />
+
         {Array.from({ length: 12 }, (_, i) => {
-          const a = (i * 30 - 90) * (Math.PI / 180);
+          const a = ((i * 30 - 90) * Math.PI) / 180;
           return (
             <line
               key={i}
@@ -31,8 +53,9 @@ function NotFoundComponent() {
             />
           );
         })}
+
         {Array.from({ length: 60 }, (_, i) => {
-          const a = (i * 6 - 90) * (Math.PI / 180);
+          const a = ((i * 6 - 90) * Math.PI) / 180;
           return (
             <line
               key={`t${i}`}
@@ -51,32 +74,50 @@ function NotFoundComponent() {
       <svg
         aria-hidden="true"
         viewBox="0 0 400 400"
-        className="pointer-events-none absolute h-[min(96vw,680px)] w-[min(96vw,680px)] text-primary opacity-40"
+        preserveAspectRatio="xMidYMid meet"
+        className="pointer-events-none absolute text-primary"
+        style={{ width: starsSize, height: starsSize, opacity: 0.5 }}
       >
-        {[
-          [58, 92, 1.4],
-          [126, 44, 0.9],
-          [312, 78, 1.2],
-          [354, 168, 0.8],
-          [40, 262, 1.1],
-          [96, 336, 0.9],
-          [286, 322, 1.3],
-          [348, 286, 0.8],
-          [178, 26, 0.7],
-          [222, 372, 1],
-        ].map(([cx, cy, r], i) => (
+        {(
+          [
+            [58, 92, 1.4],
+            [126, 44, 0.9],
+            [312, 78, 1.2],
+            [354, 168, 0.8],
+            [40, 262, 1.1],
+            [96, 336, 0.9],
+            [286, 322, 1.3],
+            [348, 286, 0.8],
+            [178, 26, 0.7],
+            [222, 372, 1],
+          ] as const
+        ).map(([cx, cy, r], i) => (
           <circle key={i} cx={cx} cy={cy} r={r} fill="currentColor" />
         ))}
       </svg>
 
       <div className="panel relative z-10 max-w-md px-8 py-12 text-center sm:px-12">
-        <p className="font-body text-[0.7rem] uppercase tracking-[0.35em] text-muted-foreground">Zodiac Zone</p>
+        <p
+          className="font-body uppercase text-muted-foreground"
+          style={{ fontSize: "0.7rem", letterSpacing: "0.35em" }}
+        >
+          Zodiac Zone
+        </p>
 
-        <h1 className="mt-6 font-display text-8xl font-semibold leading-none text-primary">404</h1>
+        <h1
+          className="mt-6 font-display font-semibold leading-none text-primary"
+          style={{ fontSize: "clamp(4.5rem, 18vw, 6rem)" }}
+        >
+          404
+        </h1>
 
         <div
           aria-hidden="true"
-          className="mx-auto mt-6 h-px w-20 bg-gradient-to-r from-transparent via-primary to-transparent"
+          className="mx-auto mt-6 h-px w-20"
+          style={{
+            background:
+              "linear-gradient(to right, transparent, var(--color-primary), transparent)",
+          }}
         />
 
         <h2 className="mt-6 font-display text-2xl font-semibold text-foreground">
@@ -87,7 +128,10 @@ function NotFoundComponent() {
           Ο σύνδεσμος μπορεί να άλλαξε ή να μην υπήρξε ποτέ.
         </p>
 
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground/70">
+        <p
+          className="mt-2 text-xs leading-relaxed"
+          style={{ color: "var(--color-muted-foreground)", opacity: 0.7 }}
+        >
           This page isn&apos;t on the chart — the link may have moved or never existed.
         </p>
 
@@ -109,6 +153,7 @@ function NotFoundComponent() {
     </div>
   );
 }
+
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
