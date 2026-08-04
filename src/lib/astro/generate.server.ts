@@ -20,6 +20,43 @@ import type {
   TopicExpansion,
 } from "./types";
 import { TOPICS } from "./types";
+import { tAspect, tPlanet, tSign } from "./i18n";
+
+/** Localises the astrological vocabulary sent to the model (Greek data → English for EN). */
+function locPlacement(p: PlacementInput, lang: Lang): PlacementInput {
+  return { ...p, planet: tPlanet(p.planet, lang), sign: tSign(p.sign, lang) };
+}
+
+function locAspect(a: AspectInput, lang: Lang): AspectInput {
+  return {
+    ...a,
+    planetA: tPlanet(a.planetA, lang),
+    planetB: tPlanet(a.planetB, lang),
+    aspect: tAspect(a.aspect, lang),
+  };
+}
+
+function locChart(chart: ChartJson, lang: Lang): ChartJson {
+  if (lang !== "en") return chart;
+  return {
+    ...chart,
+    angles: {
+      asc: { ...chart.angles.asc, sign: tSign(chart.angles.asc.sign, lang) },
+      mc: { ...chart.angles.mc, sign: tSign(chart.angles.mc.sign, lang) },
+    },
+    planets: chart.planets.map((p) => ({
+      ...p,
+      name: tPlanet(p.name, lang),
+      sign: tSign(p.sign, lang),
+    })),
+    aspects: chart.aspects.map((a) => ({
+      ...a,
+      a: tPlanet(a.a, lang),
+      b: tPlanet(a.b, lang),
+      type: tAspect(a.type, lang),
+    })),
+  };
+}
 
 const GATEWAY = "https://ai.gateway.lovable.dev/v1/chat/completions";
 const MODEL = "google/gemini-3.6-flash";
@@ -117,7 +154,7 @@ async function generate<T>(
 }
 
 export function generatePlacementAtom(placement: PlacementInput, lang: Lang) {
-  return generate<AtomPlacement>(lang, p1Placement(placement), TEMPERATURE.atom);
+  return generate<AtomPlacement>(lang, p1Placement(locPlacement(placement, lang)), TEMPERATURE.atom);
 }
 
 export function generatePlacementAtomBatch(
@@ -126,18 +163,18 @@ export function generatePlacementAtomBatch(
   houses: number[],
   lang: Lang,
 ) {
-  return generate<AtomPlacement[]>(lang, p1PlacementBatch(planet, sign, houses), TEMPERATURE.atom);
+  return generate<AtomPlacement[]>(lang, p1PlacementBatch(tPlanet(planet, lang), tSign(sign, lang), houses), TEMPERATURE.atom);
 }
 
 export function generateAspectAtom(aspect: AspectInput, lang: Lang) {
-  return generate<AtomAspect>(lang, p2Aspect(aspect), TEMPERATURE.atom);
+  return generate<AtomAspect>(lang, p2Aspect(locAspect(aspect, lang)), TEMPERATURE.atom);
 }
 
 export function generateSynthesis(chart: ChartJson, atoms: unknown, lang: Lang) {
-  return generate<Synthesis>(lang, p3Synthesis(chart, atoms), TEMPERATURE.synthesis);
+  return generate<Synthesis>(lang, p3Synthesis(locChart(chart, lang), atoms), TEMPERATURE.synthesis);
 }
 
 export function generateTopic(chart: ChartJson, topic: Topic, lang: Lang) {
   if (!TOPICS.includes(topic)) throw new AstroAiError("invalid_topic");
-  return generate<TopicExpansion>(lang, p4Topic(chart, topic, lang), TEMPERATURE.synthesis);
+  return generate<TopicExpansion>(lang, p4Topic(locChart(chart, lang), topic, lang), TEMPERATURE.synthesis);
 }
