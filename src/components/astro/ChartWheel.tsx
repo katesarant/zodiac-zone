@@ -201,20 +201,23 @@ export function ChartTables({ chart, lang }: { chart: ChartJson; lang: Lang }) {
                 {p.retrograde && <span className="ml-1 text-xs text-muted-foreground">℞</span>}
               </span>
               <span className="text-muted-foreground">
-                {p.degree.toFixed(1)}° {tSign(p.sign, lang)} · {ordinalHouse(p.house, lang)}
+                <span className="font-semibold text-primary">{p.degree.toFixed(1)}°</span>{" "}
+                {tSign(p.sign, lang)} · {ordinalHouse(p.house, lang)}
               </span>
             </li>
           ))}
           <li className="flex items-center justify-between py-1.5">
             <span>{t.asc}</span>
             <span className="text-muted-foreground">
-              {chart.angles.asc.degree.toFixed(1)}° {tSign(chart.angles.asc.sign, lang)}
+              <span className="font-semibold text-primary">{chart.angles.asc.degree.toFixed(1)}°</span>{" "}
+              {tSign(chart.angles.asc.sign, lang)}
             </span>
           </li>
           <li className="flex items-center justify-between py-1.5">
             <span>{t.mc}</span>
             <span className="text-muted-foreground">
-              {chart.angles.mc.degree.toFixed(1)}° {tSign(chart.angles.mc.sign, lang)}
+              <span className="font-semibold text-primary">{chart.angles.mc.degree.toFixed(1)}°</span>{" "}
+              {tSign(chart.angles.mc.sign, lang)}
             </span>
           </li>
         </ul>
