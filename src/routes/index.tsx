@@ -101,6 +101,8 @@ function Studio() {
   const [birthDate, setBirthDate] = useState("1990-06-15");
   const [birthTime, setBirthTime] = useState("12:00");
   const [birthPlace, setBirthPlace] = useState("Αθήνα");
+  const [chartName, setChartName] = useState("");
+  const [chartLabelName, setChartLabelName] = useState<string | null>(null);
   const [chart, setChart] = useState<ChartJson | null>(null);
   const [placeLabel, setPlaceLabel] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -140,6 +142,7 @@ function Studio() {
           local: { utcOffsetHours: number };
         };
         setChart(built.chart);
+        setChartLabelName(chartName.trim() || null);
         setPlaceLabel(
           `${built.place.name}${built.place.country ? `, ${built.place.country}` : ""} · ${built.place.timezone} (UTC${built.local.utcOffsetHours >= 0 ? "+" : ""}${built.local.utcOffsetHours})`,
         );
@@ -246,6 +249,18 @@ function Studio() {
 
         {tab === "synthesis" && (
           <div className="space-y-4">
+            <label className="block">
+              <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+                {t.chartName}
+              </span>
+              <input
+                type="text"
+                className={field}
+                value={chartName}
+                placeholder={t.namePlaceholder}
+                onChange={(e) => setChartName(e.target.value)}
+              />
+            </label>
             <div className="grid gap-4 sm:grid-cols-3">
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
@@ -304,8 +319,10 @@ function Studio() {
       {tab === "synthesis" && chart && (
         <section className="panel mt-6 p-6">
           <header className="mb-4">
-            <h2 className="text-2xl">{t.chartTitle}</h2>
-            {placeLabel && <p className="mt-1 text-xs text-muted-foreground">{placeLabel}</p>}
+            <h2 className="text-2xl">{chartLabelName ?? t.chartTitle}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
+            </p>
           </header>
           <ChartWheel chart={chart} />
           <div className="mt-8">

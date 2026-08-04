@@ -75,6 +75,8 @@ const EL = {
   birthTime: "Ώρα γέννησης",
   birthPlace: "Τόπος γέννησης",
   placePlaceholder: "π.χ. Θεσσαλονίκη",
+  chartName: "Όνομα χάρτη",
+  namePlaceholder: "π.χ. Μαρία",
   chartNote: "Η ακριβής ώρα έχει σημασία: λίγα λεπτά διαφορά μπορούν να αλλάξουν τον Ωροσκόπο και τους οίκους σου.",
 
   generate: "Δες τον χάρτη σου",
@@ -152,6 +154,8 @@ const EN: typeof EL = {
   birthTime: "Time of birth",
   birthPlace: "Place of birth",
   placePlaceholder: "e.g. Thessaloniki",
+  chartName: "Chart name",
+  namePlaceholder: "e.g. Maria",
   chartNote: "The exact time matters: a few minutes can change your Ascendant and your houses.",
 
   generate: "Reveal my chart",
