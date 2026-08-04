@@ -6,15 +6,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
-  return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
-      {/* Ζωδιακός τροχός — διακοσμητικός, αργή περιστροφή */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 400 400"
-        className="pointer-events-none absolute h-[min(90vw,620px)] w-[min(90vw,620px)] animate-[spin_120s_linear_infinite] text-primary opacity-[0.13]"
-      >
-        <circle cx="200" cy="200" r="196" fill="none" stroke="currentColor" strokeWidth="0.75" />function NotFoundComponent() {
   const wheelSize = "min(90vw, 620px)";
   const starsSize = "min(96vw, 680px)";
 
