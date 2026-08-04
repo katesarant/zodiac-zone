@@ -101,6 +101,8 @@ function Studio() {
   const [birthDate, setBirthDate] = useState("1990-06-15");
   const [birthTime, setBirthTime] = useState("12:00");
   const [birthPlace, setBirthPlace] = useState("Αθήνα");
+  const [chartName, setChartName] = useState("");
+  const [chartLabelName, setChartLabelName] = useState<string | null>(null);
   const [chart, setChart] = useState<ChartJson | null>(null);
   const [placeLabel, setPlaceLabel] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
