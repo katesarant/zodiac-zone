@@ -65,7 +65,14 @@ interface Elements {
 function elements(name: string, d: number): Elements {
   switch (name) {
     case "sun":
-      return { N: 0, i: 0, w: 282.9404 + 4.70935e-5 * d, a: 1, e: 0.016709 - 1.151e-9 * d, M: 356.047 + 0.9856002585 * d };
+      return {
+        N: 0,
+        i: 0,
+        w: 282.9404 + 4.70935e-5 * d,
+        a: 1,
+        e: 0.016709 - 1.151e-9 * d,
+        M: 356.047 + 0.9856002585 * d,
+      };
     case "moon":
       return {
         N: 125.1228 - 0.0529538083 * d,
@@ -76,19 +83,78 @@ function elements(name: string, d: number): Elements {
         M: 115.3654 + 13.0649929509 * d,
       };
     case "mercury":
-      return { N: 48.3313 + 3.24587e-5 * d, i: 7.0047 + 5.0e-8 * d, w: 29.1241 + 1.01444e-5 * d, a: 0.387098, e: 0.205635 + 5.59e-10 * d, M: 168.6562 + 4.0923344368 * d };
+      return {
+        N: 48.3313 + 3.24587e-5 * d,
+        i: 7.0047 + 5.0e-8 * d,
+        w: 29.1241 + 1.01444e-5 * d,
+        a: 0.387098,
+        e: 0.205635 + 5.59e-10 * d,
+        M: 168.6562 + 4.0923344368 * d,
+      };
+    case "neptune":
+      return {
+        N: 131.7806 + 3.0173e-5 * d,
+        i: 1.77 - 2.55e-7 * d,
+        w: 272.8461 - 6.027e-6 * d,
+        a: 30.05826 + 3.313e-8 * d,
+        e: 0.008606 + 2.15e-9 * d,
+        M: 260.2471 + 0.005995147 * d,
+      };
+
     case "venus":
-      return { N: 76.6799 + 2.4659e-5 * d, i: 3.3946 + 2.75e-8 * d, w: 54.891 + 1.38374e-5 * d, a: 0.72333, e: 0.006773 - 1.302e-9 * d, M: 48.0052 + 1.6021302244 * d };
+      return {
+        N: 76.6799 + 2.4659e-5 * d,
+        i: 3.3946 + 2.75e-8 * d,
+        w: 54.891 + 1.38374e-5 * d,
+        a: 0.72333,
+        e: 0.006773 - 1.302e-9 * d,
+        M: 48.0052 + 1.6021302244 * d,
+      };
     case "mars":
-      return { N: 49.5574 + 2.11081e-5 * d, i: 1.8497 - 1.78e-8 * d, w: 286.5016 + 2.92961e-5 * d, a: 1.523688, e: 0.093405 + 2.516e-9 * d, M: 18.6021 + 0.5240207766 * d };
+      return {
+        N: 49.5574 + 2.11081e-5 * d,
+        i: 1.8497 - 1.78e-8 * d,
+        w: 286.5016 + 2.92961e-5 * d,
+        a: 1.523688,
+        e: 0.093405 + 2.516e-9 * d,
+        M: 18.6021 + 0.5240207766 * d,
+      };
     case "jupiter":
-      return { N: 100.4542 + 2.76854e-5 * d, i: 1.303 - 1.557e-7 * d, w: 273.8777 + 1.64505e-5 * d, a: 5.20256, e: 0.048498 + 4.469e-9 * d, M: 19.895 + 0.0830853001 * d };
+      return {
+        N: 100.4542 + 2.76854e-5 * d,
+        i: 1.303 - 1.557e-7 * d,
+        w: 273.8777 + 1.64505e-5 * d,
+        a: 5.20256,
+        e: 0.048498 + 4.469e-9 * d,
+        M: 19.895 + 0.0830853001 * d,
+      };
     case "saturn":
-      return { N: 113.6634 + 2.3898e-5 * d, i: 2.4886 - 1.081e-7 * d, w: 339.3939 + 2.97661e-5 * d, a: 9.55475, e: 0.055546 - 9.499e-9 * d, M: 316.967 + 0.0334442282 * d };
+      return {
+        N: 113.6634 + 2.3898e-5 * d,
+        i: 2.4886 - 1.081e-7 * d,
+        w: 339.3939 + 2.97661e-5 * d,
+        a: 9.55475,
+        e: 0.055546 - 9.499e-9 * d,
+        M: 316.967 + 0.0334442282 * d,
+      };
     case "uranus":
-      return { N: 74.0005 + 1.3978e-5 * d, i: 0.7733 + 1.9e-8 * d, w: 96.6612 + 3.0565e-5 * d, a: 19.18171 - 1.55e-8 * d, e: 0.047318 + 7.45e-9 * d, M: 142.5905 + 0.011725806 * d };
+      return {
+        N: 74.0005 + 1.3978e-5 * d,
+        i: 0.7733 + 1.9e-8 * d,
+        w: 96.6612 + 3.0565e-5 * d,
+        a: 19.18171 - 1.55e-8 * d,
+        e: 0.047318 + 7.45e-9 * d,
+        M: 142.5905 + 0.011725806 * d,
+      };
     default:
-      return { N: 131.7806 + 3.0173e-5 * d, i: 1.77 - 2.55e-7 * d, w: 272.8461 - 6.027e-6 * d, a: 30.05826 + 3.313e-8 * d, e: 0.008606 + 2.15e-9 * d, M: 260.2471 + 0.005995147 * d };
+      return {
+        N: 131.7806 + 3.0173e-5 * d,
+        i: 1.77 - 2.55e-7 * d,
+        w: 272.8461 - 6.027e-6 * d,
+        a: 30.05826 + 3.313e-8 * d,
+        e: 0.008606 + 2.15e-9 * d,
+        M: 260.2471 + 0.005995147 * d,
+      };
   }
 }
 
@@ -155,6 +221,60 @@ function geocentricLongitude(name: string, d: number) {
   return norm(Math.atan2(p.y + ys, p.x + xs) * DEG);
 }
 
+/** Pluto — Schlyter's special approximation, valid ~1800-2100. */
+function plutoLongitude(d: number) {
+  const S = 50.03 + 0.033459652 * d;
+  const P = 238.95 + 0.003968789 * d;
+
+  const lonecl =
+    238.9508 +
+    0.00400703 * d -
+    19.799 * sin(P) +
+    19.848 * cos(P) +
+    0.897 * sin(2 * P) -
+    4.956 * cos(2 * P) +
+    0.61 * sin(3 * P) +
+    1.211 * cos(3 * P) -
+    0.341 * sin(4 * P) -
+    0.19 * cos(4 * P) +
+    0.128 * sin(5 * P) -
+    0.034 * cos(5 * P) -
+    0.038 * sin(6 * P) +
+    0.031 * cos(6 * P) +
+    0.02 * sin(S - P) -
+    0.01 * cos(S - P);
+
+  const latecl =
+    -3.9082 -
+    5.453 * sin(P) -
+    14.975 * cos(P) +
+    3.527 * sin(2 * P) +
+    1.673 * cos(2 * P) -
+    1.051 * sin(3 * P) +
+    0.328 * cos(3 * P) +
+    0.179 * sin(4 * P) -
+    0.292 * cos(4 * P) +
+    0.019 * sin(5 * P) +
+    0.1 * cos(5 * P) -
+    0.031 * sin(6 * P) -
+    0.026 * cos(6 * P) +
+    0.011 * cos(S - P);
+
+  const r =
+    40.72 +
+    6.68 * sin(P) +
+    6.9 * cos(P) -
+    1.18 * sin(2 * P) -
+    0.03 * cos(2 * P) +
+    0.15 * sin(3 * P) -
+    0.14 * cos(3 * P);
+
+  const x = r * cos(lonecl) * cos(latecl);
+  const y = r * sin(lonecl) * cos(latecl);
+  const s = sunLongitude(d);
+  return norm(Math.atan2(y + s.r * sin(s.lon), x + s.r * cos(s.lon)) * DEG);
+}
+
 function longitudes(d: number): number[] {
   return [
     sunLongitude(d).lon,
@@ -166,7 +286,7 @@ function longitudes(d: number): number[] {
     geocentricLongitude("saturn", d),
     geocentricLongitude("uranus", d),
     geocentricLongitude("neptune", d),
-    geocentricLongitude("pluto", d),
+    plutoLongitude(d),
   ];
 }
 
@@ -178,9 +298,7 @@ function angles(d: number, lat: number, lon: number) {
   const lst = norm((gmst0 + ut * 24 + lon / 15) * 15); // degrees
   const ecl = 23.4393 - 3.563e-7 * d;
   let mc = norm(Math.atan2(sin(lst), cos(lst) * cos(ecl)) * DEG);
-  let asc = norm(
-    Math.atan2(cos(lst), -(sin(lst) * cos(ecl) + Math.tan(lat * RAD) * sin(ecl))) * DEG,
-  );
+  let asc = norm(Math.atan2(cos(lst), -(sin(lst) * cos(ecl) + Math.tan(lat * RAD) * sin(ecl))) * DEG);
   if (norm(asc - mc) < 180) asc = norm(asc + 180);
   return { asc, mc };
 }
@@ -210,14 +328,8 @@ export interface BirthInput {
 }
 
 export function computeChart(input: BirthInput): ChartJson {
-  const utcMs = Date.UTC(
-    input.year,
-    input.month - 1,
-    input.day,
-    input.hour,
-    input.minute,
-    0,
-  ) - input.utcOffsetHours * 3600000;
+  const utcMs =
+    Date.UTC(input.year, input.month - 1, input.day, input.hour, input.minute, 0) - input.utcOffsetHours * 3600000;
   const d = daysSinceEpoch(new Date(utcMs));
   const lons = longitudes(d);
   const prev = longitudes(d - 1);
