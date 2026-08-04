@@ -66,7 +66,7 @@ function escapeRegex(term: string) {
  */
 function matches(term: string, norm: string, lang: Lang) {
   if (lang !== "en") return norm.includes(term);
-  return new RegExp(`\\b${escapeRegex(term)}(s|es|ed|ing|ly)?\\b`, "i").test(norm);
+  return new RegExp(`\\b${escapeRegex(term)}(s|es|ed|ing|ly|ity|ities|ies)?\\b`, "i").test(norm);
 }
 
 /** Collect every banned stem present in the text. */
