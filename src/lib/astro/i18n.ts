@@ -46,62 +46,75 @@ export function ordinalHouse(house: number, lang: Lang) {
   const v = house % 100;
   return `${house}${s[(v - 20) % 10] ?? s[v] ?? s[0]} house`;
 }
+// Αντικαθιστά τα const EL και const EN στο src/lib/astro/i18n.ts
+// ΜΗΝ αγγίξεις τα SIGN_EN / PLANET_EN / ASPECT_EN — είναι συμβόλαιο με το μοντέλο.
 
 const EL = {
-  eyebrow: "Prompt Library v1.0",
-  title: "Αστρολογική Ερμηνεία",
+  eyebrow: "Zodiac Zone",
+  title: "Ο γενέθλιος χάρτης σου",
   intro:
-    "Δομημένα prompts για atoms, όψεις, σύνθεση και θέματα εμβάθυνσης — χωρίς ελεύθερο κείμενο από τον χρήστη, με banned-term scan σε κάθε output.",
+    "Συμπλήρωσε πού και πότε γεννήθηκες και δες πού βρίσκονταν ο Ήλιος, η Σελήνη και οι πλανήτες εκείνη τη στιγμή — μαζί με μια αναλυτική ερμηνεία στα ελληνικά.",
+
   tabs: {
-    placement: { label: "P1 · Θέση", hint: "πλανήτης σε ζώδιο σε οίκο" },
-    aspect: { label: "P2 · Όψη", hint: "ζεύγος πλανητών" },
-    synthesis: { label: "P3 · Σύνθεση", hint: "ολόκληρος χάρτης" },
-    topic: { label: "P4 · Θέμα", hint: "κλειστή λίστα" },
+    placement: { label: "Θέσεις", hint: "πλανήτης, ζώδιο και οίκος" },
+    aspect: { label: "Όψεις", hint: "πώς συνομιλούν δύο πλανήτες" },
+    synthesis: { label: "Ο χάρτης μου", hint: "συνολική εικόνα" },
+    topic: { label: "Εμβάθυνση", hint: "διάλεξε θέμα" },
   },
+
   planet: "Πλανήτης",
-  planetA: "Πλανήτης Α",
-  planetB: "Πλανήτης Β",
+  planetA: "Πρώτος πλανήτης",
+  planetB: "Δεύτερος πλανήτης",
   sign: "Ζώδιο",
   house: "Οίκος",
   aspect: "Όψη",
   topic: "Θέμα",
-  topicNote: "Κλειστό enum — ο χρήστης δεν πληκτρολογεί ποτέ.",
+  topicNote: "Διάλεξε ένα από τα θέματα για πιο αναλυτική ματιά.",
+
   birthDate: "Ημερομηνία γέννησης",
   birthTime: "Ώρα γέννησης",
   birthPlace: "Τόπος γέννησης",
   placePlaceholder: "π.χ. Θεσσαλονίκη",
-  chartNote:
-    "Ο χάρτης υπολογίζεται τοπικά (whole sign) και μόνο οι θέσεις στέλνονται στο μοντέλο.",
-  generate: "Παραγωγή",
-  generating: "Παράγεται…",
-  error: "Σφάλμα",
-  chartTitle: "Γενέθλιος χάρτης",
-  analysis: "Ανάλυση χάρτη",
-  interpretation: "Ερμηνεία",
+  chartNote: "Η ακριβής ώρα έχει σημασία: λίγα λεπτά διαφορά μπορούν να αλλάξουν τον Ωροσκόπο και τους οίκους σου.",
+
+  generate: "Δες τον χάρτη σου",
+  generating: "Υπολογίζεται…",
+  error: "Κάτι πήγε στραβά",
+
+  chartTitle: "Ο χάρτης σου",
+  analysis: "Τι δείχνει ο χάρτης",
+  interpretation: "Η ερμηνεία σου",
   planets: "Πλανήτες",
   aspects: "Όψεις",
-  noAspects: "Καμία όψη εντός ορίων.",
+  noAspects: "Δεν σχηματίζονται σημαντικές όψεις σε αυτόν τον χάρτη.",
   asc: "Ωροσκόπος",
   mc: "Μεσουράνημα",
-  flagged: "Χρειάζεται χειροκίνητο γράψιμο",
-  flaggedBody: "Το κείμενο περιείχε όρους εκτός πλαισίου",
+
+  flagged: "Δεν μπορούμε να δείξουμε αυτό το κομμάτι",
+  flaggedBody: "Το κείμενο ξέφυγε από τα θέματα που καλύπτουμε",
   flaggedTail: "και δεν εμφανίζεται.",
-  footer: "Το περιεχόμενο προορίζεται αποκλειστικά για ψυχαγωγία και αυτογνωσία.",
-  core: "Πυρήνας",
-  arena: "Πεδίο",
-  growth: "Εξέλιξη",
-  keywords: "Λέξεις-κλειδιά",
-  dynamic: "Δυναμική",
+
+  footer:
+    "Το περιεχόμενο προορίζεται για ψυχαγωγία και αυτογνωσία. Δεν αντικαθιστά ιατρική, ψυχολογική, νομική ή οικονομική συμβουλή.",
+
+  core: "Ο πυρήνας",
+  arena: "Πού φαίνεται",
+  growth: "Το στοίχημα",
+  keywords: "Με δυο λόγια",
+  dynamic: "Η δυναμική",
   showsUp: "Πώς εκδηλώνεται",
-  work: "Δουλειά",
-  strengths: "Δυνάμεις",
-  tensions: "Εντάσεις",
+  work: "Τι ζητάει από σένα",
+
+  strengths: "Τα δυνατά σου σημεία",
+  tensions: "Οι εντάσεις σου",
   relationships: "Σχέσεις",
-  workArea: "Εργασία",
-  innerLife: "Εσωτερική ζωή",
-  oneThing: "Ένα πράγμα",
-  placementsUsed: "Θέσεις που χρησιμοποιήθηκαν",
-  intensity: { low: "χαμηλή ένταση", medium: "μέτρια ένταση", high: "υψηλή ένταση" },
+  workArea: "Δουλειά",
+  innerLife: "Εσωτερικός κόσμος",
+  oneThing: "Αν κρατήσεις ένα πράγμα",
+  placementsUsed: "Βασίστηκε σε",
+
+  intensity: { low: "ήπια", medium: "αισθητή", high: "έντονη" },
+
   topics: {
     relationships: "Σχέσεις",
     career: "Καριέρα",
@@ -113,59 +126,71 @@ const EL = {
 };
 
 const EN: typeof EL = {
-  eyebrow: "Prompt Library v1.0",
-  title: "Astrological Interpretation",
+  eyebrow: "Zodiac Zone",
+  title: "Your birth chart",
   intro:
-    "Structured prompts for atoms, aspects, synthesis and topic deep-dives — no free text from the user, with a banned-term scan on every output.",
+    "Tell us where and when you were born, and see exactly where the Sun, Moon and planets stood at that moment — with a full reading in English.",
+
   tabs: {
-    placement: { label: "P1 · Placement", hint: "planet in sign in house" },
-    aspect: { label: "P2 · Aspect", hint: "planet pair" },
-    synthesis: { label: "P3 · Synthesis", hint: "whole chart" },
-    topic: { label: "P4 · Topic", hint: "fixed list" },
+    placement: { label: "Placements", hint: "planet, sign and house" },
+    aspect: { label: "Aspects", hint: "how two planets talk to each other" },
+    synthesis: { label: "My chart", hint: "the whole picture" },
+    topic: { label: "Go deeper", hint: "pick a theme" },
   },
+
   planet: "Planet",
-  planetA: "Planet A",
-  planetB: "Planet B",
+  planetA: "First planet",
+  planetB: "Second planet",
   sign: "Sign",
   house: "House",
   aspect: "Aspect",
-  topic: "Topic",
-  topicNote: "Closed enum — the user never types.",
+  topic: "Theme",
+  topicNote: "Choose a theme for a closer look.",
+
   birthDate: "Date of birth",
   birthTime: "Time of birth",
   birthPlace: "Place of birth",
   placePlaceholder: "e.g. Thessaloniki",
-  chartNote: "The chart is computed locally (whole sign); only positions are sent to the model.",
-  generate: "Generate",
-  generating: "Generating…",
-  error: "Error",
-  chartTitle: "Birth chart",
-  analysis: "Chart analysis",
-  interpretation: "Interpretation",
+  chartNote: "The exact time matters: a few minutes can change your Ascendant and your houses.",
+
+  generate: "Reveal my chart",
+  generating: "Calculating…",
+  error: "Something went wrong",
+
+  chartTitle: "Your chart",
+  analysis: "What the chart shows",
+  interpretation: "Your reading",
   planets: "Planets",
   aspects: "Aspects",
-  noAspects: "No aspects within orb.",
+  noAspects: "No significant aspects form in this chart.",
   asc: "Ascendant",
   mc: "Midheaven",
-  flagged: "Needs manual writing",
-  flaggedBody: "The text contained out-of-scope terms",
-  flaggedTail: "and is not shown.",
-  footer: "This content is for entertainment and self-reflection only.",
-  core: "Core",
-  arena: "Arena",
-  growth: "Growth",
-  keywords: "Keywords",
-  dynamic: "Dynamic",
+
+  flagged: "We can't show this section",
+  flaggedBody: "The text drifted outside the themes we cover",
+  flaggedTail: "so it isn't shown.",
+
+  footer:
+    "This content is for entertainment and self-reflection. It is not medical, psychological, legal or financial advice.",
+
+  core: "The core",
+  arena: "Where it shows",
+  growth: "The challenge",
+  keywords: "In short",
+  dynamic: "The dynamic",
   showsUp: "How it shows up",
-  work: "Work",
-  strengths: "Strengths",
-  tensions: "Tensions",
+  work: "What it asks of you",
+
+  strengths: "Your strengths",
+  tensions: "Your tensions",
   relationships: "Relationships",
   workArea: "Work",
-  innerLife: "Inner life",
-  oneThing: "One thing",
-  placementsUsed: "Placements used",
-  intensity: { low: "low intensity", medium: "medium intensity", high: "high intensity" },
+  innerLife: "Inner world",
+  oneThing: "If you take one thing away",
+  placementsUsed: "Based on",
+
+  intensity: { low: "gentle", medium: "noticeable", high: "intense" },
+
   topics: {
     relationships: "Relationships",
     career: "Career",
@@ -175,6 +200,5 @@ const EN: typeof EL = {
     blind_spots: "Blind spots",
   },
 };
-
 export const dict = (lang: Lang) => (lang === "en" ? EN : EL);
 export type Dict = typeof EL;
