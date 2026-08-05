@@ -131,8 +131,15 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           },
         })) as Result;
       } else if (tab === "synthesis") {
+        const placeValue = birthPlace.trim();
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(birthDate) || !/^\d{2}:\d{2}$/.test(birthTime) || placeValue.length < 2) {
+          setError(dict(lang).errBirthFields);
+          setLoading(false);
+          return;
+        }
         const built = (await chartFn({
-          data: { date: birthDate, time: birthTime, place: birthPlace },
+          data: { date: birthDate, time: birthTime, place: placeValue },
+
         })) as {
           chart: ChartJson;
           place: { name: string; country: string; latitude: number; longitude: number; timezone: string };
