@@ -182,6 +182,10 @@
     color: var(--color-foreground);
     font-family: var(--font-body);
   }
+  button,
+  a {
+    cursor: pointer !important;
+  }
 
   h1,
   h2,
