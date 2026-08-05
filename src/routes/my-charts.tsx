@@ -41,9 +41,7 @@ function MyChartsPage() {
       <h1 className="font-display text-3xl font-semibold text-foreground">{t.chartsTitle}</h1>
 
       <div className="mt-6 space-y-3">
-        {rows === null ? (
-          <div className="panel h-20 animate-pulse" />
-        ) : rows.length === 0 ? (
+        {rows.length === 0 ? (
           <div className="panel p-6">
             <p className="text-sm text-muted-foreground">{t.chartsEmpty}</p>
             <Link to="/" className={`mt-4 ${btnOutline}`}>
@@ -64,6 +62,7 @@ function MyChartsPage() {
           ))
         )}
       </div>
+
     </main>
   );
 }
