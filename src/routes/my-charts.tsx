@@ -139,6 +139,35 @@ function MyChartsPage() {
   }
 
   const openChart = rows.find((c) => c.id === openId) ?? null;
+  const openChartJson = openChart ? (openChart.chartJson as ChartJson) : null;
+
+  // Ερμηνεία για τον ανοιχτό χάρτη (σερβίρεται από το shared cache όταν υπάρχει).
+  useEffect(() => {
+    if (!openChartJson) {
+      setReading(null);
+      setReadingError(null);
+      setReadingLoading(false);
+      return;
+    }
+    let active = true;
+    setReading(null);
+    setReadingError(null);
+    setReadingLoading(true);
+    synthesisFn({ data: { chart: openChartJson, lang } })
+      .then((res) => {
+        if (active) setReading(res as { data: unknown; flagged: boolean; limited?: boolean });
+      })
+      .catch((err: unknown) => {
+        if (active) setReadingError(err instanceof Error ? err.message : "unknown_error");
+      })
+      .finally(() => {
+        if (active) setReadingLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [openId, lang, openChartJson, synthesisFn]);
+
 
   const folderOptions: Array<{ id: string; name: string }> = [
     { id: "all", name: t.all },
