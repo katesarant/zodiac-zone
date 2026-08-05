@@ -112,6 +112,16 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
   const topicFn = useServerFn(generateTopicFn);
   const chartFn = useServerFn(buildChartFn);
 
+  // Drop stale results when the language changes, so headings and body text never mix languages.
+  const prevLang = useRef(lang);
+  useEffect(() => {
+    if (prevLang.current !== lang) {
+      prevLang.current = lang;
+      setResult(null);
+      setError(null);
+    }
+  }, [lang]);
+
   async function run() {
     setLoading(true);
     setError(null);
