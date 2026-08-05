@@ -132,11 +132,17 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           data: { date: birthDate, time: birthTime, place: birthPlace },
         })) as {
           chart: ChartJson;
-          place: { name: string; country: string; timezone: string };
+          place: { name: string; country: string; latitude: number; longitude: number; timezone: string };
           local: { utcOffsetHours: number };
         };
         setChart(built.chart);
         setChartLabelName(chartName.trim() || null);
+        setPlaceInfo({
+          name: built.place.name,
+          latitude: built.place.latitude,
+          longitude: built.place.longitude,
+          timezone: built.place.timezone,
+        });
         setPlaceLabel(
           `${built.place.name}${built.place.country ? `, ${built.place.country}` : ""} · ${built.place.timezone} (UTC${built.local.utcOffsetHours >= 0 ? "+" : ""}${built.local.utcOffsetHours})`,
         );
