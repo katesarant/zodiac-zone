@@ -378,6 +378,25 @@ function MyChartsPage() {
                 <div className="mt-8">
                   <ChartTables chart={openChart.chartJson as ChartJson} lang={lang} />
                 </div>
+
+                <div className="mt-10 border-t border-border/60 pt-8">
+                  <h3 className="mb-5 font-display text-3xl text-primary md:text-4xl">{tt.analysis}</h3>
+                  {readingLoading && <p className="text-sm text-muted-foreground">{tt.generating}</p>}
+                  {readingError && (
+                    <p className="text-sm text-destructive">
+                      {tt.error}: {readingError}
+                    </p>
+                  )}
+                  {reading &&
+                    (reading.limited ? (
+                      <p className="text-sm text-muted-foreground">{t.limitReached}</p>
+                    ) : reading.flagged ? (
+                      <p className="text-sm text-muted-foreground">{tt.flaggedBody}</p>
+                    ) : (
+                      <ResultView kind="synthesis" data={reading.data} lang={lang} />
+                    ))}
+                </div>
+
               </section>
             )}
           </div>
