@@ -245,6 +245,12 @@
     display: none !important;
   }
 
+  /* Ό,τι είναι μέσα στο περιεχόμενο εκτυπώνεται (τίτλος, στοιχεία γέννησης) */
+  main header {
+    display: block !important;
+  }
+
+
   main,
   section,
   article {
