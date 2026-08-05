@@ -52,6 +52,7 @@ export function ordinalHouse(house: number, lang: Lang) {
 const EL = {
   eyebrow: "MyZodiacMaps",
   title: "Ο γενέθλιος χάρτης σου",
+  tagline: "Ο ουρανός τη στιγμή που γεννήθηκες",
   intro:
     "Συμπλήρωσε πού και πότε γεννήθηκες και δες πού βρίσκονταν ο Ήλιος, η Σελήνη και οι πλανήτες εκείνη τη στιγμή — μαζί με μια αναλυτική ερμηνεία στα ελληνικά.",
 
@@ -239,7 +240,8 @@ const EL = {
   },
 };
 const EN: typeof EL = {
-  eyebrow: "Zodiac Zone",
+  eyebrow: "MyZodiacMaps",
+  tagline: "Your birth chart, mapped",
   title: "Your birth chart",
   intro:
     "Tell us where and when you were born, and see exactly where the Sun, Moon and planets stood at that moment — with a full reading in English.",
