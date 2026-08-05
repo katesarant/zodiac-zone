@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
 import { useLang } from "@/hooks/use-lang";
@@ -7,16 +7,11 @@ import { dict, tSign } from "@/lib/astro/i18n";
 import type { ChartJson } from "@/lib/astro/types";
 import {
   deleteChart as removeChart,
-  getLibrary,
   listCharts,
   listFolders,
-  mergeLibrary,
-  parseLibraryBackup,
-  replaceLibrary,
   toggleFavorite,
   updateChart,
   type Folder,
-  type Library,
   type SavedChart,
 } from "@/lib/storage/local-library";
 import { btnOutline, field } from "@/lib/ui";
@@ -76,9 +71,6 @@ function MyChartsPage() {
   const [sort, setSort] = useState<SortKey>("default");
   const [folderId, setFolderId] = useState<string | "all" | "unfiled">("all");
   const [openId, setOpenId] = useState<string | null>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [pending, setPending] = useState<Library | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setCharts(listCharts());
@@ -164,7 +156,7 @@ function MyChartsPage() {
       ) : (
         <div className="mt-6 flex flex-col gap-6 sm:flex-row">
           {/* Sidebar / mobile dropdown */}
-          <aside className="sm:w-52 sm:shrink-0">
+          <aside className="sm:w-52 sm:shrink-0" data-print-hide>
             <div className="sm:hidden">
               <select className={field} value={folderId} onChange={(e) => setFolderId(e.target.value)}>
                 {folderOptions.map((f) => (
@@ -196,7 +188,7 @@ function MyChartsPage() {
 
           <div className="min-w-0 flex-1">
             {/* Controls */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center" data-print-hide>
               <input
                 type="search"
                 className={field}
@@ -232,11 +224,11 @@ function MyChartsPage() {
             </div>
 
             {rows.length === 0 ? (
-              <p className="mt-6 text-sm text-muted-foreground">{t.noResults}</p>
+              <p className="mt-6 text-sm text-muted-foreground" data-print-hide>{t.noResults}</p>
             ) : (
               <>
                 {/* Desktop table */}
-                <div className="mt-5 hidden sm:block">
+                <div className="mt-5 hidden sm:block" data-print-hide>
                   <table className="w-full text-left text-sm">
                     <thead>
                       <tr className="border-b border-border text-xs uppercase tracking-widest text-muted-foreground">
@@ -272,6 +264,9 @@ function MyChartsPage() {
                                 <button type="button" className="text-muted-foreground" onClick={() => onRename(c)}>
                                   {t.rename}
                                 </button>
+                                <button type="button" className="text-muted-foreground" onClick={() => onPdf(c.id)}>
+                                  {t.pdfLabel}
+                                </button>
                                 <button type="button" className="text-destructive" onClick={() => onDelete(c.id)}>
                                   {t.remove}
                                 </button>
@@ -285,7 +280,7 @@ function MyChartsPage() {
                 </div>
 
                 {/* Mobile cards */}
-                <div className="mt-5 space-y-3 sm:hidden">
+                <div className="mt-5 space-y-3 sm:hidden" data-print-hide>
                   {rows.map((c) => {
                     const sun = sunOf(c.chartJson);
                     return (
@@ -308,6 +303,9 @@ function MyChartsPage() {
                           </button>
                           <button type="button" className="text-muted-foreground" onClick={() => onRename(c)}>
                             {t.rename}
+                          </button>
+                          <button type="button" className="text-muted-foreground" onClick={() => onPdf(c.id)}>
+                            {t.pdfLabel}
                           </button>
                           <button type="button" className="text-destructive" onClick={() => onDelete(c.id)}>
                             {t.remove}
