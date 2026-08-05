@@ -14,6 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useLang } from "@/hooks/use-lang";
 import { saveChart } from "@/lib/storage/local-library";
 import { buildChartFn } from "@/lib/astro/birth.functions";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
@@ -78,7 +79,7 @@ type Result = {
 };
 
 export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
-  const [lang, setLang] = useState<Lang>(initialLang);
+  const [lang] = useLang(initialLang);
   const [tab, setTab] = useState<Tab>("placement");
   const [planet, setPlanet] = useState(PLANETS[0]!);
   const [sign, setSign] = useState(SIGNS[0]!);
