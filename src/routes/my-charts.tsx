@@ -67,6 +67,7 @@ function Star({ on, label, onClick }: { on: boolean; label: string; onClick: () 
 function MyChartsPage() {
   const [lang] = useLang();
   const t = dict(lang).library;
+  const tt = dict(lang);
 
   const [charts, setCharts] = useState<SavedChart[]>([]);
   const [folders, setFolders] = useState<Folder[]>([]);
@@ -75,6 +76,15 @@ function MyChartsPage() {
   const [sort, setSort] = useState<SortKey>("default");
   const [folderId, setFolderId] = useState<string | "all" | "unfiled">("all");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [reading, setReading] = useState<{
+    data: unknown;
+    flagged: boolean;
+    limited?: boolean;
+  } | null>(null);
+  const [readingLoading, setReadingLoading] = useState(false);
+  const [readingError, setReadingError] = useState<string | null>(null);
+  const synthesisFn = useServerFn(generateSynthesisFn);
+
 
   useEffect(() => {
     setCharts(listCharts());
