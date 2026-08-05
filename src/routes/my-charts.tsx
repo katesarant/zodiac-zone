@@ -1,9 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
+import { ResultView } from "@/components/astro/ResultView";
 import { useLang } from "@/hooks/use-lang";
 import { dict, tSign } from "@/lib/astro/i18n";
+import { generateSynthesisFn } from "@/lib/astro/interpretation.functions";
 import type { ChartJson } from "@/lib/astro/types";
 import {
   deleteChart as removeChart,
@@ -15,6 +18,7 @@ import {
   type SavedChart,
 } from "@/lib/storage/local-library";
 import { btnOutline, field } from "@/lib/ui";
+
 
 export const Route = createFileRoute("/my-charts")({
   ssr: false,
