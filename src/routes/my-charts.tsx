@@ -1,4 +1,4 @@
-import { Link, createFileRoute, redirect } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { useLang } from "@/hooks/use-lang";
