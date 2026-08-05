@@ -6,6 +6,15 @@ import { DatePicker } from "@/components/astro/DatePicker";
 import { ResultView } from "@/components/astro/ResultView";
 import { TimePicker } from "@/components/astro/TimePicker";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { saveChart } from "@/lib/storage/local-library";
 import { buildChartFn } from "@/lib/astro/birth.functions";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
 import {
@@ -82,6 +91,14 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
   const [chartLabelName, setChartLabelName] = useState<string | null>(null);
   const [chart, setChart] = useState<ChartJson | null>(null);
   const [placeLabel, setPlaceLabel] = useState<string | null>(null);
+  const [placeInfo, setPlaceInfo] = useState<{
+    name: string;
+    latitude: number;
+    longitude: number;
+    timezone: string;
+  } | null>(null);
+  const [saveOpen, setSaveOpen] = useState(false);
+  const [saveLabel, setSaveLabel] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
@@ -115,11 +132,17 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           data: { date: birthDate, time: birthTime, place: birthPlace },
         })) as {
           chart: ChartJson;
-          place: { name: string; country: string; timezone: string };
+          place: { name: string; country: string; latitude: number; longitude: number; timezone: string };
           local: { utcOffsetHours: number };
         };
         setChart(built.chart);
         setChartLabelName(chartName.trim() || null);
+        setPlaceInfo({
+          name: built.place.name,
+          latitude: built.place.latitude,
+          longitude: built.place.longitude,
+          timezone: built.place.timezone,
+        });
         setPlaceLabel(
           `${built.place.name}${built.place.country ? `, ${built.place.country}` : ""} · ${built.place.timezone} (UTC${built.local.utcOffsetHours >= 0 ? "+" : ""}${built.local.utcOffsetHours})`,
         );
@@ -295,11 +318,24 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
 
       {tab === "synthesis" && chart && (
         <section className="panel mt-6 p-6">
-          <header className="mb-4">
-            <h2 className="text-2xl">{chartLabelName ?? t.chartTitle}</h2>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
-            </p>
+          <header className="mb-4 flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <h2 className="text-2xl">{chartLabelName ?? t.chartTitle}</h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              onClick={() => {
+                const year = birthDate.slice(0, 4);
+                const base = placeInfo?.name ?? birthPlace;
+                setSaveLabel(chartLabelName ?? `${base} ${year}`.trim());
+                setSaveOpen(true);
+              }}
+            >
+              {t.library.saveChart}
+            </Button>
           </header>
           <ChartWheel chart={chart} />
           <div className="mt-8">
@@ -307,6 +343,51 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           </div>
         </section>
       )}
+
+      <Dialog open={saveOpen} onOpenChange={setSaveOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t.library.saveDialogTitle}</DialogTitle>
+            <DialogDescription>{t.library.saveDialogBody}</DialogDescription>
+          </DialogHeader>
+          <label className="block">
+            <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+              {t.library.label}
+            </span>
+            <input
+              type="text"
+              className={field}
+              value={saveLabel}
+              onChange={(e) => setSaveLabel(e.target.value)}
+            />
+          </label>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setSaveOpen(false)}>
+              {t.library.cancel}
+            </Button>
+            <Button
+              disabled={!saveLabel.trim() || !chart}
+              onClick={() => {
+                if (!chart) return;
+                saveChart({
+                  label: saveLabel.trim(),
+                  birthDate,
+                  birthTime,
+                  birthPlace: placeInfo?.name ?? birthPlace,
+                  lat: placeInfo?.latitude ?? 0,
+                  lon: placeInfo?.longitude ?? 0,
+                  tz: placeInfo?.timezone ?? "UTC",
+                  chartJson: chart,
+                });
+                setSaveOpen(false);
+              }}
+            >
+              {t.library.save}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
 
       {result && (
         <section className="panel mt-6 p-6">
