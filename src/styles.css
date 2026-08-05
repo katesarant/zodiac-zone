@@ -284,15 +284,15 @@
    svg text {
      fill: #111111 !important;
    }
-   text.fill-primary {
+  svg text.fill-primary {
      fill: #ebbd57 !important;
    }
-.fill-foreground {
+svg text.fill-foreground {
 fill:#f1eee6!important;
 }
 
 
-.fill-muted-foreground{
+svg .fill-muted-foreground{
 fill:oklch(74% .03 280)!important;
 }
   
