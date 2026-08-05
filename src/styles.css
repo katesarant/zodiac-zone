@@ -281,22 +281,33 @@
     color: #111111 !important;
   }
 
-  // .fill-primary {
-  //   fill: #ebbd57 !important;
-  // }
-  .fill-foreground {
-    fill: var(--foreground);
+  /* Chart wheel: dark ink on white paper */
+  svg .fill-card {
+    fill: #ffffff !important;
   }
 
-  .fill-muted-foreground {
-    fill: var(--muted-foreground);
+  svg .fill-foreground {
+    fill: #111111 !important;
   }
-  
-  .fill-foreground {
-    fill: #f1eee6 !important;
+
+  svg .fill-muted-foreground {
+    fill: #555555 !important;
   }
-  .fill-muted-foreground {
-    fill: oklch(74% 0.03 280) !important;
+
+  svg .fill-primary {
+    fill: #7a5a00 !important;
+  }
+
+  svg .stroke-border {
+    stroke: #999999 !important;
+  }
+
+  svg .stroke-primary {
+    stroke: #7a5a00 !important;
+  }
+
+  svg .stroke-destructive {
+    stroke: #b00020 !important;
   }
 
   .panel {
@@ -305,11 +316,4 @@
     box-shadow: none !important;
   }
 
-  .fill-foreground {
-    fill: var(--foreground);
-  }
-
-  .fill-muted-foreground {
-    fill: var(--muted-foreground);
-  }
 }
