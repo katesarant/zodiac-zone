@@ -50,7 +50,7 @@ export function ordinalHouse(house: number, lang: Lang) {
 // ΜΗΝ αγγίξεις τα SIGN_EN / PLANET_EN / ASPECT_EN — είναι συμβόλαιο με το μοντέλο.
 
 const EL = {
-  eyebrow: "Zodiac Zone",
+  eyebrow: "MyZodiacMaps",
   title: "Ο γενέθλιος χάρτης σου",
   intro:
     "Συμπλήρωσε πού και πότε γεννήθηκες και δες πού βρίσκονταν ο Ήλιος, η Σελήνη και οι πλανήτες εκείνη τη στιγμή — μαζί με μια αναλυτική ερμηνεία στα ελληνικά.",
@@ -161,10 +161,8 @@ const EL = {
     save: "Αποθήκευση",
     savedOk: "Αποθηκεύτηκε",
     pdfLabel: "Λήψη PDF",
-    backupNote:
-      "Οι χάρτες σου αποθηκεύονται μόνο σε αυτή τη συσκευή. Κατέβασε PDF για να κρατήσεις ένα αντίγραφο.",
-    limitReached:
-      "Έφτασες το όριο δημιουργιών για αυτή την ώρα. Δοκίμασε ξανά αργότερα.",
+    backupNote: "Οι χάρτες σου αποθηκεύονται μόνο σε αυτή τη συσκευή. Κατέβασε PDF για να κρατήσεις ένα αντίγραφο.",
+    limitReached: "Έφτασες το όριο δημιουργιών για αυτή την ώρα. Δοκίμασε ξανά αργότερα.",
   },
   auth: {
     signInOrUp: "Σύνδεση / Εγγραφή",
@@ -352,8 +350,7 @@ const EN: typeof EL = {
     save: "Save",
     savedOk: "Saved",
     pdfLabel: "Download PDF",
-    backupNote:
-      "Your charts are stored only on this device. Download a PDF to keep a copy.",
+    backupNote: "Your charts are stored only on this device. Download a PDF to keep a copy.",
     limitReached: "You have reached the generation limit for this hour. Please try again later.",
   },
   auth: {
