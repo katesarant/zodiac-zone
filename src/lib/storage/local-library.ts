@@ -114,6 +114,42 @@ export function replaceLibrary(next: Library): boolean {
   }
 }
 
+/** Validates an unknown parsed JSON payload as a library backup. */
+export function parseLibraryBackup(
+  raw: unknown,
+): { ok: true; library: Library } | { ok: false; reason: "shape" | "version" } {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return { ok: false, reason: "shape" };
+  const obj = raw as Partial<Library>;
+  if (typeof obj.version !== "number") return { ok: false, reason: "shape" };
+  if (!Array.isArray(obj.charts) || !Array.isArray(obj.notes) || !Array.isArray(obj.folders)) {
+    return { ok: false, reason: "shape" };
+  }
+  if (obj.version !== LIBRARY_VERSION) return { ok: false, reason: "version" };
+  return {
+    ok: true,
+    library: {
+      version: LIBRARY_VERSION,
+      charts: asArray<SavedChart>(obj.charts),
+      folders: asArray<Folder>(obj.folders),
+      notes: asArray<Note>(obj.notes),
+    },
+  };
+}
+
+/** Merges an imported library into the current one. Existing ids win; no duplicates. */
+export function mergeLibrary(incoming: Library): Library {
+  return mutate((lib) => {
+    const chartIds = new Set(lib.charts.map((c) => c.id));
+    for (const c of incoming.charts) if (c?.id && !chartIds.has(c.id)) lib.charts.push(c);
+
+    const folderIds = new Set(lib.folders.map((f) => f.id));
+    for (const f of incoming.folders) if (f?.id && !folderIds.has(f.id)) lib.folders.push(f);
+
+    const noteIds = new Set(lib.notes.map((n) => n.id));
+    for (const n of incoming.notes) if (n?.id && !noteIds.has(n.id)) lib.notes.push(n);
+  });
+}
+
 function mutate(fn: (lib: Library) => void): Library {
   const lib = getLibrary();
   try {
