@@ -26,9 +26,9 @@ export const Route = createFileRoute("/my-charts")({
   },
   head: () => ({
     meta: [
-      { title: "Οι χάρτες μου — Zodiac Zone" },
+      { title: "Οι χάρτες μου — My Zodiac Maps" },
       { name: "description", content: "Δες και διαχειρίσου τους αποθηκευμένους γενέθλιους χάρτες σου." },
-      { property: "og:title", content: "Οι χάρτες μου — Zodiac Zone" },
+      { property: "og:title", content: "Οι χάρτες μου — My Zodiac Maps" },
       { property: "og:description", content: "Οι αποθηκευμένοι χάρτες σου σε ένα μέρος." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -68,7 +68,7 @@ function MyChartsPage() {
           <div className="panel p-6">
             <p className="text-sm text-muted-foreground">{t.chartsEmpty}</p>
             <Link to="/" className={`mt-4 ${btnOutline}`}>
-              Zodiac Zone
+              My Zodiac Maps
             </Link>
           </div>
         ) : (
