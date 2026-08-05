@@ -73,6 +73,8 @@ type Result = {
   flagged: boolean;
   bannedTerms: string[];
   attempts: number;
+  cached?: boolean;
+  limited?: boolean;
 };
 
 export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
@@ -396,7 +398,9 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
 
       {result && (
         <section className="panel mt-6 p-6">
-          {result.flagged ? (
+          {result.limited ? (
+            <p className="text-sm text-muted-foreground">{t.library.limitReached}</p>
+          ) : result.flagged ? (
             <div className="space-y-2">
               <span className="inline-block rounded-full bg-destructive px-3 py-1 text-xs text-destructive-foreground">
                 {t.flagged}

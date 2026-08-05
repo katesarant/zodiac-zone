@@ -1,6 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+const LIMITED = { data: null, flagged: false, bannedTerms: [], attempts: 0, cached: false, limited: true } as const;
+
+async function limited(): Promise<boolean> {
+  const { allowGeneration } = await import("./rate-limit.server");
+  return !(await allowGeneration());
+}
+
 const langSchema = z.enum(["el", "en"]);
 
 const placementSchema = z.object({
@@ -36,6 +43,7 @@ const topicSchema = z.object({
 export const generatePlacementAtomFn = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => placementSchema.parse(input))
   .handler(async ({ data }) => {
+    if (await limited()) return LIMITED;
     const { generatePlacementAtom } = await import("./generate.server");
     const { lang, ...placement } = data;
     return generatePlacementAtom(placement, lang);
@@ -44,6 +52,7 @@ export const generatePlacementAtomFn = createServerFn({ method: "POST" })
 export const generateAspectAtomFn = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => aspectSchema.parse(input))
   .handler(async ({ data }) => {
+    if (await limited()) return LIMITED;
     const { generateAspectAtom } = await import("./generate.server");
     const { lang, ...aspect } = data;
     return generateAspectAtom(aspect, lang);
@@ -52,6 +61,7 @@ export const generateAspectAtomFn = createServerFn({ method: "POST" })
 export const generateSynthesisFn = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => chartSchema.parse(input))
   .handler(async ({ data }) => {
+    if (await limited()) return LIMITED;
     const { generateSynthesis } = await import("./generate.server");
     const { toChartJson } = await import("./chart");
     const { contentKey, readCache, writeCache } = await import("./cache.server");
@@ -71,6 +81,7 @@ export const generateSynthesisFn = createServerFn({ method: "POST" })
 export const generateTopicFn = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => topicSchema.parse(input))
   .handler(async ({ data }) => {
+    if (await limited()) return LIMITED;
     const { generateTopic } = await import("./generate.server");
     const { toChartJson } = await import("./chart");
     const { contentKey, readCache, writeCache } = await import("./cache.server");
