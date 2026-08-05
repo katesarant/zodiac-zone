@@ -287,6 +287,15 @@
    text.fill-primary {
      fill: #ebbd57 !important;
    }
+.fill-foreground {
+fill:#f1eee6!important;
+}
+
+
+.fill-muted-foreground{
+fill:oklch(74% .03 280)!important;
+}
+  
   // .panel {
   //   background: #ffffff !important;
   //   border: 1px solid #cccccc !important;
