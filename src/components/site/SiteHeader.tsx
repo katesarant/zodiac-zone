@@ -1,10 +1,13 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
 import { useLang } from "@/hooks/use-lang";
 import { dict } from "@/lib/astro/i18n";
 
 export function SiteHeader() {
-  const [lang, setLang] = useLang();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const routeLang = pathname.startsWith("/en") ? "en" : pathname.startsWith("/el") ? "el" : undefined;
+  const [lang, setLang] = useLang(routeLang);
+  const navigate = useNavigate();
   const t = dict(lang).auth;
 
   return (
