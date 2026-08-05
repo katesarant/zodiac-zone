@@ -33,9 +33,9 @@ function Chips({ items }: { items: string[] }) {
 /** Τίτλος ενότητας στην κύρια ανάλυση. */
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-display text-primary" style={{ fontSize: "1.25rem", letterSpacing: "0.01em" }}>
+    <h4 className="font-display text-primary" style={{ fontSize: "1.25rem", letterSpacing: "0.01em" }}>
       {children}
-    </h3>
+    </h4>
   );
 }
 
