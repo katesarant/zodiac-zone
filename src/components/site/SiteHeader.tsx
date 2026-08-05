@@ -23,7 +23,12 @@ export function SiteHeader() {
               <button
                 key={code}
                 type="button"
-                onClick={() => setLang(code)}
+                onClick={() => {
+                  setLang(code);
+                  if (routeLang && routeLang !== code) {
+                    void navigate({ to: code === "en" ? "/en" : "/el", replace: true });
+                  }
+                }}
                 className={`rounded-md px-2.5 py-1 text-xs font-medium uppercase transition-colors ${
                   lang === code ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
                 }`}
