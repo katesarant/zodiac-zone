@@ -234,7 +234,7 @@
   body {
     background: #ffffff !important;
     background-image: none !important;
-    color: #0B0361 !important;
+    color: #0b0361 !important;
   }
 
   header,
@@ -268,30 +268,29 @@
     page-break-inside: avoid;
   }
 
-  // h1,
-  // h2,
-  // h3,
-  // h4,
-  // p,
-  // li,
-  // td,
-  // th,
-  // span,
-  // div {
-  //   color: #111111 !important;
-  // }
-
-   
-    .fill-primary {
-     fill: #ebbd57 !important;
-   }
-    .fill-foreground {
-    fill:#f1eee6!important;
-    }
-    .fill-muted-foreground{
-    fill:oklch(74% .03 280)!important;
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  li,
+  td,
+  th,
+  span,
+  div {
+    color: #111111 !important;
   }
-  
+
+  .fill-primary {
+    fill: #ebbd57 !important;
+  }
+  .fill-foreground {
+    fill: #f1eee6 !important;
+  }
+  .fill-muted-foreground {
+    fill: oklch(74% 0.03 280) !important;
+  }
+
   .panel {
     background: #ffffff !important;
     border: 1px solid #cccccc !important;
