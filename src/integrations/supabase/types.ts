@@ -14,60 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      charts: {
-        Row: {
-          birth_date: string
-          birth_place: string | null
-          birth_time: string | null
-          chart_hash: string
-          chart_json: Json
-          created_at: string | null
-          id: string
-          is_favorite: boolean
-          label: string
-          lat: number | null
-          lon: number | null
-          tz: string | null
-          updated_at: string | null
-          user_id: string
-          utc_offset: number | null
-        }
-        Insert: {
-          birth_date: string
-          birth_place?: string | null
-          birth_time?: string | null
-          chart_hash: string
-          chart_json: Json
-          created_at?: string | null
-          id?: string
-          is_favorite?: boolean
-          label: string
-          lat?: number | null
-          lon?: number | null
-          tz?: string | null
-          updated_at?: string | null
-          user_id: string
-          utc_offset?: number | null
-        }
-        Update: {
-          birth_date?: string
-          birth_place?: string | null
-          birth_time?: string | null
-          chart_hash?: string
-          chart_json?: Json
-          created_at?: string | null
-          id?: string
-          is_favorite?: boolean
-          label?: string
-          lat?: number | null
-          lon?: number | null
-          tz?: string | null
-          updated_at?: string | null
-          user_id?: string
-          utc_offset?: number | null
-        }
-        Relationships: []
-      }
       interpretations: {
         Row: {
           chart_hash: string
@@ -89,30 +35,6 @@ export type Database = {
           created_at?: string | null
           kind?: string
           lang?: string
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          charts_quota: number | null
-          created_at: string | null
-          display_name: string | null
-          id: string
-          locale: string | null
-        }
-        Insert: {
-          charts_quota?: number | null
-          created_at?: string | null
-          display_name?: string | null
-          id: string
-          locale?: string | null
-        }
-        Update: {
-          charts_quota?: number | null
-          created_at?: string | null
-          display_name?: string | null
-          id?: string
-          locale?: string | null
         }
         Relationships: []
       }
