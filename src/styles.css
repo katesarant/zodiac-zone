@@ -281,20 +281,16 @@
   //   color: #111111 !important;
   // }
 
-   svg text {
-     fill: #111111 !important;
-   }
-  svg text.fill-primary {
+   
+    .fill-primary {
      fill: #ebbd57 !important;
    }
-svg text.fill-foreground {
-fill:#f1eee6!important;
-}
-
-
-svg .fill-muted-foreground{
-fill:oklch(74% .03 280)!important;
-}
+    .fill-foreground {
+    fill:#f1eee6!important;
+    }
+    .fill-muted-foreground{
+    fill:oklch(74% .03 280)!important;
+  }
   
   // .panel {
   //   background: #ffffff !important;
