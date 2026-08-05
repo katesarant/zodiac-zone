@@ -295,11 +295,24 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
 
       {tab === "synthesis" && chart && (
         <section className="panel mt-6 p-6">
-          <header className="mb-4">
-            <h2 className="text-2xl">{chartLabelName ?? t.chartTitle}</h2>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
-            </p>
+          <header className="mb-4 flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <h2 className="text-2xl">{chartLabelName ?? t.chartTitle}</h2>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              onClick={() => {
+                const year = birthDate.slice(0, 4);
+                const base = placeInfo?.name ?? birthPlace;
+                setSaveLabel(chartLabelName ?? `${base} ${year}`.trim());
+                setSaveOpen(true);
+              }}
+            >
+              {t.library.saveChart}
+            </Button>
           </header>
           <ChartWheel chart={chart} />
           <div className="mt-8">
@@ -307,6 +320,51 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           </div>
         </section>
       )}
+
+      <Dialog open={saveOpen} onOpenChange={setSaveOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t.library.saveDialogTitle}</DialogTitle>
+            <DialogDescription>{t.library.saveDialogBody}</DialogDescription>
+          </DialogHeader>
+          <label className="block">
+            <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+              {t.library.label}
+            </span>
+            <input
+              type="text"
+              className={field}
+              value={saveLabel}
+              onChange={(e) => setSaveLabel(e.target.value)}
+            />
+          </label>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setSaveOpen(false)}>
+              {t.library.cancel}
+            </Button>
+            <Button
+              disabled={!saveLabel.trim() || !chart}
+              onClick={() => {
+                if (!chart) return;
+                saveChart({
+                  label: saveLabel.trim(),
+                  birthDate,
+                  birthTime,
+                  birthPlace: placeInfo?.name ?? birthPlace,
+                  lat: placeInfo?.latitude ?? 0,
+                  lon: placeInfo?.longitude ?? 0,
+                  tz: placeInfo?.timezone ?? "UTC",
+                  chartJson: chart,
+                });
+                setSaveOpen(false);
+              }}
+            >
+              {t.library.save}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
 
       {result && (
         <section className="panel mt-6 p-6">
