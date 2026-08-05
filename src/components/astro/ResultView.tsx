@@ -174,8 +174,9 @@ export function ResultView({ kind, data, lang }: { kind: string; data: unknown; 
             <p
               className="font-display text-foreground"
               style={{
-                fontSize: "clamp(1.35rem, 2.6vw, 1.75rem)",
-                lineHeight: 1.5,
+                fontSize: "clamp(1.7rem, 3.2vw, 2.25rem)",
+                lineHeight: 0.8,
+                letterSpacing: "0.02em",
                 maxWidth: "58ch",
               }}
             >
