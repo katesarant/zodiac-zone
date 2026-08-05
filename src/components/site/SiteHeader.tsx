@@ -11,7 +11,7 @@ export function SiteHeader() {
     <header className="border-b border-border/60">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
         <Link to="/" className="font-display text-lg font-semibold tracking-tight text-foreground">
-          Zodiac Zone
+          My Zodiac Maps
         </Link>
 
         <nav className="flex items-center gap-2">
@@ -22,9 +22,7 @@ export function SiteHeader() {
                 type="button"
                 onClick={() => setLang(code)}
                 className={`rounded-md px-2.5 py-1 text-xs font-medium uppercase transition-colors ${
-                  lang === code
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-secondary"
+                  lang === code ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
                 }`}
               >
                 {code}
