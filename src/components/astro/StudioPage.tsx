@@ -170,7 +170,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           <h1 className="mt-3 text-4xl md:text-5xl">{t.title}</h1>
           <p className="mt-3 max-w-xl text-sm text-muted-foreground">{t.intro}</p>
         </div>
-        <div className="flex gap-1 rounded-full border border-border bg-card p-1">
+        {/* <div className="flex gap-1 rounded-full border border-border bg-card p-1">
           {(["el", "en"] as Lang[]).map((l) => (
             <button
               key={l}
@@ -182,7 +182,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
               {l}
             </button>
           ))}
-        </div>
+        </div> */}
       </header>
 
       <nav data-print-hide className="mb-6 grid gap-2 sm:grid-cols-4">
@@ -328,20 +328,20 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
               </p>
             </div>
             <div className="flex shrink-0 gap-2" data-print-hide>
-            <Button
-              variant="outline"
-              onClick={() => {
-                const year = birthDate.slice(0, 4);
-                const base = placeInfo?.name ?? birthPlace;
-                setSaveLabel(chartLabelName ?? `${base} ${year}`.trim());
-                setSaveOpen(true);
-              }}
-            >
-              {t.library.saveChart}
-            </Button>
-            <Button variant="outline" onClick={() => window.print()}>
-              {t.library.pdfLabel}
-            </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  const year = birthDate.slice(0, 4);
+                  const base = placeInfo?.name ?? birthPlace;
+                  setSaveLabel(chartLabelName ?? `${base} ${year}`.trim());
+                  setSaveOpen(true);
+                }}
+              >
+                {t.library.saveChart}
+              </Button>
+              <Button variant="outline" onClick={() => window.print()}>
+                {t.library.pdfLabel}
+              </Button>
             </div>
           </header>
           <ChartWheel chart={chart} />
@@ -361,12 +361,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
             <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
               {t.library.label}
             </span>
-            <input
-              type="text"
-              className={field}
-              value={saveLabel}
-              onChange={(e) => setSaveLabel(e.target.value)}
-            />
+            <input type="text" className={field} value={saveLabel} onChange={(e) => setSaveLabel(e.target.value)} />
           </label>
           <DialogFooter>
             <Button variant="outline" onClick={() => setSaveOpen(false)}>
@@ -394,7 +389,6 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
 
       {result && (
         <section className="panel mt-6 p-6">
