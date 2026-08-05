@@ -191,6 +191,49 @@ function MyChartsPage() {
     <main className="mx-auto w-full max-w-6xl px-4 py-10">
       <h1 className="font-display text-3xl font-semibold text-foreground">{t.title}</h1>
 
+      <section className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">{t.backupNote}</p>
+        <div className="flex shrink-0 gap-2">
+          <button type="button" className={btnOutline} onClick={onExport}>
+            {t.exportLabel}
+          </button>
+          <button type="button" className={btnOutline} onClick={() => fileRef.current?.click()}>
+            {t.importLabel}
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={(e) => {
+              void onFilePicked(e.target.files?.[0]);
+              e.target.value = "";
+            }}
+          />
+        </div>
+      </section>
+
+      {message && <p className="mt-3 text-xs text-muted-foreground">{message}</p>}
+
+      {pending && (
+        <div className="panel mt-4 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-foreground">{t.importChoose}</p>
+          <div className="flex shrink-0 gap-2">
+            <button type="button" className={btnOutline} onClick={onMerge}>
+              {t.importMerge}
+            </button>
+            <button type="button" className={btnOutline} onClick={onReplace}>
+              {t.importReplace}
+            </button>
+            <button type="button" className={btnOutline} onClick={() => setPending(null)}>
+              {t.cancel}
+            </button>
+          </div>
+        </div>
+      )}
+
+
+
       {charts.length === 0 ? (
         <div className="panel mt-6 p-6">
           <h2 className="font-display text-lg text-foreground">{t.emptyTitle}</h2>
