@@ -8,9 +8,20 @@ const KEY = "zz-lang";
 export function useLang(initial?: Lang): [Lang, (lang: Lang) => void] {
   const [lang, setLangState] = useState<Lang>(initial ?? "el");
 
+  // Keep state in sync when the route dictates the language (/el vs /en).
+  useEffect(() => {
+    if (!initial) return;
+    setLangState(initial);
+    try {
+      window.localStorage.setItem(KEY, initial);
+    } catch {
+      /* ignore */
+    }
+  }, [initial]);
+
   useEffect(() => {
     if (initial) {
-      window.localStorage.setItem(KEY, initial);
+      // handled above
     } else {
       const stored = window.localStorage.getItem(KEY);
       if (stored === "en" || stored === "el") setLangState(stored);

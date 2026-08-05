@@ -1,5 +1,5 @@
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
 import { DatePicker } from "@/components/astro/DatePicker";
@@ -111,6 +111,16 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
   const synthesisFn = useServerFn(generateSynthesisFn);
   const topicFn = useServerFn(generateTopicFn);
   const chartFn = useServerFn(buildChartFn);
+
+  // Drop stale results when the language changes, so headings and body text never mix languages.
+  const prevLang = useRef(lang);
+  useEffect(() => {
+    if (prevLang.current !== lang) {
+      prevLang.current = lang;
+      setResult(null);
+      setError(null);
+    }
+  }, [lang]);
 
   async function run() {
     setLoading(true);
