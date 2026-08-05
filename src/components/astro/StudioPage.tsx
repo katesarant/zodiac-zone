@@ -170,19 +170,6 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           <h1 className="mt-3 text-4xl md:text-5xl">{t.title}</h1>
           <p className="mt-3 max-w-xl text-sm text-muted-foreground">{t.intro}</p>
         </div>
-        {/* <div className="flex gap-1 rounded-full border border-border bg-card p-1">
-          {(["el", "en"] as Lang[]).map((l) => (
-            <button
-              key={l}
-              onClick={() => setLang(l)}
-              className={`rounded-full px-4 py-1.5 text-xs uppercase tracking-widest transition-colors ${
-                lang === l ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-              }`}
-            >
-              {l}
-            </button>
-          ))}
-        </div> */}
       </header>
 
       <nav data-print-hide className="mb-6 grid gap-2 sm:grid-cols-4">
