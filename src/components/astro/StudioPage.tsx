@@ -78,7 +78,7 @@ type Result = {
 };
 
 export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
-  const [lang, setLang] = useState<Lang>(initialLang);
+  const [lang] = useLang(initialLang);
   const [tab, setTab] = useState<Tab>("placement");
   const [planet, setPlanet] = useState(PLANETS[0]!);
   const [sign, setSign] = useState(SIGNS[0]!);
