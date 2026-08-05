@@ -358,6 +358,18 @@ const EN: typeof EL = {
     cancel: "Cancel",
     save: "Save",
     savedOk: "Saved",
+    exportLabel: "Export",
+    importLabel: "Import",
+    backupNote:
+      "Your charts are stored only on this device. Export them to keep a backup or move them to another device.",
+    importInvalid: "This file is not a valid library backup.",
+    importVersion: "This backup version is not supported.",
+    importChoose: "Merge this backup with your library, or replace it?",
+    importMerge: "Merge",
+    importReplace: "Replace",
+    importReplaceConfirm: "Your current library will be replaced. Continue?",
+    importDoneMerge: "Merged.",
+    importDoneReplace: "Replaced.",
   },
   auth: {
     signInOrUp: "Sign in / Sign up",
