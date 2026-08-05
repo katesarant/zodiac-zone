@@ -268,28 +268,28 @@
     page-break-inside: avoid;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  li,
-  td,
-  th,
-  span,
-  div {
-    color: #111111 !important;
-  }
+  // h1,
+  // h2,
+  // h3,
+  // h4,
+  // p,
+  // li,
+  // td,
+  // th,
+  // span,
+  // div {
+  //   color: #111111 !important;
+  // }
 
-  svg text {
-    fill: #111111 !important;
-  }
-  text.fill-primar {
-    fill: #ebbd57 !important;
-  }
-  .panel {
-    background: #ffffff !important;
-    border: 1px solid #cccccc !important;
-    box-shadow: none !important;
-  }
+  // svg text {
+  //   fill: #111111 !important;
+  // }
+  // text.fill-primary {
+  //   fill: #ebbd57 !important;
+  // }
+  // .panel {
+  //   background: #ffffff !important;
+  //   border: 1px solid #cccccc !important;
+  //   box-shadow: none !important;
+  // }
 }
