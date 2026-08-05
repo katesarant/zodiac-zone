@@ -223,3 +223,62 @@
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-glow);
 }
+
+/* ── Εκτύπωση / PDF ────────────────────────────────────────────────────── */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #111111 !important;
+  }
+
+  header,
+  footer,
+  nav,
+  button,
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  main,
+  section,
+  article {
+    box-shadow: none !important;
+  }
+
+  section,
+  article,
+  table,
+  li,
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  li,
+  td,
+  th,
+  span,
+  div {
+    color: #111111 !important;
+  }
+
+  svg text {
+    fill: #111111 !important;
+  }
+
+  .panel {
+    background: #ffffff !important;
+    border: 1px solid #cccccc !important;
+    box-shadow: none !important;
+  }
+}

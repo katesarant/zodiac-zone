@@ -183,7 +183,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
         </div>
       </header>
 
-      <nav className="mb-6 grid gap-2 sm:grid-cols-4">
+      <nav data-print-hide className="mb-6 grid gap-2 sm:grid-cols-4">
         {TAB_IDS.map((id) => (
           <button
             key={id}
@@ -201,7 +201,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
         ))}
       </nav>
 
-      <section className="panel p-6">
+      <section className="panel p-6" data-print-hide>
         {tab === "placement" && (
           <div className="grid gap-4 sm:grid-cols-3">
             <Select
@@ -325,6 +325,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
                 {[placeLabel, `${birthDate} · ${birthTime}`].filter(Boolean).join(" · ")}
               </p>
             </div>
+            <div className="flex shrink-0 gap-2" data-print-hide>
             <Button
               variant="outline"
               onClick={() => {
@@ -336,6 +337,10 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
             >
               {t.library.saveChart}
             </Button>
+            <Button variant="outline" onClick={() => window.print()}>
+              {t.library.pdfLabel}
+            </Button>
+            </div>
           </header>
           <ChartWheel chart={chart} />
           <div className="mt-8">
