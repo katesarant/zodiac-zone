@@ -42,7 +42,7 @@ export function DatePicker({ value, onChange, placeholder = "Pick a date", class
           selected={date}
           {...(date ? { defaultMonth: date } : {})}
           captionLayout="dropdown"
-          side="bottom"
+          
           startMonth={new Date(1980, 0)}
           endMonth={new Date(new Date().getFullYear(), 11)}
           onSelect={(selected) => {
