@@ -6,6 +6,15 @@ import { DatePicker } from "@/components/astro/DatePicker";
 import { ResultView } from "@/components/astro/ResultView";
 import { TimePicker } from "@/components/astro/TimePicker";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { saveChart } from "@/lib/storage/local-library";
 import { buildChartFn } from "@/lib/astro/birth.functions";
 import { SAMPLE_CHART } from "@/lib/astro/chart";
 import {
