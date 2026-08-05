@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
 import { useLang } from "@/hooks/use-lang";
@@ -7,11 +7,16 @@ import { dict, tSign } from "@/lib/astro/i18n";
 import type { ChartJson } from "@/lib/astro/types";
 import {
   deleteChart as removeChart,
+  getLibrary,
   listCharts,
   listFolders,
+  mergeLibrary,
+  parseLibraryBackup,
+  replaceLibrary,
   toggleFavorite,
   updateChart,
   type Folder,
+  type Library,
   type SavedChart,
 } from "@/lib/storage/local-library";
 import { btnOutline, field } from "@/lib/ui";
@@ -71,6 +76,9 @@ function MyChartsPage() {
   const [sort, setSort] = useState<SortKey>("default");
   const [folderId, setFolderId] = useState<string | "all" | "unfiled">("all");
   const [openId, setOpenId] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [pending, setPending] = useState<Library | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setCharts(listCharts());
@@ -118,6 +126,59 @@ function MyChartsPage() {
     setCharts(listCharts());
   }
 
+  function refresh() {
+    setCharts(listCharts());
+    setFolders(listFolders());
+  }
+
+  function onExport() {
+    const data = JSON.stringify(getLibrary(), null, 2);
+    const stamp = new Date().toISOString().slice(0, 10);
+    const url = URL.createObjectURL(new Blob([data], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `astroxartes-library-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function onFilePicked(file: File | undefined) {
+    setMessage(null);
+    if (!file) return;
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(await file.text());
+    } catch {
+      setMessage(t.importInvalid);
+      return;
+    }
+    const result = parseLibraryBackup(parsed);
+    if (!result.ok) {
+      setMessage(result.reason === "version" ? t.importVersion : t.importInvalid);
+      return;
+    }
+    setPending(result.library);
+  }
+
+  function onMerge() {
+    if (!pending) return;
+    mergeLibrary(pending);
+    setPending(null);
+    refresh();
+    setMessage(t.importDoneMerge);
+  }
+
+  function onReplace() {
+    if (!pending) return;
+    if (!window.confirm(t.importReplaceConfirm)) return;
+    replaceLibrary(pending);
+    setPending(null);
+    refresh();
+    setMessage(t.importDoneReplace);
+  }
+
   const openChart = rows.find((c) => c.id === openId) ?? null;
 
   const folderOptions: Array<{ id: string; name: string }> = [
@@ -129,6 +190,49 @@ function MyChartsPage() {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10">
       <h1 className="font-display text-3xl font-semibold text-foreground">{t.title}</h1>
+
+      <section className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-xl text-xs leading-relaxed text-muted-foreground">{t.backupNote}</p>
+        <div className="flex shrink-0 gap-2">
+          <button type="button" className={btnOutline} onClick={onExport}>
+            {t.exportLabel}
+          </button>
+          <button type="button" className={btnOutline} onClick={() => fileRef.current?.click()}>
+            {t.importLabel}
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={(e) => {
+              void onFilePicked(e.target.files?.[0]);
+              e.target.value = "";
+            }}
+          />
+        </div>
+      </section>
+
+      {message && <p className="mt-3 text-xs text-muted-foreground">{message}</p>}
+
+      {pending && (
+        <div className="panel mt-4 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-foreground">{t.importChoose}</p>
+          <div className="flex shrink-0 gap-2">
+            <button type="button" className={btnOutline} onClick={onMerge}>
+              {t.importMerge}
+            </button>
+            <button type="button" className={btnOutline} onClick={onReplace}>
+              {t.importReplace}
+            </button>
+            <button type="button" className={btnOutline} onClick={() => setPending(null)}>
+              {t.cancel}
+            </button>
+          </div>
+        </div>
+      )}
+
+
 
       {charts.length === 0 ? (
         <div className="panel mt-6 p-6">
