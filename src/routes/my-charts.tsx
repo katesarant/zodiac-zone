@@ -1,8 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 
 import { useLang } from "@/hooks/use-lang";
-import { supabase } from "@/integrations/supabase/client";
 import { dict } from "@/lib/astro/i18n";
 import { btnOutline } from "@/lib/ui";
 
@@ -35,21 +33,8 @@ export const Route = createFileRoute("/my-charts")({
 function MyChartsPage() {
   const [lang] = useLang();
   const t = dict(lang).auth;
-  const [rows, setRows] = useState<ChartRow[] | null>(null);
+  const rows: ChartRow[] = [];
 
-  useEffect(() => {
-    let active = true;
-    void supabase
-      .from("charts")
-      .select("id, label, birth_date, birth_time, birth_place, is_favorite")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (active) setRows((data as ChartRow[] | null) ?? []);
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
 
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-10">
