@@ -394,7 +394,9 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
             </div>
           ) : (
             <>
-              <h2 className="mb-5 text-2xl">{tab === "synthesis" ? t.analysis : t.interpretation}</h2>
+              <h2 className="mb-5 font-display text-3xl text-primary md:text-4xl">
+                {tab === "synthesis" ? t.analysis : t.interpretation}
+              </h2>
               <ResultView kind={tab} data={result.data} lang={lang} />
             </>
           )}

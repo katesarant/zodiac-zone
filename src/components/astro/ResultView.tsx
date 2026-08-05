@@ -42,7 +42,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 /** Σώμα κειμένου με περιορισμένο πλάτος ανάγνωσης. */
 function Prose({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-foreground/90" style={{ fontSize: "0.95rem", lineHeight: 1.75, maxWidth: "65ch" }}>
+    <div className="text-foreground/90" style={{ fontSize: "0.875rem", lineHeight: 1.75, maxWidth: "65ch" }}>
       {children}
     </div>
   );
