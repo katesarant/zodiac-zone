@@ -202,14 +202,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:locale", content: "el_GR" },
       { property: "og:locale:alternate", content: "en_US" },
       { property: "og:url", content: "https://myzodiacmaps.gr/" },
-      { property: "og:image", content: "https://myzodiacmaps.gr/og-image.jpg" },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "My Zodiac Maps" },
 
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Zodiac Zone — Ο γενέθλιος χάρτης σου" },
-      { name: "twitter:image", content: "https://myzodiacmaps.gr/og-image.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
