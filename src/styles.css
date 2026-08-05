@@ -250,7 +250,6 @@
     display: block !important;
   }
 
-
   main,
   section,
   article {
@@ -285,7 +284,9 @@
   svg text {
     fill: #111111 !important;
   }
-
+  svg text.fill-primar {
+    fill: #ebbd57 !important;
+  }
   .panel {
     background: #ffffff !important;
     border: 1px solid #cccccc !important;
