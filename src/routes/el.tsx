@@ -18,7 +18,6 @@ export const Route = createFileRoute("/el")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { rel: "canonical", href: "https://myzodiacmaps.gr/el" },
     ],
     links: [
       { rel: "canonical", href: "https://myzodiacmaps.gr/el" },
