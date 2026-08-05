@@ -54,7 +54,18 @@ export const generateSynthesisFn = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { generateSynthesis } = await import("./generate.server");
     const { toChartJson } = await import("./chart");
-    return generateSynthesis(toChartJson(data.chart), [], data.lang);
+    const { contentKey, readCache, writeCache } = await import("./cache.server");
+
+    const chart = toChartJson(data.chart);
+    const key = await contentKey(chart);
+    const hit = await readCache<unknown>(key, data.lang, "synthesis");
+    if (hit) return { data: hit, flagged: false, bannedTerms: [], attempts: 0, cached: true };
+
+    const result = await generateSynthesis(chart, [], data.lang);
+    if (!result.flagged && result.data) {
+      await writeCache(key, data.lang, "synthesis", result.data);
+    }
+    return { ...result, cached: false };
   });
 
 export const generateTopicFn = createServerFn({ method: "POST" })
@@ -62,5 +73,18 @@ export const generateTopicFn = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { generateTopic } = await import("./generate.server");
     const { toChartJson } = await import("./chart");
-    return generateTopic(toChartJson(data.chart), data.topic, data.lang);
+    const { contentKey, readCache, writeCache } = await import("./cache.server");
+
+    const chart = toChartJson(data.chart);
+    const key = await contentKey(chart);
+    const kind = `topic:${data.topic}`;
+    const hit = await readCache<unknown>(key, data.lang, kind);
+    if (hit) return { data: hit, flagged: false, bannedTerms: [], attempts: 0, cached: true };
+
+    const result = await generateTopic(chart, data.topic, data.lang);
+    if (!result.flagged && result.data) {
+      await writeCache(key, data.lang, kind, result.data);
+    }
+    return { ...result, cached: false };
   });
+
