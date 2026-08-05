@@ -281,12 +281,12 @@
   //   color: #111111 !important;
   // }
 
-  // svg text {
-  //   fill: #111111 !important;
-  // }
-  // text.fill-primary {
-  //   fill: #ebbd57 !important;
-  // }
+   svg text {
+     fill: #111111 !important;
+   }
+   text.fill-primary {
+     fill: #ebbd57 !important;
+   }
   // .panel {
   //   background: #ffffff !important;
   //   border: 1px solid #cccccc !important;
