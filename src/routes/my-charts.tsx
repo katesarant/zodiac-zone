@@ -76,6 +76,9 @@ function MyChartsPage() {
   const [sort, setSort] = useState<SortKey>("default");
   const [folderId, setFolderId] = useState<string | "all" | "unfiled">("all");
   const [openId, setOpenId] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [pending, setPending] = useState<Library | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setCharts(listCharts());
