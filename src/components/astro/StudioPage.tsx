@@ -91,6 +91,14 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
   const [chartLabelName, setChartLabelName] = useState<string | null>(null);
   const [chart, setChart] = useState<ChartJson | null>(null);
   const [placeLabel, setPlaceLabel] = useState<string | null>(null);
+  const [placeInfo, setPlaceInfo] = useState<{
+    name: string;
+    latitude: number;
+    longitude: number;
+    timezone: string;
+  } | null>(null);
+  const [saveOpen, setSaveOpen] = useState(false);
+  const [saveLabel, setSaveLabel] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
