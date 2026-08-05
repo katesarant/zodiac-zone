@@ -17,13 +17,7 @@ type ChartRow = {
 
 export const Route = createFileRoute("/my-charts")({
   ssr: false,
-  beforeLoad: async ({ location }) => {
-    const { data } = await supabase.auth.getUser();
-    if (!data.user) {
-      throw redirect({ to: "/auth/login", search: { redirect: location.pathname } });
-    }
-    return { user: data.user };
-  },
+
   head: () => ({
     meta: [
       { title: "Οι χάρτες μου — My Zodiac Maps" },
