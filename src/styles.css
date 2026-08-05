@@ -281,9 +281,17 @@
     color: #111111 !important;
   }
 
-  .fill-primary {
-    fill: #ebbd57 !important;
+  // .fill-primary {
+  //   fill: #ebbd57 !important;
+  // }
+  .fill-foreground {
+    fill: var(--foreground);
   }
+
+  .fill-muted-foreground {
+    fill: var(--muted-foreground);
+  }
+  
   .fill-foreground {
     fill: #f1eee6 !important;
   }
@@ -295,5 +303,13 @@
     background: #ffffff !important;
     border: 1px solid #cccccc !important;
     box-shadow: none !important;
+  }
+
+  .fill-foreground {
+    fill: var(--foreground);
+  }
+
+  .fill-muted-foreground {
+    fill: var(--muted-foreground);
   }
 }
