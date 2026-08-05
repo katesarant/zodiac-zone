@@ -1,9 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
+import { ResultView } from "@/components/astro/ResultView";
 import { useLang } from "@/hooks/use-lang";
 import { dict, tSign } from "@/lib/astro/i18n";
+import { generateSynthesisFn } from "@/lib/astro/interpretation.functions";
 import type { ChartJson } from "@/lib/astro/types";
 import {
   deleteChart as removeChart,
@@ -15,6 +18,7 @@ import {
   type SavedChart,
 } from "@/lib/storage/local-library";
 import { btnOutline, field } from "@/lib/ui";
+
 
 export const Route = createFileRoute("/my-charts")({
   ssr: false,
@@ -63,6 +67,7 @@ function Star({ on, label, onClick }: { on: boolean; label: string; onClick: () 
 function MyChartsPage() {
   const [lang] = useLang();
   const t = dict(lang).library;
+  const tt = dict(lang);
 
   const [charts, setCharts] = useState<SavedChart[]>([]);
   const [folders, setFolders] = useState<Folder[]>([]);
@@ -71,6 +76,15 @@ function MyChartsPage() {
   const [sort, setSort] = useState<SortKey>("default");
   const [folderId, setFolderId] = useState<string | "all" | "unfiled">("all");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [reading, setReading] = useState<{
+    data: unknown;
+    flagged: boolean;
+    limited?: boolean;
+  } | null>(null);
+  const [readingLoading, setReadingLoading] = useState(false);
+  const [readingError, setReadingError] = useState<string | null>(null);
+  const synthesisFn = useServerFn(generateSynthesisFn);
+
 
   useEffect(() => {
     setCharts(listCharts());
@@ -125,6 +139,35 @@ function MyChartsPage() {
   }
 
   const openChart = rows.find((c) => c.id === openId) ?? null;
+  const openChartJson = openChart ? (openChart.chartJson as ChartJson) : null;
+
+  // Ερμηνεία για τον ανοιχτό χάρτη (σερβίρεται από το shared cache όταν υπάρχει).
+  useEffect(() => {
+    if (!openChartJson) {
+      setReading(null);
+      setReadingError(null);
+      setReadingLoading(false);
+      return;
+    }
+    let active = true;
+    setReading(null);
+    setReadingError(null);
+    setReadingLoading(true);
+    synthesisFn({ data: { chart: openChartJson, lang } })
+      .then((res) => {
+        if (active) setReading(res as { data: unknown; flagged: boolean; limited?: boolean });
+      })
+      .catch((err: unknown) => {
+        if (active) setReadingError(err instanceof Error ? err.message : "unknown_error");
+      })
+      .finally(() => {
+        if (active) setReadingLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [openId, lang, openChartJson, synthesisFn]);
+
 
   const folderOptions: Array<{ id: string; name: string }> = [
     { id: "all", name: t.all },
@@ -335,6 +378,25 @@ function MyChartsPage() {
                 <div className="mt-8">
                   <ChartTables chart={openChart.chartJson as ChartJson} lang={lang} />
                 </div>
+
+                <div className="mt-10 border-t border-border/60 pt-8">
+                  <h3 className="mb-5 font-display text-3xl text-primary md:text-4xl">{tt.analysis}</h3>
+                  {readingLoading && <p className="text-sm text-muted-foreground">{tt.generating}</p>}
+                  {readingError && (
+                    <p className="text-sm text-destructive">
+                      {tt.error}: {readingError}
+                    </p>
+                  )}
+                  {reading &&
+                    (reading.limited ? (
+                      <p className="text-sm text-muted-foreground">{t.limitReached}</p>
+                    ) : reading.flagged ? (
+                      <p className="text-sm text-muted-foreground">{tt.flaggedBody}</p>
+                    ) : (
+                      <ResultView kind="synthesis" data={reading.data} lang={lang} />
+                    ))}
+                </div>
+
               </section>
             )}
           </div>
