@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
 import { useLang } from "@/hooks/use-lang";
@@ -7,11 +7,16 @@ import { dict, tSign } from "@/lib/astro/i18n";
 import type { ChartJson } from "@/lib/astro/types";
 import {
   deleteChart as removeChart,
+  getLibrary,
   listCharts,
   listFolders,
+  mergeLibrary,
+  parseLibraryBackup,
+  replaceLibrary,
   toggleFavorite,
   updateChart,
   type Folder,
+  type Library,
   type SavedChart,
 } from "@/lib/storage/local-library";
 import { btnOutline, field } from "@/lib/ui";
