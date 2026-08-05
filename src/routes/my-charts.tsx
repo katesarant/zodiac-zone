@@ -126,6 +126,59 @@ function MyChartsPage() {
     setCharts(listCharts());
   }
 
+  function refresh() {
+    setCharts(listCharts());
+    setFolders(listFolders());
+  }
+
+  function onExport() {
+    const data = JSON.stringify(getLibrary(), null, 2);
+    const stamp = new Date().toISOString().slice(0, 10);
+    const url = URL.createObjectURL(new Blob([data], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `astroxartes-library-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function onFilePicked(file: File | undefined) {
+    setMessage(null);
+    if (!file) return;
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(await file.text());
+    } catch {
+      setMessage(t.importInvalid);
+      return;
+    }
+    const result = parseLibraryBackup(parsed);
+    if (!result.ok) {
+      setMessage(result.reason === "version" ? t.importVersion : t.importInvalid);
+      return;
+    }
+    setPending(result.library);
+  }
+
+  function onMerge() {
+    if (!pending) return;
+    mergeLibrary(pending);
+    setPending(null);
+    refresh();
+    setMessage(t.importDoneMerge);
+  }
+
+  function onReplace() {
+    if (!pending) return;
+    if (!window.confirm(t.importReplaceConfirm)) return;
+    replaceLibrary(pending);
+    setPending(null);
+    refresh();
+    setMessage(t.importDoneReplace);
+  }
+
   const openChart = rows.find((c) => c.id === openId) ?? null;
 
   const folderOptions: Array<{ id: string; name: string }> = [
