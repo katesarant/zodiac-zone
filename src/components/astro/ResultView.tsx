@@ -1,5 +1,5 @@
 import { dict, ordinalHouse, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
-import type { AtomAspect, AtomPlacement, Lang, Synthesis, TopicExpansion } from "@/lib/astro/types";
+import type { AtomAspect, AtomPlacement, Lang, Synthesis } from "@/lib/astro/types";
 
 /* ── Helpers ──────────────────────────────────────────────────────────── */
 
@@ -246,40 +246,5 @@ export function ResultView({ kind, data, lang }: { kind: string; data: unknown; 
     );
   }
 
-  /* Θέμα εμβάθυνσης */
-  const topic = data as TopicExpansion;
-  return (
-    <article className="space-y-6">
-      <header className="space-y-2">
-        <p className="text-xs uppercase text-muted-foreground" style={{ letterSpacing: "0.3em" }}>
-          {t.tabs.topic.label}
-        </p>
-        <h3 className="font-display text-3xl text-primary">
-          {t.topics[topic.topic as keyof typeof t.topics] ?? topic.topic}
-        </h3>
-      </header>
-
-      {topic.body && (
-        <Prose>
-          <div className="space-y-4">
-            {topic.body
-              .split(/\n{2,}/)
-              .filter(Boolean)
-              .map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-          </div>
-        </Prose>
-      )}
-
-      {topic.placements_used?.length > 0 && (
-        <div className="space-y-3 pt-2">
-          <p className="text-xs uppercase text-muted-foreground" style={{ letterSpacing: "0.2em" }}>
-            {t.placementsUsed}
-          </p>
-          <Chips items={topic.placements_used} />
-        </div>
-      )}
-    </article>
-  );
+  return null;
 }

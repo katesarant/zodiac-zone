@@ -1,22 +1,5 @@
 export type Lang = "el" | "en";
 
-export type Topic =
-  | "relationships"
-  | "career"
-  | "communication"
-  | "emotional_needs"
-  | "strengths"
-  | "blind_spots";
-
-export const TOPICS: Topic[] = [
-  "relationships",
-  "career",
-  "communication",
-  "emotional_needs",
-  "strengths",
-  "blind_spots",
-];
-
 export interface PlacementInput {
   planet: string;
   sign: string;
@@ -62,12 +45,6 @@ export interface Synthesis {
   one_thing: string;
 }
 
-export interface TopicExpansion {
-  topic: string;
-  body: string;
-  placements_used: string[];
-}
-
 /** Contract between the astrology engine and the AI layer (§6). */
 export interface ChartJson {
   chartHash: string;
@@ -103,5 +80,4 @@ export const cacheKeys = {
     `atom:${planet}:${sign}:${house}:${lang}`,
   aspect: (a: string, aspect: string, b: string, lang: Lang) => `asp:${a}:${aspect}:${b}:${lang}`,
   synthesis: (chartHash: string, lang: Lang) => `synth:${chartHash}:${lang}`,
-  topic: (chartHash: string, topic: Topic, lang: Lang) => `topic:${chartHash}:${topic}:${lang}`,
 };
