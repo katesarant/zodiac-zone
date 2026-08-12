@@ -14,19 +14,26 @@ export const Route = createFileRoute("/sitemap.xml")({
           ["el", "zodia", ["simera", "minas", "etos"]],
           ["en", "zodiac", ["today", "month", "year"]],
         ] as const) {
-          const days = await listKeys("daily", lang);
+          const [days, months, years] = await Promise.all([
+            listKeys("daily", lang),
+            listKeys("month", lang),
+            listKeys("year", lang),
+          ]);
+          const archiveKeys = [...days.slice(0, 400), ...months, ...years];
           for (const slug of SIGN_SLUGS[lang]) {
             urls.push(`${SITE_URL}/${lang}/${section}/${slug}`);
             for (const p of periods) urls.push(`${SITE_URL}/${lang}/${section}/${slug}/${p}`);
-            for (const day of days.slice(0, 400)) {
-              urls.push(`${SITE_URL}/${lang}/${section}/${slug}/${day}`);
+            for (const key of archiveKeys) {
+              urls.push(`${SITE_URL}/${lang}/${section}/${slug}/${key}`);
             }
           }
         }
 
+
+        const unique = Array.from(new Set(urls));
         const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}
+${unique.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}
 </urlset>`;
 
         return new Response(body, {
