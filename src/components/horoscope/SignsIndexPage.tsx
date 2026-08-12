@@ -7,6 +7,7 @@ import { dict, tSign } from "@/lib/astro/i18n";
 import { SIGNS } from "@/lib/astro/engine";
 import { SIGN_GLYPHS, formatLongDate, periodPath, signPath } from "@/lib/horoscope/signs";
 import { getAllSignsFn } from "@/lib/horoscope/horoscope.functions";
+import { field } from "@/lib/ui";
 import { PathLink } from "./PathLink";
 
 type Period = "daily" | "month" | "year";
@@ -37,7 +38,7 @@ export function SignsIndexPage({ lang, dataKey }: { lang: Lang; dataKey: string 
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value as Period)}
-            className="field"
+            className={field}
           >
             <option value="daily">{z.today}</option>
             <option value="month">{z.month}</option>
