@@ -1,20 +1,19 @@
 import type { ChartJson } from "./types";
+import { chartJsonSchema } from "./vocab";
 
-/** Runtime validation of the engine → AI contract (§6). */
+/**
+ * Runtime validation of the engine → AI contract (§6).
+ * Rejects anything outside the fixed astrology vocabulary and strips unknown
+ * fields, so no client-supplied free text can reach the prompt or the cache.
+ */
 export function toChartJson(value: unknown): ChartJson {
-  const chart = value as ChartJson;
-  if (
-    !chart ||
-    typeof chart !== "object" ||
-    typeof chart.chartHash !== "string" ||
-    !Array.isArray(chart.planets) ||
-    !Array.isArray(chart.aspects) ||
-    !chart.angles
-  ) {
+  const parsed = chartJsonSchema.safeParse(value);
+  if (!parsed.success) {
     throw new Error("invalid_chart_contract");
   }
-  return chart;
+  return parsed.data as ChartJson;
 }
+
 
 /** Example payload matching the contract — used by the studio page. */
 export const SAMPLE_CHART: ChartJson = {
