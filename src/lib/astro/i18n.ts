@@ -117,6 +117,22 @@ const EL = {
 
   intensity: { low: "ήπια", medium: "αισθητή", high: "έντονη" },
 
+  zodiac: {
+    title: "Ζώδια",
+    intro:
+      "Καθημερινή, μηνιαία και ετήσια ανάγνωση του ουρανού για τα δώδεκα ζώδια — τι συμβαίνει ψηλά, όχι τι θα σου συμβεί.",
+    pickSign: "Διάλεξε ζώδιο",
+    today: "Σήμερα",
+    month: "Ο μήνας",
+    year: "Η χρονιά",
+    archive: "Αρχείο",
+    allSigns: "Όλα τα ζώδια",
+    otherSigns: "Τα υπόλοιπα ζώδια",
+    fallbackNotice: "Δεν υπάρχει ακόμη ανάγνωση για αυτή την ημερομηνία. Βλέπεις την πιο πρόσφατη:",
+    empty: "Δεν υπάρχει διαθέσιμη ανάγνωση αυτή τη στιγμή.",
+    updated: "Ενημερώθηκε",
+  },
+
   library: {
     title: "Οι χάρτες μου",
     emptyTitle: "Καμία αποθήκευση ακόμη",
@@ -296,6 +312,22 @@ const EN: typeof EL = {
   placementsUsed: "Based on",
 
   intensity: { low: "gentle", medium: "noticeable", high: "intense" },
+
+  zodiac: {
+    title: "Zodiac",
+    intro:
+      "Daily, monthly and yearly readings of the sky for the twelve signs — what the sky is doing, not what will happen to you.",
+    pickSign: "Choose a sign",
+    today: "Today",
+    month: "This month",
+    year: "This year",
+    archive: "Archive",
+    allSigns: "All signs",
+    otherSigns: "The other signs",
+    fallbackNotice: "There is no reading for that date yet. You are seeing the most recent one:",
+    empty: "No reading is available right now.",
+    updated: "Updated",
+  },
 
   library: {
     title: "My charts",
