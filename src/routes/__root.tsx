@@ -217,7 +217,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-      { rel: "canonical", href: "https://myzodiacmaps.gr/" },
     ],
   }),
   shellComponent: RootShell,
