@@ -38,7 +38,7 @@ export function SignsIndexPage({ lang, dataKey }: { lang: Lang; dataKey: string 
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value as Period)}
-            className="field"
+            className={field}
           >
             <option value="daily">{z.today}</option>
             <option value="month">{z.month}</option>
