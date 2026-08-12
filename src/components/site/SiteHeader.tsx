@@ -2,6 +2,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
 import { useLang } from "@/hooks/use-lang";
 import { dict } from "@/lib/astro/i18n";
+import { Logo } from "./Logo";
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
