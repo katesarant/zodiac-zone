@@ -2,6 +2,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
 import { useLang } from "@/hooks/use-lang";
 import { dict } from "@/lib/astro/i18n";
+import { Logo } from "./Logo";
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -13,8 +14,13 @@ export function SiteHeader() {
   return (
     <header className="border-b border-border/60">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
-        <Link to="/" className="font-display text-lg font-semibold tracking-tight text-foreground">
-          My Zodiac Maps
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-foreground"
+          aria-label="MyZodiacMaps home"
+        >
+          <Logo className="h-6 w-6" />
+          <span>My Zodiac Maps</span>
         </Link>
 
         <nav className="flex items-center gap-2">
