@@ -3,6 +3,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useLang } from "@/hooks/use-lang";
 import { dict } from "@/lib/astro/i18n";
 import { Logo } from "./Logo";
+import { PathLink } from "@/components/horoscope/PathLink";
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -10,6 +11,8 @@ export function SiteHeader() {
   const [lang, setLang] = useLang(routeLang);
   const navigate = useNavigate();
   const t = dict(lang).auth;
+  const z = dict(lang).zodiac;
+  const zodiacHref = lang === "en" ? "/en/zodiac" : "/el/zodia";
 
   return (
     <header className="border-b border-border/60">
@@ -43,6 +46,13 @@ export function SiteHeader() {
               </button>
             ))}
           </div>
+
+          <PathLink
+            href={zodiacHref}
+            className="inline-flex items-center justify-center rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+          >
+            {z.nav}
+          </PathLink>
 
           <Link
             to="/my-charts"

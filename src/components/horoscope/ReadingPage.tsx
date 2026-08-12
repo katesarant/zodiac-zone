@@ -10,6 +10,7 @@ import {
   zodiacIndexPath,
 } from "@/lib/horoscope/signs";
 import { SIGNS } from "@/lib/astro/engine";
+import { dateModifiedFor, isoForKey } from "@/lib/horoscope/dates";
 import { PathLink } from "./PathLink";
 
 export interface ReadingPageProps {
@@ -41,8 +42,8 @@ export function ReadingPage(props: ReadingPageProps) {
           "@type": "Article",
           headline: `${signName} — ${dateLabel}`,
           inLanguage: lang,
-          datePublished: isoFor(dataKey),
-          dateModified: generatedAt ?? isoFor(dataKey),
+          datePublished: isoForKey(dataKey),
+          dateModified: dateModifiedFor(dataKey, generatedAt),
           articleSection: signName,
           isAccessibleForFree: true,
           publisher: { "@type": "Organization", name: "MyZodiacMaps", url: SITE_URL },
@@ -146,10 +147,4 @@ export function ReadingPage(props: ReadingPageProps) {
       <p className="mt-10 font-body text-xs text-muted-foreground">{t.footer}</p>
     </main>
   );
-}
-
-function isoFor(key: string): string {
-  if (/^\d{4}$/.test(key)) return `${key}-01-01T00:00:00Z`;
-  if (/^\d{4}-\d{2}$/.test(key)) return `${key}-01T00:00:00Z`;
-  return `${key}T00:00:00Z`;
 }

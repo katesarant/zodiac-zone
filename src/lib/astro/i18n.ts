@@ -131,6 +131,11 @@ const EL = {
     fallbackNotice: "Δεν υπάρχει ακόμη ανάγνωση για αυτή την ημερομηνία. Βλέπεις την πιο πρόσφατη:",
     empty: "Δεν υπάρχει διαθέσιμη ανάγνωση αυτή τη στιγμή.",
     updated: "Ενημερώθηκε",
+    nav: "Προβλέψεις",
+    periodLabel: "Είδος πρόβλεψης",
+    allReadings: "Οι προβλέψεις της ημέρας",
+    readMore: "Δες περισσότερα",
+    loading: "Φόρτωση…",
   },
 
   library: {
@@ -327,6 +332,11 @@ const EN: typeof EL = {
     fallbackNotice: "There is no reading for that date yet. You are seeing the most recent one:",
     empty: "No reading is available right now.",
     updated: "Updated",
+    nav: "Forecasts",
+    periodLabel: "Forecast type",
+    allReadings: "Today's readings",
+    readMore: "Read more",
+    loading: "Loading…",
   },
 
   library: {
