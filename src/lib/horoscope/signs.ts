@@ -68,3 +68,19 @@ export function formatLongDate(key: string, lang: Lang): string {
     timeZone: "UTC",
   }).format(d);
 }
+
+export function zodiacIndexPath(lang: Lang): string {
+  return `/${lang}/${SECTION[lang]}`;
+}
+
+export function signPath(index: number, lang: Lang): string {
+  return `${zodiacIndexPath(lang)}/${signSlug(index, lang)}`;
+}
+
+export function periodPath(index: number, lang: Lang, period: "daily" | "month" | "year"): string {
+  return `${signPath(index, lang)}/${PERIOD_SLUG[lang][period]}`;
+}
+
+export function archivePath(index: number, lang: Lang, key: string): string {
+  return `${signPath(index, lang)}/${key}`;
+}
