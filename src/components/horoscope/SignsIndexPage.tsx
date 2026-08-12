@@ -29,20 +29,21 @@ export function SignsIndexPage({ lang, dataKey }: { lang: Lang; dataKey: string 
       <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground">{z.title}</h1>
       <p className="mt-2 max-w-[58ch] font-body text-sm text-muted-foreground">{z.intro}</p>
 
-      <div className="mt-6 flex flex-wrap items-center gap-3">
-        <label htmlFor="period" className="font-body text-sm text-muted-foreground">
-          {z.periodLabel}
+      <div className="mt-6 flex flex-wrap items-end gap-4">
+        <label className="block w-auto min-w-[10rem]">
+          <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
+            {z.periodLabel}
+          </span>
+          <select
+            value={period}
+            onChange={(e) => setPeriod(e.target.value as Period)}
+            className="field"
+          >
+            <option value="daily">{z.today}</option>
+            <option value="month">{z.month}</option>
+            <option value="year">{z.year}</option>
+          </select>
         </label>
-        <select
-          id="period"
-          value={period}
-          onChange={(e) => setPeriod(e.target.value as Period)}
-          className="field w-auto"
-        >
-          <option value="daily">{z.today}</option>
-          <option value="month">{z.month}</option>
-          <option value="year">{z.year}</option>
-        </select>
         {shownKey ? (
           <span className="font-body text-xs text-muted-foreground">
             {z.updated}: {formatLongDate(shownKey, lang)}
