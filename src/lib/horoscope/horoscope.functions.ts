@@ -43,3 +43,18 @@ export const listArchiveFn = createServerFn({ method: "GET" })
     const { listKeys } = await import("./files.server");
     return { keys: await listKeys("daily", data.lang) };
   });
+
+/** All 12 readings for a period/language — static read, no AI at request time. */
+export const getAllSignsFn = createServerFn({ method: "GET" })
+  .inputValidator((input: unknown) =>
+    z.object({ lang: langSchema, period: periodSchema }).parse(input),
+  )
+  .handler(async ({ data }) => {
+    const { loadFile } = await import("./files.server");
+    const file = await loadFile(data.period, data.lang);
+    return {
+      key: file?.key ?? null,
+      generatedAt: file?.generatedAt ?? null,
+      signs: file?.signs ?? [],
+    };
+  });
