@@ -164,9 +164,8 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           `${built.place.name}${built.place.country ? `, ${built.place.country}` : ""} · ${built.place.timezone} (UTC${built.local.utcOffsetHours >= 0 ? "+" : ""}${built.local.utcOffsetHours})`,
         );
         res = (await synthesisFn({ data: { chart: built.chart, lang } })) as Result;
-      } else {
-        res = (await topicFn({ data: { chart: chart ?? SAMPLE_CHART, topic, lang } })) as Result;
       }
+      if (!res) return;
       setResult(res);
     } catch (err) {
       setError(err instanceof Error ? err.message : "unknown_error");
