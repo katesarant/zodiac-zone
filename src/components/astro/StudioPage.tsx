@@ -124,7 +124,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
     setError(null);
     setResult(null);
     try {
-      let res: Result;
+      let res: Result | undefined;
       if (tab === "placement") {
         res = (await placementFn({ data: { planet, sign, house, lang } })) as Result;
       } else if (tab === "aspect") {
