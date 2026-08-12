@@ -167,8 +167,14 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
       if (!res) return;
       setResult(res);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "unknown_error");
+      const message = err instanceof Error ? err.message : "unknown_error";
+      const invalid =
+        /invalid_chart_contract|aspect_angle_mismatch|invalid_enum|Invalid option|ZodError|validation/i.test(
+          message,
+        );
+      setError(invalid ? dict(lang).errInvalidInput : message);
     } finally {
+
       setLoading(false);
     }
   }
