@@ -277,6 +277,8 @@ const EN: typeof EL = {
   birthPlace: "Place of birth",
   placePlaceholder: "e.g. Thessaloniki",
   errBirthFields: "Please fill in birth date, time and place (at least 2 characters).",
+  errInvalidInput: "Invalid astrology data. Please pick values from the lists and try again.",
+
   chartName: "Chart name",
   namePlaceholder: "e.g. Maria",
   chartNote: "The exact time matters: a few minutes can change your Ascendant and your houses.",
