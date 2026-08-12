@@ -1,4 +1,4 @@
-import type { AspectInput, ChartJson, Lang, PlacementInput } from "./types";
+import type { AspectInput, ChartJson, HoroscopePeriod, Lang, PlacementInput } from "./types";
 
 /** SYS_BASE — shared system prompt (§1). */
 export function sysBase(lang: Lang): string {
