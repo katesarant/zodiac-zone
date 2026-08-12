@@ -23,42 +23,13 @@ import {
   generateSynthesisFn,
 } from "@/lib/astro/interpretation.functions";
 import { dict, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
+import { ASPECTS as ASPECT_DEFS, PLANETS as PLANET_NAMES, SIGNS as SIGN_NAMES } from "@/lib/astro/vocab";
 import type { ChartJson, Lang } from "@/lib/astro/types";
-const SIGNS = [
-  "Κριός",
-  "Ταύρος",
-  "Δίδυμοι",
-  "Καρκίνος",
-  "Λέων",
-  "Παρθένος",
-  "Ζυγός",
-  "Σκορπιός",
-  "Τοξότης",
-  "Αιγόκερως",
-  "Υδροχόος",
-  "Ιχθύες",
-];
 
-const PLANETS = [
-  "Ήλιος",
-  "Σελήνη",
-  "Ερμής",
-  "Αφροδίτη",
-  "Άρης",
-  "Δίας",
-  "Κρόνος",
-  "Ουρανός",
-  "Ποσειδώνας",
-  "Πλούτωνας",
-];
+const SIGNS: string[] = [...SIGN_NAMES];
+const PLANETS: string[] = [...PLANET_NAMES];
+const ASPECTS: Array<{ label: string; angle: number }> = ASPECT_DEFS.map((a) => ({ ...a }));
 
-const ASPECTS: Array<{ label: string; angle: number }> = [
-  { label: "σύνοδος", angle: 0 },
-  { label: "εξάγωνο", angle: 60 },
-  { label: "τετράγωνο", angle: 90 },
-  { label: "τρίγωνο", angle: 120 },
-  { label: "αντίθεση", angle: 180 },
-];
 
 type Tab = "placement" | "aspect" | "synthesis";
 
@@ -167,8 +138,14 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
       if (!res) return;
       setResult(res);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "unknown_error");
+      const message = err instanceof Error ? err.message : "unknown_error";
+      const invalid =
+        /invalid_chart_contract|aspect_angle_mismatch|invalid_enum|Invalid option|ZodError|validation/i.test(
+          message,
+        );
+      setError(invalid ? dict(lang).errInvalidInput : message);
     } finally {
+
       setLoading(false);
     }
   }

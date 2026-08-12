@@ -74,6 +74,8 @@ const EL = {
   birthPlace: "Τόπος γέννησης",
   placePlaceholder: "π.χ. Θεσσαλονίκη",
   errBirthFields: "Συμπλήρωσε ημερομηνία, ώρα και τόπο γέννησης (τουλάχιστον 2 χαρακτήρες).",
+  errInvalidInput: "Μη έγκυρα αστρολογικά δεδομένα. Διάλεξε τιμές από τις λίστες και δοκίμασε ξανά.",
+
   chartName: "Όνομα χάρτη",
   namePlaceholder: "π.χ. Μαρία",
   chartNote: "Η ακριβής ώρα έχει σημασία: λίγα λεπτά διαφορά μπορούν να αλλάξουν τον Ωροσκόπο και τους οίκους σου.",
@@ -275,6 +277,8 @@ const EN: typeof EL = {
   birthPlace: "Place of birth",
   placePlaceholder: "e.g. Thessaloniki",
   errBirthFields: "Please fill in birth date, time and place (at least 2 characters).",
+  errInvalidInput: "Invalid astrology data. Please pick values from the lists and try again.",
+
   chartName: "Chart name",
   namePlaceholder: "e.g. Maria",
   chartNote: "The exact time matters: a few minutes can change your Ascendant and your houses.",
