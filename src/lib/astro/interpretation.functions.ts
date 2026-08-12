@@ -11,21 +11,24 @@ async function limited(): Promise<boolean> {
 const langSchema = z.enum(["el", "en"]);
 
 const placementSchema = z.object({
-  planet: z.string().min(1),
-  sign: z.string().min(1),
-  house: z.number().int().min(1).max(12),
+  planet: planetEnum,
+  sign: signEnum,
+  house: houseSchema,
   lang: langSchema,
 });
 
-const aspectSchema = z.object({
-  planetA: z.string().min(1),
-  planetB: z.string().min(1),
-  aspect: z.string().min(1),
-  angle: z.number(),
-  lang: langSchema,
-});
+const aspectSchema = z
+  .object({
+    planetA: planetEnum,
+    planetB: planetEnum,
+    aspect: aspectEnum,
+    angle: z.number(),
+    lang: langSchema,
+  })
+  .refine((v) => ASPECT_ANGLE[v.aspect] === v.angle, { message: "aspect_angle_mismatch" });
 
-const chartSchema = z.object({ chart: z.unknown(), lang: langSchema });
+const chartSchema = z.object({ chart: chartJsonSchema, lang: langSchema });
+
 
 export const generatePlacementAtomFn = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => placementSchema.parse(input))
