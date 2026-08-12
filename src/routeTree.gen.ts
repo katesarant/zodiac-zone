@@ -15,6 +15,18 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as MyChartsRouteImport } from './routes/my-charts'
 import { Route as ElIndexRouteImport } from './routes/el.index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
+import { Route as EnZodiacIndexRouteImport } from './routes/en.zodiac.index'
+import { Route as ElZodiaSignIndexRouteImport } from './routes/el.zodia.$sign.index'
+import { Route as ElZodiaSignDateRouteImport } from './routes/el.zodia.$sign.$date'
+import { Route as ElZodiaSignEtosRouteImport } from './routes/el.zodia.$sign.etos'
+import { Route as ElZodiaSignMinasRouteImport } from './routes/el.zodia.$sign.minas'
+import { Route as ElZodiaSignSimeraRouteImport } from './routes/el.zodia.$sign.simera'
+import { Route as EnZodiacSignIndexRouteImport } from './routes/en.zodiac.$sign.index'
+import { Route as EnZodiacSignDateRouteImport } from './routes/en.zodiac.$sign.$date'
+import { Route as EnZodiacSignMonthRouteImport } from './routes/en.zodiac.$sign.month'
+import { Route as EnZodiacSignTodayRouteImport } from './routes/en.zodiac.$sign.today'
+import { Route as EnZodiacSignYearRouteImport } from './routes/en.zodiac.$sign.year'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +58,66 @@ const EnIndexRoute = EnIndexRouteImport.update({
   path: '/',
   getParentRoute: () => EnRoute,
 } as any)
+const ElZodiaIndexRoute = ElZodiaIndexRouteImport.update({
+  id: '/zodia/',
+  path: '/zodia/',
+  getParentRoute: () => ElRoute,
+} as any)
+const EnZodiacIndexRoute = EnZodiacIndexRouteImport.update({
+  id: '/zodiac/',
+  path: '/zodiac/',
+  getParentRoute: () => EnRoute,
+} as any)
+const ElZodiaSignIndexRoute = ElZodiaSignIndexRouteImport.update({
+  id: '/zodia/$sign/',
+  path: '/zodia/$sign/',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElZodiaSignDateRoute = ElZodiaSignDateRouteImport.update({
+  id: '/zodia/$sign/$date',
+  path: '/zodia/$sign/$date',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElZodiaSignEtosRoute = ElZodiaSignEtosRouteImport.update({
+  id: '/zodia/$sign/etos',
+  path: '/zodia/$sign/etos',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElZodiaSignMinasRoute = ElZodiaSignMinasRouteImport.update({
+  id: '/zodia/$sign/minas',
+  path: '/zodia/$sign/minas',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElZodiaSignSimeraRoute = ElZodiaSignSimeraRouteImport.update({
+  id: '/zodia/$sign/simera',
+  path: '/zodia/$sign/simera',
+  getParentRoute: () => ElRoute,
+} as any)
+const EnZodiacSignIndexRoute = EnZodiacSignIndexRouteImport.update({
+  id: '/zodiac/$sign/',
+  path: '/zodiac/$sign/',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnZodiacSignDateRoute = EnZodiacSignDateRouteImport.update({
+  id: '/zodiac/$sign/$date',
+  path: '/zodiac/$sign/$date',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnZodiacSignMonthRoute = EnZodiacSignMonthRouteImport.update({
+  id: '/zodiac/$sign/month',
+  path: '/zodiac/$sign/month',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnZodiacSignTodayRoute = EnZodiacSignTodayRouteImport.update({
+  id: '/zodiac/$sign/today',
+  path: '/zodiac/$sign/today',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnZodiacSignYearRoute = EnZodiacSignYearRouteImport.update({
+  id: '/zodiac/$sign/year',
+  path: '/zodiac/$sign/year',
+  getParentRoute: () => EnRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,12 +126,36 @@ export interface FileRoutesByFullPath {
   '/my-charts': typeof MyChartsRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
+  '/el/zodia/': typeof ElZodiaIndexRoute
+  '/en/zodiac/': typeof EnZodiacIndexRoute
+  '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
+  '/el/zodia/$sign/etos': typeof ElZodiaSignEtosRoute
+  '/el/zodia/$sign/minas': typeof ElZodiaSignMinasRoute
+  '/el/zodia/$sign/simera': typeof ElZodiaSignSimeraRoute
+  '/en/zodiac/$sign/$date': typeof EnZodiacSignDateRoute
+  '/en/zodiac/$sign/month': typeof EnZodiacSignMonthRoute
+  '/en/zodiac/$sign/today': typeof EnZodiacSignTodayRoute
+  '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
+  '/el/zodia/$sign/': typeof ElZodiaSignIndexRoute
+  '/en/zodiac/$sign/': typeof EnZodiacSignIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/my-charts': typeof MyChartsRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
+  '/el/zodia': typeof ElZodiaIndexRoute
+  '/en/zodiac': typeof EnZodiacIndexRoute
+  '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
+  '/el/zodia/$sign/etos': typeof ElZodiaSignEtosRoute
+  '/el/zodia/$sign/minas': typeof ElZodiaSignMinasRoute
+  '/el/zodia/$sign/simera': typeof ElZodiaSignSimeraRoute
+  '/en/zodiac/$sign/$date': typeof EnZodiacSignDateRoute
+  '/en/zodiac/$sign/month': typeof EnZodiacSignMonthRoute
+  '/en/zodiac/$sign/today': typeof EnZodiacSignTodayRoute
+  '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
+  '/el/zodia/$sign': typeof ElZodiaSignIndexRoute
+  '/en/zodiac/$sign': typeof EnZodiacSignIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,13 +165,78 @@ export interface FileRoutesById {
   '/my-charts': typeof MyChartsRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
+  '/el/zodia/': typeof ElZodiaIndexRoute
+  '/en/zodiac/': typeof EnZodiacIndexRoute
+  '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
+  '/el/zodia/$sign/etos': typeof ElZodiaSignEtosRoute
+  '/el/zodia/$sign/minas': typeof ElZodiaSignMinasRoute
+  '/el/zodia/$sign/simera': typeof ElZodiaSignSimeraRoute
+  '/en/zodiac/$sign/$date': typeof EnZodiacSignDateRoute
+  '/en/zodiac/$sign/month': typeof EnZodiacSignMonthRoute
+  '/en/zodiac/$sign/today': typeof EnZodiacSignTodayRoute
+  '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
+  '/el/zodia/$sign/': typeof ElZodiaSignIndexRoute
+  '/en/zodiac/$sign/': typeof EnZodiacSignIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/el' | '/en' | '/my-charts' | '/el/' | '/en/'
+  fullPaths:
+    | '/'
+    | '/el'
+    | '/en'
+    | '/my-charts'
+    | '/el/'
+    | '/en/'
+    | '/el/zodia/'
+    | '/en/zodiac/'
+    | '/el/zodia/$sign/$date'
+    | '/el/zodia/$sign/etos'
+    | '/el/zodia/$sign/minas'
+    | '/el/zodia/$sign/simera'
+    | '/en/zodiac/$sign/$date'
+    | '/en/zodiac/$sign/month'
+    | '/en/zodiac/$sign/today'
+    | '/en/zodiac/$sign/year'
+    | '/el/zodia/$sign/'
+    | '/en/zodiac/$sign/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/my-charts' | '/el' | '/en'
-  id: '__root__' | '/' | '/el' | '/en' | '/my-charts' | '/el/' | '/en/'
+  to:
+    | '/'
+    | '/my-charts'
+    | '/el'
+    | '/en'
+    | '/el/zodia'
+    | '/en/zodiac'
+    | '/el/zodia/$sign/$date'
+    | '/el/zodia/$sign/etos'
+    | '/el/zodia/$sign/minas'
+    | '/el/zodia/$sign/simera'
+    | '/en/zodiac/$sign/$date'
+    | '/en/zodiac/$sign/month'
+    | '/en/zodiac/$sign/today'
+    | '/en/zodiac/$sign/year'
+    | '/el/zodia/$sign'
+    | '/en/zodiac/$sign'
+  id:
+    | '__root__'
+    | '/'
+    | '/el'
+    | '/en'
+    | '/my-charts'
+    | '/el/'
+    | '/en/'
+    | '/el/zodia/'
+    | '/en/zodiac/'
+    | '/el/zodia/$sign/$date'
+    | '/el/zodia/$sign/etos'
+    | '/el/zodia/$sign/minas'
+    | '/el/zodia/$sign/simera'
+    | '/en/zodiac/$sign/$date'
+    | '/en/zodiac/$sign/month'
+    | '/en/zodiac/$sign/today'
+    | '/en/zodiac/$sign/year'
+    | '/el/zodia/$sign/'
+    | '/en/zodiac/$sign/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -129,25 +290,133 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnIndexRouteImport
       parentRoute: typeof EnRoute
     }
+    '/el/zodia/': {
+      id: '/el/zodia/'
+      path: '/zodia'
+      fullPath: '/el/zodia/'
+      preLoaderRoute: typeof ElZodiaIndexRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/en/zodiac/': {
+      id: '/en/zodiac/'
+      path: '/zodiac'
+      fullPath: '/en/zodiac/'
+      preLoaderRoute: typeof EnZodiacIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/el/zodia/$sign/': {
+      id: '/el/zodia/$sign/'
+      path: '/zodia/$sign'
+      fullPath: '/el/zodia/$sign/'
+      preLoaderRoute: typeof ElZodiaSignIndexRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/zodia/$sign/$date': {
+      id: '/el/zodia/$sign/$date'
+      path: '/zodia/$sign/$date'
+      fullPath: '/el/zodia/$sign/$date'
+      preLoaderRoute: typeof ElZodiaSignDateRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/zodia/$sign/etos': {
+      id: '/el/zodia/$sign/etos'
+      path: '/zodia/$sign/etos'
+      fullPath: '/el/zodia/$sign/etos'
+      preLoaderRoute: typeof ElZodiaSignEtosRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/zodia/$sign/minas': {
+      id: '/el/zodia/$sign/minas'
+      path: '/zodia/$sign/minas'
+      fullPath: '/el/zodia/$sign/minas'
+      preLoaderRoute: typeof ElZodiaSignMinasRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/zodia/$sign/simera': {
+      id: '/el/zodia/$sign/simera'
+      path: '/zodia/$sign/simera'
+      fullPath: '/el/zodia/$sign/simera'
+      preLoaderRoute: typeof ElZodiaSignSimeraRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/en/zodiac/$sign/': {
+      id: '/en/zodiac/$sign/'
+      path: '/zodiac/$sign'
+      fullPath: '/en/zodiac/$sign/'
+      preLoaderRoute: typeof EnZodiacSignIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/zodiac/$sign/$date': {
+      id: '/en/zodiac/$sign/$date'
+      path: '/zodiac/$sign/$date'
+      fullPath: '/en/zodiac/$sign/$date'
+      preLoaderRoute: typeof EnZodiacSignDateRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/zodiac/$sign/month': {
+      id: '/en/zodiac/$sign/month'
+      path: '/zodiac/$sign/month'
+      fullPath: '/en/zodiac/$sign/month'
+      preLoaderRoute: typeof EnZodiacSignMonthRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/zodiac/$sign/today': {
+      id: '/en/zodiac/$sign/today'
+      path: '/zodiac/$sign/today'
+      fullPath: '/en/zodiac/$sign/today'
+      preLoaderRoute: typeof EnZodiacSignTodayRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/zodiac/$sign/year': {
+      id: '/en/zodiac/$sign/year'
+      path: '/zodiac/$sign/year'
+      fullPath: '/en/zodiac/$sign/year'
+      preLoaderRoute: typeof EnZodiacSignYearRouteImport
+      parentRoute: typeof EnRoute
+    }
   }
 }
 
 interface ElRouteChildren {
   ElIndexRoute: typeof ElIndexRoute
+  ElZodiaIndexRoute: typeof ElZodiaIndexRoute
+  ElZodiaSignDateRoute: typeof ElZodiaSignDateRoute
+  ElZodiaSignEtosRoute: typeof ElZodiaSignEtosRoute
+  ElZodiaSignMinasRoute: typeof ElZodiaSignMinasRoute
+  ElZodiaSignSimeraRoute: typeof ElZodiaSignSimeraRoute
+  ElZodiaSignIndexRoute: typeof ElZodiaSignIndexRoute
 }
 
 const ElRouteChildren: ElRouteChildren = {
   ElIndexRoute: ElIndexRoute,
+  ElZodiaIndexRoute: ElZodiaIndexRoute,
+  ElZodiaSignDateRoute: ElZodiaSignDateRoute,
+  ElZodiaSignEtosRoute: ElZodiaSignEtosRoute,
+  ElZodiaSignMinasRoute: ElZodiaSignMinasRoute,
+  ElZodiaSignSimeraRoute: ElZodiaSignSimeraRoute,
+  ElZodiaSignIndexRoute: ElZodiaSignIndexRoute,
 }
 
 const ElRouteWithChildren = ElRoute._addFileChildren(ElRouteChildren)
 
 interface EnRouteChildren {
   EnIndexRoute: typeof EnIndexRoute
+  EnZodiacIndexRoute: typeof EnZodiacIndexRoute
+  EnZodiacSignDateRoute: typeof EnZodiacSignDateRoute
+  EnZodiacSignMonthRoute: typeof EnZodiacSignMonthRoute
+  EnZodiacSignTodayRoute: typeof EnZodiacSignTodayRoute
+  EnZodiacSignYearRoute: typeof EnZodiacSignYearRoute
+  EnZodiacSignIndexRoute: typeof EnZodiacSignIndexRoute
 }
 
 const EnRouteChildren: EnRouteChildren = {
   EnIndexRoute: EnIndexRoute,
+  EnZodiacIndexRoute: EnZodiacIndexRoute,
+  EnZodiacSignDateRoute: EnZodiacSignDateRoute,
+  EnZodiacSignMonthRoute: EnZodiacSignMonthRoute,
+  EnZodiacSignTodayRoute: EnZodiacSignTodayRoute,
+  EnZodiacSignYearRoute: EnZodiacSignYearRoute,
+  EnZodiacSignIndexRoute: EnZodiacSignIndexRoute,
 }
 
 const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
