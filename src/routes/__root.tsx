@@ -94,7 +94,7 @@ function NotFoundComponent() {
           className="font-body uppercase text-muted-foreground"
           style={{ fontSize: "0.7rem", letterSpacing: "0.35em" }}
         >
-          Zodiac Zone
+          MyZodiacMaps
         </p>
 
         <h1
@@ -193,7 +193,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#1c1733" },
 
       { property: "og:site_name", content: "MyZodiacMaps" },
-      { property: "og:title", content: "Zodiac Zone — Ο γενέθλιος χάρτης σου" },
+      { property: "og:title", content: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
       {
         property: "og:description",
         content: "Δωρεάν υπολογισμός και ανάλυση γενέθλιου χάρτη, στα ελληνικά και στα αγγλικά.",
@@ -201,10 +201,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "el_GR" },
       { property: "og:locale:alternate", content: "en_US" },
-      { property: "og:url", content: "https://myzodiacmaps.gr/" },
 
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Zodiac Zone — Ο γενέθλιος χάρτης σου" },
+      { name: "twitter:title", content: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
+
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -217,7 +217,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-      { rel: "canonical", href: "https://myzodiacmaps.gr/" },
     ],
   }),
   shellComponent: RootShell,
