@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ElRouteImport } from './routes/el'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as MyChartsRouteImport } from './routes/my-charts'
+import { Route as ElIndexRouteImport } from './routes/el.index'
+import { Route as EnIndexRouteImport } from './routes/en.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,38 +36,52 @@ const MyChartsRoute = MyChartsRouteImport.update({
   path: '/my-charts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ElIndexRoute = ElIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ElRoute,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EnRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/el': typeof ElRoute
-  '/en': typeof EnRoute
+  '/el': typeof ElRouteWithChildren
+  '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
+  '/el/': typeof ElIndexRoute
+  '/en/': typeof EnIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/el': typeof ElRoute
-  '/en': typeof EnRoute
   '/my-charts': typeof MyChartsRoute
+  '/el': typeof ElIndexRoute
+  '/en': typeof EnIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/el': typeof ElRoute
-  '/en': typeof EnRoute
+  '/el': typeof ElRouteWithChildren
+  '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
+  '/el/': typeof ElIndexRoute
+  '/en/': typeof EnIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/el' | '/en' | '/my-charts'
+  fullPaths: '/' | '/el' | '/en' | '/my-charts' | '/el/' | '/en/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/el' | '/en' | '/my-charts'
-  id: '__root__' | '/' | '/el' | '/en' | '/my-charts'
+  to: '/' | '/my-charts' | '/el' | '/en'
+  id: '__root__' | '/' | '/el' | '/en' | '/my-charts' | '/el/' | '/en/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ElRoute: typeof ElRoute
-  EnRoute: typeof EnRoute
+  ElRoute: typeof ElRouteWithChildren
+  EnRoute: typeof EnRouteWithChildren
   MyChartsRoute: typeof MyChartsRoute
 }
 
@@ -99,13 +115,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyChartsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/el/': {
+      id: '/el/'
+      path: '/'
+      fullPath: '/el/'
+      preLoaderRoute: typeof ElIndexRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/en/': {
+      id: '/en/'
+      path: '/'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
   }
 }
 
+interface ElRouteChildren {
+  ElIndexRoute: typeof ElIndexRoute
+}
+
+const ElRouteChildren: ElRouteChildren = {
+  ElIndexRoute: ElIndexRoute,
+}
+
+const ElRouteWithChildren = ElRoute._addFileChildren(ElRouteChildren)
+
+interface EnRouteChildren {
+  EnIndexRoute: typeof EnIndexRoute
+}
+
+const EnRouteChildren: EnRouteChildren = {
+  EnIndexRoute: EnIndexRoute,
+}
+
+const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ElRoute: ElRoute,
-  EnRoute: EnRoute,
+  ElRoute: ElRouteWithChildren,
+  EnRoute: EnRouteWithChildren,
   MyChartsRoute: MyChartsRoute,
 }
 export const routeTree = rootRouteImport
