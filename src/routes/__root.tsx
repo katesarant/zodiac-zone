@@ -196,7 +196,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
       {
         property: "og:description",
-        content: "Δωρεάν υπολογισμός και ανάλυση γενέθλιου χάρτη, στα ελληνικά και στα αγγλικά.",
+        content: "Υπολόγισε δωρεάν τον γενέθλιο χάρτη σου και διάβασε αναλυτική ερμηνεία για Ήλιο, Σελήνη, Ωροσκόπο, οίκους και όψεις — στα ελληνικά και στα αγγλικά.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "el_GR" },
@@ -205,6 +205,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
 
+      { name: "twitter:description", content: "Υπολόγισε δωρεάν τον γενέθλιο χάρτη σου και διάβασε αναλυτική ερμηνεία για Ήλιο, Σελήνη, Ωροσκόπο, οίκους και όψεις — στα ελληνικά και στα αγγλικά." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d39cb7075a47cd88ac627a67d1c08491/id-preview-fd0fb1c4--784450e4-7580-4233-a756-96940d87fc5b.lovable.app-1786543112671.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d39cb7075a47cd88ac627a67d1c08491/id-preview-fd0fb1c4--784450e4-7580-4233-a756-96940d87fc5b.lovable.app-1786543112671.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -215,7 +218,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Karla:wght@400;500;700&display=swap",
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
-      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "icon", href: "/favicon.png", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
