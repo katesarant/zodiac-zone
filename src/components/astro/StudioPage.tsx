@@ -17,7 +17,6 @@ import {
 import { useLang } from "@/hooks/use-lang";
 import { saveChart } from "@/lib/storage/local-library";
 import { buildChartFn } from "@/lib/astro/birth.functions";
-import { SAMPLE_CHART } from "@/lib/astro/chart";
 import {
   generateAspectAtomFn,
   generatePlacementAtomFn,
