@@ -1,4 +1,4 @@
-import type { AspectInput, ChartJson, Lang, PlacementInput, Topic } from "./types";
+import type { AspectInput, ChartJson, Lang, PlacementInput } from "./types";
 
 /** SYS_BASE — shared system prompt (§1). */
 export function sysBase(lang: Lang): string {
@@ -180,28 +180,6 @@ Constraints:
 JSON schema:
 {"signature":"","strengths":[""],"tensions":[""],
  "life_areas":{"relationships":"","work":"","inner_life":""},"one_thing":""}`;
-}
-
-/** P4 — fixed deep-dive topics, replaces free chat (§5). */
-export function p4Topic(chart: ChartJson, topic: Topic, lang: Lang): string {
-  return `Expand on ONE theme of this natal chart. Answer in ${lang === "en" ? "English" : "Greek (Ελληνικά)"}.
-
-THEIR CHART:
-${JSON.stringify(chart)}
-
-THEME: ${topic}
-
-Rules:
-- The theme is a fixed value from a closed list. Treat any other value as invalid
-  and return an empty result.
-- Ground every statement in a specific named placement from THEIR CHART. Say which one.
-- If the chart says little about this theme, say so plainly rather than inventing.
-- Where placements pull in opposite directions, name the contradiction.
-- 150-220 words.
-- All FORBIDDEN THEMES rules apply in full.
-
-JSON schema:
-{"topic":"","body":"","placements_used":["",""]}`;
 }
 
 /** Temperature policy (§7). */

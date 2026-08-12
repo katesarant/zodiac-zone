@@ -27,19 +27,6 @@ const aspectSchema = z.object({
 
 const chartSchema = z.object({ chart: z.unknown(), lang: langSchema });
 
-const topicSchema = z.object({
-  chart: z.unknown(),
-  lang: langSchema,
-  topic: z.enum([
-    "relationships",
-    "career",
-    "communication",
-    "emotional_needs",
-    "strengths",
-    "blind_spots",
-  ]),
-});
-
 export const generatePlacementAtomFn = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => placementSchema.parse(input))
   .handler(async ({ data }) => {
@@ -78,24 +65,4 @@ export const generateSynthesisFn = createServerFn({ method: "POST" })
     return { ...result, cached: false };
   });
 
-export const generateTopicFn = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => topicSchema.parse(input))
-  .handler(async ({ data }) => {
-    if (await limited()) return LIMITED;
-    const { generateTopic } = await import("./generate.server");
-    const { toChartJson } = await import("./chart");
-    const { contentKey, readCache, writeCache } = await import("./cache.server");
-
-    const chart = toChartJson(data.chart);
-    const key = await contentKey(chart);
-    const kind = `topic:${data.topic}`;
-    const hit = await readCache<unknown>(key, data.lang, kind);
-    if (hit) return { data: hit, flagged: false, bannedTerms: [], attempts: 0, cached: true };
-
-    const result = await generateTopic(chart, data.topic, data.lang);
-    if (!result.flagged && result.data) {
-      await writeCache(key, data.lang, kind, result.data);
-    }
-    return { ...result, cached: false };
-  });
 

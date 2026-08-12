@@ -4,7 +4,6 @@ import {
   p1PlacementBatch,
   p2Aspect,
   p3Synthesis,
-  p4Topic,
   sysBase,
   TEMPERATURE,
 } from "./prompts";
@@ -16,10 +15,7 @@ import type {
   Lang,
   PlacementInput,
   Synthesis,
-  Topic,
-  TopicExpansion,
 } from "./types";
-import { TOPICS } from "./types";
 import { tAspect, tPlanet, tSign } from "./i18n";
 
 /** Localises the astrological vocabulary sent to the model (Greek data → English for EN). */
@@ -174,7 +170,3 @@ export function generateSynthesis(chart: ChartJson, atoms: unknown, lang: Lang) 
   return generate<Synthesis>(lang, p3Synthesis(locChart(chart, lang), atoms), TEMPERATURE.synthesis);
 }
 
-export function generateTopic(chart: ChartJson, topic: Topic, lang: Lang) {
-  if (!TOPICS.includes(topic)) throw new AstroAiError("invalid_topic");
-  return generate<TopicExpansion>(lang, p4Topic(locChart(chart, lang), topic, lang), TEMPERATURE.synthesis);
-}

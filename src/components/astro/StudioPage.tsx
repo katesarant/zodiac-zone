@@ -22,10 +22,9 @@ import {
   generateAspectAtomFn,
   generatePlacementAtomFn,
   generateSynthesisFn,
-  generateTopicFn,
 } from "@/lib/astro/interpretation.functions";
 import { dict, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
-import { TOPICS, type ChartJson, type Lang, type Topic } from "@/lib/astro/types";
+import type { ChartJson, Lang } from "@/lib/astro/types";
 const SIGNS = [
   "Κριός",
   "Ταύρος",
@@ -62,9 +61,9 @@ const ASPECTS: Array<{ label: string; angle: number }> = [
   { label: "αντίθεση", angle: 180 },
 ];
 
-type Tab = "placement" | "aspect" | "synthesis" | "topic";
+type Tab = "placement" | "aspect" | "synthesis";
 
-const TAB_IDS: Tab[] = ["placement", "aspect", "synthesis", "topic"];
+const TAB_IDS: Tab[] = ["placement", "aspect", "synthesis"];
 
 const field =
   "w-full rounded-lg border border-input bg-secondary/60 px-3 py-2 text-sm text-foreground outline-none focus:border-primary";
@@ -86,7 +85,6 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
   const [house, setHouse] = useState(1);
   const [planetB, setPlanetB] = useState(PLANETS[6]!);
   const [aspect, setAspect] = useState(ASPECTS[2]!);
-  const [topic, setTopic] = useState<Topic>("relationships");
   const [birthDate, setBirthDate] = useState("1990-06-15");
   const [birthTime, setBirthTime] = useState("12:00");
   const [birthPlace, setBirthPlace] = useState("Αθήνα");
@@ -109,7 +107,6 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
   const placementFn = useServerFn(generatePlacementAtomFn);
   const aspectFn = useServerFn(generateAspectAtomFn);
   const synthesisFn = useServerFn(generateSynthesisFn);
-  const topicFn = useServerFn(generateTopicFn);
   const chartFn = useServerFn(buildChartFn);
 
   // Drop stale results when the language changes, so headings and body text never mix languages.
@@ -298,18 +295,6 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           </div>
         )}
 
-        {tab === "topic" && (
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Select
-              label={t.topic}
-              value={topic}
-              onChange={(v) => setTopic(v as Topic)}
-              options={TOPICS}
-              render={(v) => t.topics[v as Topic]}
-            />
-            <p className="self-end text-xs text-muted-foreground">{t.topicNote}</p>
-          </div>
-        )}
 
         <div className="mt-6 flex items-center gap-4">
           <Button onClick={run} disabled={loading}>

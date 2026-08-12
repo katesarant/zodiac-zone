@@ -60,7 +60,6 @@ const EL = {
     placement: { label: "Θέσεις", hint: "πλανήτης, ζώδιο και οίκος" },
     aspect: { label: "Όψεις", hint: "πώς συνομιλούν δύο πλανήτες" },
     synthesis: { label: "Ο χάρτης μου", hint: "συνολική εικόνα" },
-    topic: { label: "Εμβάθυνση", hint: "διάλεξε θέμα" },
   },
 
   planet: "Πλανήτης",
@@ -69,8 +68,6 @@ const EL = {
   sign: "Ζώδιο",
   house: "Οίκος",
   aspect: "Όψη",
-  topic: "Θέμα",
-  topicNote: "Διάλεξε ένα από τα θέματα για πιο αναλυτική ματιά.",
 
   birthDate: "Ημερομηνία γέννησης",
   birthTime: "Ώρα γέννησης",
@@ -120,14 +117,6 @@ const EL = {
 
   intensity: { low: "ήπια", medium: "αισθητή", high: "έντονη" },
 
-  topics: {
-    relationships: "Σχέσεις",
-    career: "Καριέρα",
-    communication: "Επικοινωνία",
-    emotional_needs: "Συναισθηματικές ανάγκες",
-    strengths: "Δυνατά σημεία",
-    blind_spots: "Τυφλά σημεία",
-  },
   library: {
     title: "Οι χάρτες μου",
     emptyTitle: "Καμία αποθήκευση ακόμη",
@@ -251,7 +240,6 @@ const EN: typeof EL = {
     placement: { label: "Placements", hint: "planet, sign and house" },
     aspect: { label: "Aspects", hint: "how two planets talk to each other" },
     synthesis: { label: "My chart", hint: "the whole picture" },
-    topic: { label: "Go deeper", hint: "pick a theme" },
   },
 
   planet: "Planet",
@@ -260,8 +248,6 @@ const EN: typeof EL = {
   sign: "Sign",
   house: "House",
   aspect: "Aspect",
-  topic: "Theme",
-  topicNote: "Choose a theme for a closer look.",
 
   birthDate: "Date of birth",
   birthTime: "Time of birth",
@@ -311,14 +297,6 @@ const EN: typeof EL = {
 
   intensity: { low: "gentle", medium: "noticeable", high: "intense" },
 
-  topics: {
-    relationships: "Relationships",
-    career: "Career",
-    communication: "Communication",
-    emotional_needs: "Emotional needs",
-    strengths: "Strengths",
-    blind_spots: "Blind spots",
-  },
   library: {
     title: "My charts",
     emptyTitle: "Nothing saved yet",
