@@ -4,7 +4,9 @@ import {
   p1PlacementBatch,
   p2Aspect,
   p3Synthesis,
+  p5Horoscope,
   sysBase,
+  sysHoroscope,
   TEMPERATURE,
 } from "./prompts";
 import type {
@@ -12,6 +14,8 @@ import type {
   AtomAspect,
   AtomPlacement,
   ChartJson,
+  Horoscope,
+  HoroscopePeriod,
   Lang,
   PlacementInput,
   Synthesis,
@@ -132,8 +136,9 @@ async function generate<T>(
   lang: Lang,
   userPrompt: string,
   temperature: number,
+  systemPrompt?: string,
 ): Promise<GenerationResult<T>> {
-  const system = sysBase(lang);
+  const system = systemPrompt ?? sysBase(lang);
   let bannedTerms: string[] = [];
 
   for (let attempt = 1; attempt <= 2; attempt++) {
@@ -170,3 +175,15 @@ export function generateSynthesis(chart: ChartJson, atoms: unknown, lang: Lang) 
   return generate<Synthesis>(lang, p3Synthesis(locChart(chart, lang), atoms), TEMPERATURE.synthesis);
 }
 
+/** Horoscope for one sign/period — same banned-filter gate as chart readings. */
+export function generateHoroscope(
+  input: { sign: string; period: HoroscopePeriod; date: string; sky: unknown },
+  lang: Lang,
+) {
+  return generate<Horoscope>(
+    lang,
+    p5Horoscope(input),
+    TEMPERATURE.horoscope,
+    sysHoroscope(lang),
+  );
+}
