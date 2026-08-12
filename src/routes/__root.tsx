@@ -94,7 +94,7 @@ function NotFoundComponent() {
           className="font-body uppercase text-muted-foreground"
           style={{ fontSize: "0.7rem", letterSpacing: "0.35em" }}
         >
-          Zodiac Zone
+          MyZodiacMaps
         </p>
 
         <h1
