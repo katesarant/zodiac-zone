@@ -35,7 +35,6 @@ export const Route = createFileRoute("/sitemap.xml")({
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${unique.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}
 </urlset>`;
-</urlset>`;
 
         return new Response(body, {
           headers: { "Content-Type": "application/xml; charset=utf-8" },
