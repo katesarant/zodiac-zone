@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ElRouteImport } from './routes/el'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as MyChartsRouteImport } from './routes/my-charts'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ElIndexRouteImport } from './routes/el.index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
@@ -46,6 +47,11 @@ const EnRoute = EnRouteImport.update({
 const MyChartsRoute = MyChartsRouteImport.update({
   id: '/my-charts',
   path: '/my-charts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ElIndexRoute = ElIndexRouteImport.update({
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/el': typeof ElRouteWithChildren
   '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/my-charts': typeof MyChartsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/el/zodia': typeof ElZodiaIndexRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/el': typeof ElRouteWithChildren
   '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
@@ -185,6 +194,7 @@ export interface FileRouteTypes {
     | '/el'
     | '/en'
     | '/my-charts'
+    | '/sitemap.xml'
     | '/el/'
     | '/en/'
     | '/el/zodia/'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/my-charts'
+    | '/sitemap.xml'
     | '/el'
     | '/en'
     | '/el/zodia'
@@ -223,6 +234,7 @@ export interface FileRouteTypes {
     | '/el'
     | '/en'
     | '/my-charts'
+    | '/sitemap.xml'
     | '/el/'
     | '/en/'
     | '/el/zodia/'
@@ -244,6 +256,7 @@ export interface RootRouteChildren {
   ElRoute: typeof ElRouteWithChildren
   EnRoute: typeof EnRouteWithChildren
   MyChartsRoute: typeof MyChartsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/my-charts'
       fullPath: '/my-charts'
       preLoaderRoute: typeof MyChartsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/el/': {
@@ -426,6 +446,7 @@ const rootRouteChildren: RootRouteChildren = {
   ElRoute: ElRouteWithChildren,
   EnRoute: EnRouteWithChildren,
   MyChartsRoute: MyChartsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

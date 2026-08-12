@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SIGN_SLUGS, SITE_URL } from "@/lib/horoscope/signs";
 
 /** Static sitemap: pages + all pre-generated horoscope archive days. */
-export const Route = createFileRoute("/sitemap/xml")({
+export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
