@@ -1,6 +1,16 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+import {
+  ASPECT_ANGLE,
+  aspectEnum,
+  chartJsonSchema,
+  houseSchema,
+  planetEnum,
+  signEnum,
+} from "./vocab";
+
+
 const LIMITED = { data: null, flagged: false, bannedTerms: [], attempts: 0, cached: false, limited: true } as const;
 
 async function limited(): Promise<boolean> {
