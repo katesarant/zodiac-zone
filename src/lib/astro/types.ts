@@ -81,3 +81,15 @@ export const cacheKeys = {
   aspect: (a: string, aspect: string, b: string, lang: Lang) => `asp:${a}:${aspect}:${b}:${lang}`,
   synthesis: (chartHash: string, lang: Lang) => `synth:${chartHash}:${lang}`,
 };
+
+export type HoroscopePeriod = "daily" | "month" | "year";
+
+export interface Horoscope {
+  sign: string;
+  period: string;
+  date: string;
+  sky: string;
+  tone: string;
+  focus: string;
+  keyTransit: string;
+}
