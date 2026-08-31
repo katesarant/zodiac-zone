@@ -14,17 +14,17 @@ export interface HoroscopeFile {
  * returns nothing there — the JSON must be part of the bundle instead.
  * Plain node/bun scripts have no `import.meta.glob`, so they read from disk.
  */
-const hasGlob = typeof (import.meta as { glob?: unknown }).glob === "function";
-
 async function readFromDisk(): Promise<Record<string, HoroscopeFile>> {
+  const out: Record<string, HoroscopeFile> = {};
+  const self = import.meta.url;
+  if (typeof self !== "string" || !self.startsWith("file:")) return out;
   const [{ readdirSync, readFileSync, existsSync }, path, url] = await Promise.all([
     import("node:fs"),
     import("node:path"),
     import("node:url"),
   ]);
-  const here = path.dirname(url.fileURLToPath(import.meta.url));
+  const here = path.dirname(url.fileURLToPath(self));
   const root = path.resolve(here, "../../../data/horoscopes");
-  const out: Record<string, HoroscopeFile> = {};
   if (!existsSync(root)) return out;
   for (const folder of readdirSync(root)) {
     const dir = path.join(root, folder);
@@ -37,12 +37,21 @@ async function readFromDisk(): Promise<Record<string, HoroscopeFile>> {
   return out;
 }
 
-const MODULES: Record<string, HoroscopeFile> = hasGlob
-  ? (import.meta.glob<HoroscopeFile>("../../../data/horoscopes/**/*.json", {
+function readBundled(): Record<string, HoroscopeFile> {
+  try {
+    return (import.meta.glob<HoroscopeFile>("../../../data/horoscopes/**/*.json", {
       eager: true,
       import: "default",
-    }) as Record<string, HoroscopeFile>)
-  : await readFromDisk();
+    }) ?? {}) as Record<string, HoroscopeFile>;
+  } catch {
+    return {};
+  }
+}
+
+const bundled = readBundled();
+const MODULES: Record<string, HoroscopeFile> =
+  Object.keys(bundled).length > 0 ? bundled : await readFromDisk();
+
 
 
 const FOLDER: Record<HoroscopePeriod, string> = {
