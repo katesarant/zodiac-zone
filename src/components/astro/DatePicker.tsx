@@ -46,7 +46,7 @@ export function DatePicker({ value, onChange, placeholder = "Pick a date", class
           startMonth={new Date(1900, 0)}
           endMonth={new Date()}
           disabled={{ after: new Date() }}
-
+          onSelect={(selected) => {
             if (selected) {
               onChange(format(selected, "yyyy-MM-dd"));
             }
