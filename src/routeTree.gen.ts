@@ -15,6 +15,7 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as MyChartsRouteImport } from './routes/my-charts'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ElIndexRouteImport } from './routes/el.index'
+import { Route as ElEpikoinoniaRouteImport } from './routes/el.epikoinonia'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
@@ -62,6 +63,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ElIndexRoute = ElIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElEpikoinoniaRoute = ElEpikoinoniaRouteImport.update({
+  id: '/epikoinonia',
+  path: '/epikoinonia',
   getParentRoute: () => ElRoute,
 } as any)
 const ElOroiChrisisRoute = ElOroiChrisisRouteImport.update({
@@ -161,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/my-charts': typeof MyChartsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
@@ -212,6 +220,7 @@ export interface FileRoutesById {
   '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/en'
     | '/my-charts'
     | '/sitemap.xml'
+    | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/'
     | '/my-charts'
     | '/sitemap.xml'
+    | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
@@ -290,6 +301,7 @@ export interface FileRouteTypes {
     | '/en'
     | '/my-charts'
     | '/sitemap.xml'
+    | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
@@ -363,6 +375,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/el/'
       preLoaderRoute: typeof ElIndexRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/epikoinonia': {
+      id: '/el/epikoinonia'
+      path: '/epikoinonia'
+      fullPath: '/el/epikoinonia'
+      preLoaderRoute: typeof ElEpikoinoniaRouteImport
       parentRoute: typeof ElRoute
     }
     '/el/oroi-chrisis': {
@@ -495,6 +514,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface ElRouteChildren {
+  ElEpikoinoniaRoute: typeof ElEpikoinoniaRoute
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
   ElSchetikaRoute: typeof ElSchetikaRoute
@@ -508,6 +528,7 @@ interface ElRouteChildren {
 }
 
 const ElRouteChildren: ElRouteChildren = {
+  ElEpikoinoniaRoute: ElEpikoinoniaRoute,
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
   ElSchetikaRoute: ElSchetikaRoute,
