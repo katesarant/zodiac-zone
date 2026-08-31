@@ -25,8 +25,15 @@ export const Route = createFileRoute("/api/public/publish-watch")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const expected = process.env["PUBLISH_WATCH_SECRET"];
-        if (!expected) return json({ error: "PUBLISH_WATCH_SECRET not configured" }, 500);
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+        const { data: config } = await supabaseAdmin
+          .from("publish_watch_config")
+          .select("token")
+          .maybeSingle();
+
+        const expected = config?.token;
+        if (!expected) return json({ error: "watcher not configured" }, 500);
 
         const provided = request.headers.get("x-publish-watch-secret") ?? "";
         if (!timingSafeEqual(provided, expected)) {
