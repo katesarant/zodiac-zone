@@ -59,6 +59,21 @@ export type Database = {
         }
         Relationships: []
       }
+      publish_watch_config: {
+        Row: {
+          id: boolean
+          token: string
+        }
+        Insert: {
+          id?: boolean
+          token: string
+        }
+        Update: {
+          id?: boolean
+          token?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
