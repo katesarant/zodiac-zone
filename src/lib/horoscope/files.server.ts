@@ -1,6 +1,3 @@
-import { readdir, readFile } from "node:fs/promises";
-import path from "node:path";
-
 import type { Horoscope, HoroscopePeriod, Lang } from "@/lib/astro/types";
 
 export interface HoroscopeFile {
@@ -11,33 +8,41 @@ export interface HoroscopeFile {
   signs: Horoscope[];
 }
 
-const ROOT = path.resolve(process.cwd(), "data", "horoscopes");
-const DIR: Record<HoroscopePeriod, string> = {
-  daily: path.join(ROOT, "daily"),
-  month: path.join(ROOT, "monthly"),
-  year: path.join(ROOT, "yearly"),
+/**
+ * The archive is bundled at build time. The production runtime is an edge
+ * worker with no real filesystem, so reading `data/horoscopes` from disk
+ * returns nothing there — the JSON must be part of the bundle instead.
+ */
+const MODULES = import.meta.glob<HoroscopeFile>("../../../data/horoscopes/**/*.json", {
+  eager: true,
+  import: "default",
+});
+
+const FOLDER: Record<HoroscopePeriod, string> = {
+  daily: "daily",
+  month: "monthly",
+  year: "yearly",
 };
 
-async function readFileJson(file: string): Promise<HoroscopeFile | null> {
-  try {
-    return JSON.parse(await readFile(file, "utf8")) as HoroscopeFile;
-  } catch {
-    return null;
-  }
+/** period -> lang -> key -> file */
+const ARCHIVE: Record<HoroscopePeriod, Record<Lang, Record<string, HoroscopeFile>>> = {
+  daily: { el: {}, en: {} },
+  month: { el: {}, en: {} },
+  year: { el: {}, en: {} },
+};
+
+for (const [filePath, mod] of Object.entries(MODULES)) {
+  const match = /\/horoscopes\/(daily|monthly|yearly)\/(.+)\.(el|en)\.json$/.exec(filePath);
+  if (!match || !mod) continue;
+  const [, folder, key, lang] = match as unknown as [string, string, string, Lang];
+  const period = (Object.keys(FOLDER) as HoroscopePeriod[]).find((p) => FOLDER[p] === folder);
+  if (!period) continue;
+  ARCHIVE[period][lang][key] = mod;
 }
 
 /** All available keys for a period/language, newest first. */
 export async function listKeys(period: HoroscopePeriod, lang: Lang): Promise<string[]> {
-  try {
-    const files = await readdir(DIR[period]);
-    return files
-      .filter((f) => f.endsWith(`.${lang}.json`))
-      .map((f) => f.slice(0, -`.${lang}.json`.length))
-      .sort()
-      .reverse();
-  } catch {
-    return [];
-  }
+  return Object.keys(ARCHIVE[period][lang]).sort().reverse();
 }
 
 /**
@@ -49,12 +54,9 @@ export async function loadFile(
   lang: Lang,
   key?: string,
 ): Promise<HoroscopeFile | null> {
-  if (key) {
-    const exact = await readFileJson(path.join(DIR[period], `${key}.${lang}.json`));
-    if (exact) return exact;
-  }
+  const byKey = ARCHIVE[period][lang];
+  if (key && byKey[key]) return byKey[key];
   const keys = await listKeys(period, lang);
   const latest = key ? (keys.find((k) => k <= key) ?? keys[0]) : keys[0];
-  if (!latest) return null;
-  return readFileJson(path.join(DIR[period], `${latest}.${lang}.json`));
+  return latest ? (byKey[latest] ?? null) : null;
 }
