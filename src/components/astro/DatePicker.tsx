@@ -43,8 +43,9 @@ export function DatePicker({ value, onChange, placeholder = "Pick a date", class
           {...(date ? { defaultMonth: date } : {})}
           captionLayout="dropdown"
           
-          startMonth={new Date(1980, 0)}
-          endMonth={new Date(new Date().getFullYear(), 11)}
+          startMonth={new Date(1900, 0)}
+          endMonth={new Date()}
+          disabled={{ after: new Date() }}
           onSelect={(selected) => {
             if (selected) {
               onChange(format(selected, "yyyy-MM-dd"));
