@@ -611,7 +611,164 @@ const EN: typeof EL = {
       noResetSession: "This reset link expired or isn't valid. Request a new one.",
     },
   },
+
+  site: {
+    contactEmail: "info@myzodiacmaps.gr",
+    updated: "Last updated: 31 August 2026",
+    rights: "All rights reserved.",
+    disclaimer:
+      "MyZodiacMaps content is for entertainment and self-reflection. It is not medical, psychological, legal or financial advice.",
+    nav: {
+      home: "Home",
+      forecasts: "Forecasts",
+      about: "About",
+      contact: "Contact",
+      privacy: "Privacy policy",
+      terms: "Terms of use",
+    },
+    cookie: {
+      text: "We use cookies to run the site and, with your consent, for traffic measurement and advertising.",
+      accept: "Accept",
+      reject: "Essential only",
+      more: "Learn more",
+    },
+    contactIntro:
+      "For questions, corrections or partnerships, send us an email. We usually reply within a few days.",
+    contactCta: "Send an email",
+  },
+
+  legal: {
+    privacy: {
+      title: "Privacy policy",
+      description:
+        "How MyZodiacMaps handles your data: cookies, birth details, advertising partners and your rights.",
+      sections: [
+        {
+          h: "Who we are",
+          p: [
+            "MyZodiacMaps (myzodiacmaps.gr) offers birth chart calculation and daily, monthly and yearly readings for the twelve zodiac signs.",
+          ],
+        },
+        {
+          h: "What data we collect",
+          p: [
+            "There are no accounts and we store no personal details in a database. The birth details you enter (date, time, place, chart name) stay in your own browser and you can delete them whenever you like.",
+            "To calculate and interpret a chart, the astrological data (planet positions, aspects) is sent to the AI provider that writes the text. No name or email is sent.",
+            "For abuse protection we temporarily process your IP address to rate-limit the generator.",
+          ],
+        },
+        {
+          h: "Cookies and tracking",
+          p: [
+            "Essential cookies remember choices such as your language and your saved charts. They are always active.",
+            "Optional cookies cover traffic analytics and advertising. They are only enabled if you consent through the banner, and you can withdraw consent at any time by clearing this site's data.",
+          ],
+        },
+        {
+          h: "Advertising",
+          p: [
+            "We may show advertising through third-party networks such as Google AdSense. These providers may use cookies to serve ads based on your prior visits to this or other websites.",
+            "You can manage your Google advertising preferences on Google's Ads Settings page.",
+          ],
+        },
+        {
+          h: "Your rights",
+          p: [
+            "Because we keep no user records, your data lives on your device: delete it instantly from the \"My charts\" page or by clearing your browser data.",
+            "Under GDPR you have the right of access, rectification, erasure and objection. Contact us for any request.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Terms of use",
+      description:
+        "MyZodiacMaps terms of use: the nature of the content, intellectual property and limitation of liability.",
+      sections: [
+        {
+          h: "Accepting these terms",
+          p: [
+            "By using MyZodiacMaps you accept the terms below. If you disagree, please do not use the service.",
+          ],
+        },
+        {
+          h: "Nature of the content",
+          p: [
+            "Charts, interpretations and forecasts are for entertainment and self-reflection. They are not medical, psychological, legal or financial advice and should not be the basis for serious decisions.",
+            "Part of the text is generated automatically with AI and may contain inaccuracies.",
+          ],
+        },
+        {
+          h: "Using the service",
+          p: [
+            "The service is free and provided \"as is\". Automated bulk scraping, overloading the infrastructure and any unlawful use are prohibited.",
+          ],
+        },
+        {
+          h: "Intellectual property",
+          p: [
+            "The content, design and code of this site belong to MyZodiacMaps. You may share excerpts with a credit and a link back.",
+          ],
+        },
+        {
+          h: "Limitation of liability",
+          p: [
+            "We are not liable for damages arising from the use of, or inability to use, this site, nor for service interruptions.",
+          ],
+        },
+      ],
+    },
+    about: {
+      title: "About us",
+      description:
+        "What MyZodiacMaps is, how the charts are calculated and how the zodiac readings are written.",
+      sections: [
+        {
+          h: "The idea",
+          p: [
+            "MyZodiacMaps started from a simple thought: most astrology sites tell people what will happen to them. We prefer to describe what the sky is doing and leave the interpretation to the reader.",
+          ],
+        },
+        {
+          h: "How we calculate",
+          p: [
+            "The birth chart is computed with astronomical algorithms from your birth date, time and coordinates: planet positions, houses, ascendant and aspects.",
+            "Daily, monthly and yearly readings come from the real planetary aspects of that period, not from recycled generic text.",
+          ],
+        },
+        {
+          h: "The role of AI",
+          p: [
+            "The astronomy is computed by us. AI is used only to turn that data into plain, readable language, under strict rules: no event predictions, no health or money advice.",
+          ],
+        },
+        {
+          h: "Languages",
+          p: ["All content is available in Greek and English."],
+        },
+      ],
+    },
+    contact: {
+      title: "Contact",
+      description: "Get in touch with the MyZodiacMaps team about questions, corrections or partnerships.",
+      sections: [
+        {
+          h: "When to write",
+          p: [
+            "If you spotted an error in a chart or a reading, if you want to suggest something, or if you are interested in a partnership or advertising.",
+          ],
+        },
+        {
+          h: "Personal data",
+          p: [
+            "There is no form storing your data: your email reaches us directly and is used only to reply to you.",
+          ],
+        },
+      ],
+    },
+  },
 };
+
 
 export const dict = (lang: Lang) => (lang === "en" ? EN : EL);
 export type Dict = typeof EL;
