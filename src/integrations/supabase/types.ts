@@ -38,6 +38,27 @@ export type Database = {
         }
         Relationships: []
       }
+      publish_events: {
+        Row: {
+          build_stamp: string
+          calendar_event_id: string | null
+          detected_at: string
+          id: string
+        }
+        Insert: {
+          build_stamp: string
+          calendar_event_id?: string | null
+          detected_at?: string
+          id?: string
+        }
+        Update: {
+          build_stamp?: string
+          calendar_event_id?: string | null
+          detected_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
