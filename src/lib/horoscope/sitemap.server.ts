@@ -1,5 +1,7 @@
 import { SIGN_SLUGS, SITE_URL } from "./signs";
+import { sitePageUrls } from "@/lib/site/pages";
 import { isValidKey } from "./dates";
+
 
 export interface SitemapEntry {
   loc: string;
