@@ -20,6 +20,7 @@ import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
 import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
@@ -88,6 +89,11 @@ const ElSchetikaRoute = ElSchetikaRouteImport.update({
 const EnIndexRoute = EnIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnPrivacyRoute = EnPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => EnRoute,
 } as any)
 const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/en/privacy': typeof EnPrivacyRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -196,6 +203,7 @@ export interface FileRoutesByTo {
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/en/privacy': typeof EnPrivacyRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -224,6 +232,7 @@ export interface FileRoutesById {
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/en/privacy': typeof EnPrivacyRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -253,6 +262,7 @@ export interface FileRouteTypes {
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
+    | '/en/privacy'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -278,6 +288,7 @@ export interface FileRouteTypes {
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
+    | '/en/privacy'
     | '/el'
     | '/en'
     | '/api/public/build-info'
@@ -305,6 +316,7 @@ export interface FileRouteTypes {
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
+    | '/en/privacy'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -410,6 +422,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/en/'
       preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/privacy': {
+      id: '/en/privacy'
+      path: '/privacy'
+      fullPath: '/en/privacy'
+      preLoaderRoute: typeof EnPrivacyRouteImport
       parentRoute: typeof EnRoute
     }
     '/api/public/build-info': {
@@ -544,6 +563,7 @@ const ElRouteChildren: ElRouteChildren = {
 const ElRouteWithChildren = ElRoute._addFileChildren(ElRouteChildren)
 
 interface EnRouteChildren {
+  EnPrivacyRoute: typeof EnPrivacyRoute
   EnIndexRoute: typeof EnIndexRoute
   EnZodiacIndexRoute: typeof EnZodiacIndexRoute
   EnZodiacSignDateRoute: typeof EnZodiacSignDateRoute
@@ -554,6 +574,7 @@ interface EnRouteChildren {
 }
 
 const EnRouteChildren: EnRouteChildren = {
+  EnPrivacyRoute: EnPrivacyRoute,
   EnIndexRoute: EnIndexRoute,
   EnZodiacIndexRoute: EnZodiacIndexRoute,
   EnZodiacSignDateRoute: EnZodiacSignDateRoute,
