@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ElIndexRouteImport } from './routes/el.index'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
+import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
@@ -71,6 +72,11 @@ const ElOroiChrisisRoute = ElOroiChrisisRouteImport.update({
 const ElPolitikiAporritouRoute = ElPolitikiAporritouRouteImport.update({
   id: '/politiki-aporritou',
   path: '/politiki-aporritou',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElSchetikaRoute = ElSchetikaRouteImport.update({
+  id: '/schetika',
+  path: '/schetika',
   getParentRoute: () => ElRoute,
 } as any)
 const EnIndexRoute = EnIndexRouteImport.update({
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/schetika': typeof ElSchetikaRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/schetika': typeof ElSchetikaRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -206,6 +214,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/schetika': typeof ElSchetikaRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -233,6 +242,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/schetika'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -256,6 +266,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/schetika'
     | '/el'
     | '/en'
     | '/api/public/build-info'
@@ -281,6 +292,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/schetika'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -365,6 +377,13 @@ declare module '@tanstack/react-router' {
       path: '/politiki-aporritou'
       fullPath: '/el/politiki-aporritou'
       preLoaderRoute: typeof ElPolitikiAporritouRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/schetika': {
+      id: '/el/schetika'
+      path: '/schetika'
+      fullPath: '/el/schetika'
+      preLoaderRoute: typeof ElSchetikaRouteImport
       parentRoute: typeof ElRoute
     }
     '/en/': {
@@ -478,6 +497,7 @@ declare module '@tanstack/react-router' {
 interface ElRouteChildren {
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
+  ElSchetikaRoute: typeof ElSchetikaRoute
   ElIndexRoute: typeof ElIndexRoute
   ElZodiaIndexRoute: typeof ElZodiaIndexRoute
   ElZodiaSignDateRoute: typeof ElZodiaSignDateRoute
@@ -490,6 +510,7 @@ interface ElRouteChildren {
 const ElRouteChildren: ElRouteChildren = {
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
+  ElSchetikaRoute: ElSchetikaRoute,
   ElIndexRoute: ElIndexRoute,
   ElZodiaIndexRoute: ElZodiaIndexRoute,
   ElZodiaSignDateRoute: ElZodiaSignDateRoute,
