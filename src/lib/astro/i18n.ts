@@ -251,7 +251,164 @@ const EL = {
       noResetSession: "Ο σύνδεσμος επαναφοράς έληξε ή δεν είναι έγκυρος. Ζήτησε νέο.",
     },
   },
+
+  site: {
+    contactEmail: "info@myzodiacmaps.gr",
+    updated: "Τελευταία ενημέρωση: 31 Αυγούστου 2026",
+    rights: "Όλα τα δικαιώματα διατηρούνται.",
+    disclaimer:
+      "Το περιεχόμενο του MyZodiacMaps είναι ψυχαγωγικού χαρακτήρα και δεν αποτελεί ιατρική, ψυχολογική, νομική ή οικονομική συμβουλή.",
+    nav: {
+      home: "Αρχική",
+      forecasts: "Προβλέψεις",
+      about: "Σχετικά",
+      contact: "Επικοινωνία",
+      privacy: "Πολιτική απορρήτου",
+      terms: "Όροι χρήσης",
+    },
+    cookie: {
+      text: "Χρησιμοποιούμε cookies για τη λειτουργία του site και, εφόσον συμφωνήσεις, για μέτρηση επισκεψιμότητας και διαφημίσεις.",
+      accept: "Αποδοχή",
+      reject: "Μόνο τα απαραίτητα",
+      more: "Περισσότερα",
+    },
+    contactIntro:
+      "Για απορίες, διορθώσεις ή συνεργασίες, στείλε μας email. Απαντάμε συνήθως μέσα σε λίγες μέρες.",
+    contactCta: "Στείλε email",
+  },
+
+  legal: {
+    privacy: {
+      title: "Πολιτική απορρήτου",
+      description:
+        "Πώς διαχειρίζεται το MyZodiacMaps τα δεδομένα σου: cookies, γενέθλια στοιχεία, διαφημιστικοί συνεργάτες και τα δικαιώματά σου.",
+      sections: [
+        {
+          h: "Ποιοι είμαστε",
+          p: [
+            "Το MyZodiacMaps (myzodiacmaps.gr) προσφέρει υπολογισμό γενέθλιου χάρτη και ημερήσιες, μηνιαίες και ετήσιες αναγνώσεις για τα δώδεκα ζώδια.",
+          ],
+        },
+        {
+          h: "Τι δεδομένα συλλέγουμε",
+          p: [
+            "Δεν δημιουργείς λογαριασμό και δεν αποθηκεύουμε προσωπικά στοιχεία σε βάση δεδομένων. Τα γενέθλια στοιχεία που συμπληρώνεις (ημερομηνία, ώρα, τόπος, όνομα χάρτη) αποθηκεύονται μόνο τοπικά στον browser σου και μπορείς να τα διαγράψεις όποτε θέλεις.",
+            "Για τον υπολογισμό και την ερμηνεία, τα αστρολογικά δεδομένα του χάρτη (θέσεις πλανητών, όψεις) αποστέλλονται στον πάροχο τεχνητής νοημοσύνης που παράγει το κείμενο. Δεν αποστέλλεται όνομα ή email.",
+            "Για τεχνικούς λόγους ασφάλειας κρατάμε προσωρινά τη διεύθυνση IP ώστε να περιορίζουμε την κατάχρηση του εργαλείου.",
+          ],
+        },
+        {
+          h: "Cookies και τεχνολογίες παρακολούθησης",
+          p: [
+            "Τα απαραίτητα cookies κρατούν επιλογές όπως η γλώσσα και οι αποθηκευμένοι χάρτες σου. Λειτουργούν πάντα.",
+            "Τα προαιρετικά cookies αφορούν στατιστικά επισκεψιμότητας και διαφημίσεις. Ενεργοποιούνται μόνο αν δώσεις τη συγκατάθεσή σου στο σχετικό banner και μπορείς να την ανακαλέσεις όποτε θέλεις καθαρίζοντας τα δεδομένα του site.",
+          ],
+        },
+        {
+          h: "Διαφημίσεις",
+          p: [
+            "Ενδέχεται να προβάλλουμε διαφημίσεις μέσω τρίτων δικτύων, όπως το Google AdSense. Οι πάροχοι αυτοί μπορεί να χρησιμοποιούν cookies για την προβολή σχετικών διαφημίσεων με βάση προηγούμενες επισκέψεις σου σε αυτό ή σε άλλα sites.",
+            "Μπορείς να ρυθμίσεις τις προτιμήσεις σου για τις διαφημίσεις της Google στη σελίδα Ρυθμίσεων Διαφημίσεων της Google.",
+          ],
+        },
+        {
+          h: "Τα δικαιώματά σου",
+          p: [
+            "Επειδή δεν τηρούμε αρχείο χρηστών, τα δεδομένα σου βρίσκονται στη συσκευή σου: μπορείς να τα διαγράψεις άμεσα από τη σελίδα «Οι χάρτες μου» ή καθαρίζοντας τα δεδομένα του browser.",
+            "Βάσει GDPR έχεις δικαίωμα πρόσβασης, διόρθωσης, διαγραφής και εναντίωσης. Για οποιοδήποτε αίτημα επικοινώνησε μαζί μας.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Όροι χρήσης",
+      description:
+        "Οι όροι χρήσης του MyZodiacMaps: χαρακτήρας περιεχομένου, πνευματικά δικαιώματα και όρια ευθύνης.",
+      sections: [
+        {
+          h: "Αποδοχή των όρων",
+          p: [
+            "Χρησιμοποιώντας το MyZodiacMaps αποδέχεσαι τους παρακάτω όρους. Αν διαφωνείς, παρακαλούμε μην χρησιμοποιείς την υπηρεσία.",
+          ],
+        },
+        {
+          h: "Χαρακτήρας του περιεχομένου",
+          p: [
+            "Οι χάρτες, οι ερμηνείες και οι προβλέψεις έχουν ψυχαγωγικό και αυτογνωσιακό χαρακτήρα. Δεν αποτελούν ιατρική, ψυχολογική, νομική ή οικονομική συμβουλή και δεν πρέπει να χρησιμοποιούνται ως βάση για σοβαρές αποφάσεις.",
+            "Μέρος του κειμένου παράγεται αυτόματα με τεχνητή νοημοσύνη και μπορεί να περιέχει ανακρίβειες.",
+          ],
+        },
+        {
+          h: "Χρήση της υπηρεσίας",
+          p: [
+            "Η υπηρεσία προσφέρεται δωρεάν και «ως έχει». Απαγορεύεται η αυτοματοποιημένη μαζική άντληση περιεχομένου, η υπερφόρτωση των υποδομών και κάθε χρήση που παραβιάζει τον νόμο.",
+          ],
+        },
+        {
+          h: "Πνευματικά δικαιώματα",
+          p: [
+            "Το περιεχόμενο, ο σχεδιασμός και ο κώδικας του site ανήκουν στο MyZodiacMaps. Μπορείς να μοιραστείς αποσπάσματα με αναφορά στην πηγή.",
+          ],
+        },
+        {
+          h: "Περιορισμός ευθύνης",
+          p: [
+            "Δεν φέρουμε ευθύνη για ζημίες που μπορεί να προκύψουν από τη χρήση ή την αδυναμία χρήσης του site, ούτε για διακοπές λειτουργίας.",
+          ],
+        },
+      ],
+    },
+    about: {
+      title: "Σχετικά με εμάς",
+      description:
+        "Τι είναι το MyZodiacMaps, πώς υπολογίζονται οι χάρτες και πώς γράφονται οι αναγνώσεις των ζωδίων.",
+      sections: [
+        {
+          h: "Η ιδέα",
+          p: [
+            "Το MyZodiacMaps ξεκίνησε από μια απλή σκέψη: οι περισσότερες αστρολογικές σελίδες λένε στους ανθρώπους τι θα τους συμβεί. Εμείς προτιμάμε να περιγράφουμε τι κάνει ο ουρανός και να αφήνουμε την ερμηνεία στον αναγνώστη.",
+          ],
+        },
+        {
+          h: "Πώς υπολογίζουμε",
+          p: [
+            "Ο γενέθλιος χάρτης υπολογίζεται με αστρονομικούς αλγορίθμους από την ημερομηνία, την ώρα και τις συντεταγμένες γέννησης: θέσεις πλανητών, οίκοι, ωροσκόπος και όψεις.",
+            "Οι ημερήσιες, μηνιαίες και ετήσιες αναγνώσεις προκύπτουν από τις πραγματικές όψεις των πλανητών για την αντίστοιχη περίοδο και όχι από τυχαία κείμενα.",
+          ],
+        },
+        {
+          h: "Ο ρόλος της τεχνητής νοημοσύνης",
+          p: [
+            "Τα αστρονομικά δεδομένα υπολογίζονται από εμάς. Η τεχνητή νοημοσύνη χρησιμοποιείται μόνο για να μετατρέψει αυτά τα δεδομένα σε καθημερινό, κατανοητό κείμενο, με αυστηρούς κανόνες: καμία πρόβλεψη γεγονότων, καμία συμβουλή υγείας ή χρημάτων.",
+          ],
+        },
+        {
+          h: "Γλώσσες",
+          p: ["Όλο το περιεχόμενο είναι διαθέσιμο στα ελληνικά και στα αγγλικά."],
+        },
+      ],
+    },
+    contact: {
+      title: "Επικοινωνία",
+      description: "Επικοινώνησε με την ομάδα του MyZodiacMaps για απορίες, διορθώσεις ή συνεργασίες.",
+      sections: [
+        {
+          h: "Πότε να μας γράψεις",
+          p: [
+            "Αν εντόπισες λάθος σε έναν χάρτη ή σε μια ανάγνωση, αν θέλεις να προτείνεις κάτι, ή αν σε ενδιαφέρει συνεργασία και διαφημιστική προβολή.",
+          ],
+        },
+        {
+          h: "Προσωπικά δεδομένα",
+          p: [
+            "Δεν υπάρχει φόρμα που να αποθηκεύει δεδομένα: το email σου πηγαίνει απευθείας σε εμάς και χρησιμοποιείται μόνο για να σου απαντήσουμε.",
+          ],
+        },
+      ],
+    },
+  },
 };
+
 const EN: typeof EL = {
   eyebrow: "MyZodiacMaps",
   tagline: "Your birth chart, mapped",
@@ -454,7 +611,164 @@ const EN: typeof EL = {
       noResetSession: "This reset link expired or isn't valid. Request a new one.",
     },
   },
+
+  site: {
+    contactEmail: "info@myzodiacmaps.gr",
+    updated: "Last updated: 31 August 2026",
+    rights: "All rights reserved.",
+    disclaimer:
+      "MyZodiacMaps content is for entertainment and self-reflection. It is not medical, psychological, legal or financial advice.",
+    nav: {
+      home: "Home",
+      forecasts: "Forecasts",
+      about: "About",
+      contact: "Contact",
+      privacy: "Privacy policy",
+      terms: "Terms of use",
+    },
+    cookie: {
+      text: "We use cookies to run the site and, with your consent, for traffic measurement and advertising.",
+      accept: "Accept",
+      reject: "Essential only",
+      more: "Learn more",
+    },
+    contactIntro:
+      "For questions, corrections or partnerships, send us an email. We usually reply within a few days.",
+    contactCta: "Send an email",
+  },
+
+  legal: {
+    privacy: {
+      title: "Privacy policy",
+      description:
+        "How MyZodiacMaps handles your data: cookies, birth details, advertising partners and your rights.",
+      sections: [
+        {
+          h: "Who we are",
+          p: [
+            "MyZodiacMaps (myzodiacmaps.gr) offers birth chart calculation and daily, monthly and yearly readings for the twelve zodiac signs.",
+          ],
+        },
+        {
+          h: "What data we collect",
+          p: [
+            "There are no accounts and we store no personal details in a database. The birth details you enter (date, time, place, chart name) stay in your own browser and you can delete them whenever you like.",
+            "To calculate and interpret a chart, the astrological data (planet positions, aspects) is sent to the AI provider that writes the text. No name or email is sent.",
+            "For abuse protection we temporarily process your IP address to rate-limit the generator.",
+          ],
+        },
+        {
+          h: "Cookies and tracking",
+          p: [
+            "Essential cookies remember choices such as your language and your saved charts. They are always active.",
+            "Optional cookies cover traffic analytics and advertising. They are only enabled if you consent through the banner, and you can withdraw consent at any time by clearing this site's data.",
+          ],
+        },
+        {
+          h: "Advertising",
+          p: [
+            "We may show advertising through third-party networks such as Google AdSense. These providers may use cookies to serve ads based on your prior visits to this or other websites.",
+            "You can manage your Google advertising preferences on Google's Ads Settings page.",
+          ],
+        },
+        {
+          h: "Your rights",
+          p: [
+            "Because we keep no user records, your data lives on your device: delete it instantly from the \"My charts\" page or by clearing your browser data.",
+            "Under GDPR you have the right of access, rectification, erasure and objection. Contact us for any request.",
+          ],
+        },
+      ],
+    },
+    terms: {
+      title: "Terms of use",
+      description:
+        "MyZodiacMaps terms of use: the nature of the content, intellectual property and limitation of liability.",
+      sections: [
+        {
+          h: "Accepting these terms",
+          p: [
+            "By using MyZodiacMaps you accept the terms below. If you disagree, please do not use the service.",
+          ],
+        },
+        {
+          h: "Nature of the content",
+          p: [
+            "Charts, interpretations and forecasts are for entertainment and self-reflection. They are not medical, psychological, legal or financial advice and should not be the basis for serious decisions.",
+            "Part of the text is generated automatically with AI and may contain inaccuracies.",
+          ],
+        },
+        {
+          h: "Using the service",
+          p: [
+            "The service is free and provided \"as is\". Automated bulk scraping, overloading the infrastructure and any unlawful use are prohibited.",
+          ],
+        },
+        {
+          h: "Intellectual property",
+          p: [
+            "The content, design and code of this site belong to MyZodiacMaps. You may share excerpts with a credit and a link back.",
+          ],
+        },
+        {
+          h: "Limitation of liability",
+          p: [
+            "We are not liable for damages arising from the use of, or inability to use, this site, nor for service interruptions.",
+          ],
+        },
+      ],
+    },
+    about: {
+      title: "About us",
+      description:
+        "What MyZodiacMaps is, how the charts are calculated and how the zodiac readings are written.",
+      sections: [
+        {
+          h: "The idea",
+          p: [
+            "MyZodiacMaps started from a simple thought: most astrology sites tell people what will happen to them. We prefer to describe what the sky is doing and leave the interpretation to the reader.",
+          ],
+        },
+        {
+          h: "How we calculate",
+          p: [
+            "The birth chart is computed with astronomical algorithms from your birth date, time and coordinates: planet positions, houses, ascendant and aspects.",
+            "Daily, monthly and yearly readings come from the real planetary aspects of that period, not from recycled generic text.",
+          ],
+        },
+        {
+          h: "The role of AI",
+          p: [
+            "The astronomy is computed by us. AI is used only to turn that data into plain, readable language, under strict rules: no event predictions, no health or money advice.",
+          ],
+        },
+        {
+          h: "Languages",
+          p: ["All content is available in Greek and English."],
+        },
+      ],
+    },
+    contact: {
+      title: "Contact",
+      description: "Get in touch with the MyZodiacMaps team about questions, corrections or partnerships.",
+      sections: [
+        {
+          h: "When to write",
+          p: [
+            "If you spotted an error in a chart or a reading, if you want to suggest something, or if you are interested in a partnership or advertising.",
+          ],
+        },
+        {
+          h: "Personal data",
+          p: [
+            "There is no form storing your data: your email reaches us directly and is used only to reply to you.",
+          ],
+        },
+      ],
+    },
+  },
 };
+
 
 export const dict = (lang: Lang) => (lang === "en" ? EN : EL);
 export type Dict = typeof EL;

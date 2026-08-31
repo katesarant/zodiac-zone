@@ -1,5 +1,7 @@
 import { SIGN_SLUGS, SITE_URL } from "./signs";
+import { sitePageUrls } from "@/lib/site/pages";
 import { isValidKey } from "./dates";
+
 
 export interface SitemapEntry {
   loc: string;
@@ -23,7 +25,9 @@ export function buildSitemapUrls(keys: Record<"el" | "en", ArchiveKeys>): string
     `${SITE_URL}/en`,
     `${SITE_URL}/el/zodia`,
     `${SITE_URL}/en/zodiac`,
+    ...sitePageUrls(),
   ];
+
 
   for (const { lang, section, periods } of SECTIONS) {
     const k = keys[lang];
