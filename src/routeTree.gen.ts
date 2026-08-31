@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ElIndexRouteImport } from './routes/el.index'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
 import { Route as EnZodiacIndexRouteImport } from './routes/en.zodiac.index'
 import { Route as ElZodiaSignIndexRouteImport } from './routes/el.zodia.$sign.index'
@@ -68,6 +69,11 @@ const EnIndexRoute = EnIndexRouteImport.update({
 const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   id: '/api/public/build-info',
   path: '/api/public/build-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPublishWatchRoute = ApiPublicPublishWatchRouteImport.update({
+  id: '/api/public/publish-watch',
+  path: '/api/public/publish-watch',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ElZodiaIndexRoute = ElZodiaIndexRouteImport.update({
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByTo {
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/el/zodia': typeof ElZodiaIndexRoute
   '/en/zodiac': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
+    | '/api/public/publish-watch'
     | '/el/zodia/'
     | '/en/zodiac/'
     | '/el/zodia/$sign/$date'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/el'
     | '/en'
     | '/api/public/build-info'
+    | '/api/public/publish-watch'
     | '/el/zodia'
     | '/en/zodiac'
     | '/el/zodia/$sign/$date'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
+    | '/api/public/publish-watch'
     | '/el/zodia/'
     | '/en/zodiac/'
     | '/el/zodia/$sign/$date'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   MyChartsRoute: typeof MyChartsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
+  ApiPublicPublishWatchRoute: typeof ApiPublicPublishWatchRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -328,6 +341,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/build-info'
       fullPath: '/api/public/build-info'
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/publish-watch': {
+      id: '/api/public/publish-watch'
+      path: '/api/public/publish-watch'
+      fullPath: '/api/public/publish-watch'
+      preLoaderRoute: typeof ApiPublicPublishWatchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/el/zodia/': {
@@ -468,6 +488,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyChartsRoute: MyChartsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
+  ApiPublicPublishWatchRoute: ApiPublicPublishWatchRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
