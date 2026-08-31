@@ -12,4 +12,10 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    define: {
+      // Build stamp: changes on every build, used to detect a new publish.
+      __BUILD_STAMP__: JSON.stringify(new Date().toISOString()),
+    },
+  },
 });
