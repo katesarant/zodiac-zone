@@ -54,7 +54,6 @@ export const Route = createFileRoute("/api/public/publish-watch")({
           return json({ skipped: "no build stamp" });
         }
 
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
         // 2. Record it — the unique constraint makes this idempotent.
         const { data: inserted, error: insertError } = await supabaseAdmin
