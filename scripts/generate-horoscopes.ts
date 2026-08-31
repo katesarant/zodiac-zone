@@ -105,10 +105,11 @@ async function generatePeriod(
   key: string,
   date: Date,
   stats: Stats,
+  force = false,
 ): Promise<void> {
   await mkdir(DIRS[period], { recursive: true });
 
-  const done = LANGS.every((lang) => existsSync(fileFor(period, key, lang)));
+  const done = !force && LANGS.every((lang) => existsSync(fileFor(period, key, lang)));
   if (done) {
     console.log(`[horoscopes] ${period} ${key} already present — skipping`);
     return;
@@ -120,7 +121,7 @@ async function generatePeriod(
 
   for (const lang of LANGS) {
     const target = fileFor(period, key, lang);
-    if (existsSync(target)) continue;
+    if (!force && existsSync(target)) continue;
 
     const fallback = await readJson<HoroscopeFile>(
       fileFor(period, previousKey(period, key), lang),
@@ -179,33 +180,66 @@ async function generatePeriod(
   }
 }
 
-async function main() {
-  const now = new Date();
-  const { year, month, day, iso } = athensParts(now);
-  const stats: Stats = { generated: 0, reused: 0, rejected: 0 };
+/**
+ * CLI flags:
+ *   --periods=daily,month,year   which periods to build (default: daily, plus
+ *                                month on the 1st and year on Jan 1st)
+ *   --date=YYYY-MM-DD            build for another date instead of today
+ *   --force                      regenerate even if the files already exist
+ */
+function parseArgs(argv: string[]) {
+  const get = (name: string) =>
+    argv.find((a) => a.startsWith(`--${name}=`))?.split("=").slice(1).join("=");
+  const periodsRaw = get("periods");
+  const periods = periodsRaw
+    ? (periodsRaw
+        .split(",")
+        .map((p) => p.trim())
+        .filter((p): p is HoroscopePeriod => p === "daily" || p === "month" || p === "year"))
+    : null;
+  return { periods, date: get("date") ?? null, force: argv.includes("--force") };
+}
 
+async function main() {
+  const { periods, date: dateArg, force } = parseArgs(process.argv.slice(2));
+
+  let year: number, month: number, day: number, iso: string;
+  if (dateArg && /^\d{4}-\d{2}-\d{2}$/.test(dateArg)) {
+    [year, month, day] = dateArg.split("-").map(Number) as [number, number, number];
+    iso = dateArg;
+  } else {
+    ({ year, month, day, iso } = athensParts(new Date()));
+  }
+
+  const stats: Stats = { generated: 0, reused: 0, rejected: 0 };
   await mkdir(ROOT, { recursive: true });
 
-  const dailyDone = LANGS.every((lang) => existsSync(fileFor("daily", iso, lang)));
-  if (dailyDone) {
+  const wanted: HoroscopePeriod[] =
+    periods ??
+    (["daily", ...(day === 1 ? (["month"] as const) : []), ...(day === 1 && month === 1 ? (["year"] as const) : [])] as HoroscopePeriod[]);
+
+  const date = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+  const monthKey = `${year}-${String(month).padStart(2, "0")}`;
+  const keyFor: Record<HoroscopePeriod, string> = {
+    daily: iso,
+    month: monthKey,
+    year: String(year),
+  };
+
+  const allDone =
+    !force &&
+    wanted.every((p) => LANGS.every((lang) => existsSync(fileFor(p, keyFor[p], lang))));
+  if (allDone) {
     console.log(`[horoscopes] ${iso} already generated — exiting without AI calls`);
     return;
   }
 
-  const date = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
-
-  await generatePeriod("daily", iso, date, stats);
-
-  if (day === 1) {
-    const monthKey = `${year}-${String(month).padStart(2, "0")}`;
-    await generatePeriod("month", monthKey, date, stats);
-  }
-  if (day === 1 && month === 1) {
-    await generatePeriod("year", String(year), date, stats);
+  for (const p of wanted) {
+    await generatePeriod(p, keyFor[p], date, stats, force);
   }
 
   console.log(
-    `[horoscopes] ${iso} generated=${stats.generated} reused=${stats.reused} rejected=${stats.rejected}`,
+    `[horoscopes] ${iso} periods=${wanted.join(",")} generated=${stats.generated} reused=${stats.reused} rejected=${stats.rejected}`,
   );
 }
 
