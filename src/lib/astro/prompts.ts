@@ -264,6 +264,37 @@ Return ONLY valid JSON:
 {"sign":"","period":"","date":"","sky":"","tone":"","focus":"","keyTransit":""}`;
 }
 
+/** P5b — All twelve signs in one call, each grounded in its own SKY DATA. */
+export function p5HoroscopeBatch(input: {
+  period: HoroscopePeriod;
+  date: string;
+  signs: Array<{ sign: string; sky: unknown }>;
+}): string {
+  return `Write the horoscope for EACH of the twelve signs below, grounded ONLY
+in that sign's own sky data.
+
+PERIOD: ${input.period}
+DATE: ${input.date}
+
+SIGNS AND SKY DATA (authoritative — use nothing else):
+${input.signs
+  .map((s, i) => `${i + 1}. ${s.sign} -> ${JSON.stringify(s.sky)}`)
+  .join("\n")}
+
+Constraints:
+- ${HOROSCOPE_LENGTH[input.period]} per sign.
+- "keyTransit" names the single transit that reading leans on, exactly as it
+  appears in that sign's SKY DATA (planet + aspect + sign).
+- Fill "sign" with the sign name exactly as given, "period" with "${input.period}"
+  and "date" with "${input.date}".
+- Keep the twelve readings distinct: different openings, different angles.
+- Return all twelve, in the same order as listed above.
+
+Return ONLY valid JSON:
+{"readings":[{"sign":"","period":"","date":"","sky":"","tone":"","focus":"","keyTransit":""}]}`;
+}
+
+
 /** Temperature policy (§7). */
 export const TEMPERATURE = { atom: 0.7, synthesis: 0.4, horoscope: 0.8 } as const;
 

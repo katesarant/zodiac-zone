@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      horoscope_cron_config: {
+        Row: {
+          created_at: string
+          id: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          token: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          token?: string
+        }
+        Relationships: []
+      }
+      horoscopes: {
+        Row: {
+          created_at: string
+          generated_at: string
+          id: string
+          key: string
+          lang: string
+          period: string
+          signs: Json
+        }
+        Insert: {
+          created_at?: string
+          generated_at?: string
+          id?: string
+          key: string
+          lang: string
+          period: string
+          signs: Json
+        }
+        Update: {
+          created_at?: string
+          generated_at?: string
+          id?: string
+          key?: string
+          lang?: string
+          period?: string
+          signs?: Json
+        }
+        Relationships: []
+      }
       interpretations: {
         Row: {
           chart_hash: string
