@@ -15,18 +15,22 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as MyChartsRouteImport } from './routes/my-charts'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ElIndexRouteImport } from './routes/el.index'
+import { Route as ElAnalitikaRouteImport } from './routes/el.analitika'
 import { Route as ElEpikoinoniaRouteImport } from './routes/el.epikoinonia'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
+import { Route as EnAnalyticsRouteImport } from './routes/en.analytics'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
+import { Route as ApiPublicPublishInstagramRouteImport } from './routes/api/public/publish-instagram'
 import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
+import { Route as ApiPublicRenderStoriesRouteImport } from './routes/api/public/render-stories'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
 import { Route as EnZodiacIndexRouteImport } from './routes/en.zodiac.index'
 import { Route as ElZodiaSignIndexRouteImport } from './routes/el.zodia.$sign.index'
@@ -39,6 +43,7 @@ import { Route as EnZodiacSignDateRouteImport } from './routes/en.zodiac.$sign.$
 import { Route as EnZodiacSignMonthRouteImport } from './routes/en.zodiac.$sign.month'
 import { Route as EnZodiacSignTodayRouteImport } from './routes/en.zodiac.$sign.today'
 import { Route as EnZodiacSignYearRouteImport } from './routes/en.zodiac.$sign.year'
+import { Route as ApiPublicStoryImageDayFileRouteImport } from './routes/api/public/story-image.$day.$file'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -68,6 +73,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ElIndexRoute = ElIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElAnalitikaRoute = ElAnalitikaRouteImport.update({
+  id: '/analitika',
+  path: '/analitika',
   getParentRoute: () => ElRoute,
 } as any)
 const ElEpikoinoniaRoute = ElEpikoinoniaRouteImport.update({
@@ -100,6 +110,11 @@ const EnAboutRoute = EnAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => EnRoute,
 } as any)
+const EnAnalyticsRoute = EnAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnContactRoute = EnContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -126,9 +141,20 @@ const ApiPublicGenerateHoroscopesRoute =
     path: '/api/public/generate-horoscopes',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicPublishInstagramRoute =
+  ApiPublicPublishInstagramRouteImport.update({
+    id: '/api/public/publish-instagram',
+    path: '/api/public/publish-instagram',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPublishWatchRoute = ApiPublicPublishWatchRouteImport.update({
   id: '/api/public/publish-watch',
   path: '/api/public/publish-watch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicRenderStoriesRoute = ApiPublicRenderStoriesRouteImport.update({
+  id: '/api/public/render-stories',
+  path: '/api/public/render-stories',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ElZodiaIndexRoute = ElZodiaIndexRouteImport.update({
@@ -191,6 +217,12 @@ const EnZodiacSignYearRoute = EnZodiacSignYearRouteImport.update({
   path: '/zodiac/$sign/year',
   getParentRoute: () => EnRoute,
 } as any)
+const ApiPublicStoryImageDayFileRoute =
+  ApiPublicStoryImageDayFileRouteImport.update({
+    id: '/api/public/story-image/$day/$file',
+    path: '/api/public/story-image/$day/$file',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -198,11 +230,13 @@ export interface FileRoutesByFullPath {
   '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/el/analitika': typeof ElAnalitikaRoute
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
   '/en/about': typeof EnAboutRoute
+  '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
@@ -210,7 +244,9 @@ export interface FileRoutesByFullPath {
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
+  '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
+  '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -223,16 +259,19 @@ export interface FileRoutesByFullPath {
   '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
   '/el/zodia/$sign/': typeof ElZodiaSignIndexRoute
   '/en/zodiac/$sign/': typeof EnZodiacSignIndexRoute
+  '/api/public/story-image/$day/$file': typeof ApiPublicStoryImageDayFileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/my-charts': typeof MyChartsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/el/analitika': typeof ElAnalitikaRoute
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
   '/en/about': typeof EnAboutRoute
+  '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
@@ -240,7 +279,9 @@ export interface FileRoutesByTo {
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
+  '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
+  '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia': typeof ElZodiaIndexRoute
   '/en/zodiac': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -253,6 +294,7 @@ export interface FileRoutesByTo {
   '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
   '/el/zodia/$sign': typeof ElZodiaSignIndexRoute
   '/en/zodiac/$sign': typeof EnZodiacSignIndexRoute
+  '/api/public/story-image/$day/$file': typeof ApiPublicStoryImageDayFileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -261,11 +303,13 @@ export interface FileRoutesById {
   '/en': typeof EnRouteWithChildren
   '/my-charts': typeof MyChartsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/el/analitika': typeof ElAnalitikaRoute
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
   '/en/about': typeof EnAboutRoute
+  '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
@@ -273,7 +317,9 @@ export interface FileRoutesById {
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
+  '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
+  '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -286,6 +332,7 @@ export interface FileRoutesById {
   '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
   '/el/zodia/$sign/': typeof ElZodiaSignIndexRoute
   '/en/zodiac/$sign/': typeof EnZodiacSignIndexRoute
+  '/api/public/story-image/$day/$file': typeof ApiPublicStoryImageDayFileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -295,11 +342,13 @@ export interface FileRouteTypes {
     | '/en'
     | '/my-charts'
     | '/sitemap.xml'
+    | '/el/analitika'
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
     | '/en/about'
+    | '/en/analytics'
     | '/en/contact'
     | '/en/privacy'
     | '/en/terms'
@@ -307,7 +356,9 @@ export interface FileRouteTypes {
     | '/en/'
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
+    | '/api/public/publish-instagram'
     | '/api/public/publish-watch'
+    | '/api/public/render-stories'
     | '/el/zodia/'
     | '/en/zodiac/'
     | '/el/zodia/$sign/$date'
@@ -320,16 +371,19 @@ export interface FileRouteTypes {
     | '/en/zodiac/$sign/year'
     | '/el/zodia/$sign/'
     | '/en/zodiac/$sign/'
+    | '/api/public/story-image/$day/$file'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/my-charts'
     | '/sitemap.xml'
+    | '/el/analitika'
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
     | '/en/about'
+    | '/en/analytics'
     | '/en/contact'
     | '/en/privacy'
     | '/en/terms'
@@ -337,7 +391,9 @@ export interface FileRouteTypes {
     | '/en'
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
+    | '/api/public/publish-instagram'
     | '/api/public/publish-watch'
+    | '/api/public/render-stories'
     | '/el/zodia'
     | '/en/zodiac'
     | '/el/zodia/$sign/$date'
@@ -350,6 +406,7 @@ export interface FileRouteTypes {
     | '/en/zodiac/$sign/year'
     | '/el/zodia/$sign'
     | '/en/zodiac/$sign'
+    | '/api/public/story-image/$day/$file'
   id:
     | '__root__'
     | '/'
@@ -357,11 +414,13 @@ export interface FileRouteTypes {
     | '/en'
     | '/my-charts'
     | '/sitemap.xml'
+    | '/el/analitika'
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
     | '/en/about'
+    | '/en/analytics'
     | '/en/contact'
     | '/en/privacy'
     | '/en/terms'
@@ -369,7 +428,9 @@ export interface FileRouteTypes {
     | '/en/'
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
+    | '/api/public/publish-instagram'
     | '/api/public/publish-watch'
+    | '/api/public/render-stories'
     | '/el/zodia/'
     | '/en/zodiac/'
     | '/el/zodia/$sign/$date'
@@ -382,6 +443,7 @@ export interface FileRouteTypes {
     | '/en/zodiac/$sign/year'
     | '/el/zodia/$sign/'
     | '/en/zodiac/$sign/'
+    | '/api/public/story-image/$day/$file'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -392,7 +454,10 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicGenerateHoroscopesRoute: typeof ApiPublicGenerateHoroscopesRoute
+  ApiPublicPublishInstagramRoute: typeof ApiPublicPublishInstagramRoute
   ApiPublicPublishWatchRoute: typeof ApiPublicPublishWatchRoute
+  ApiPublicRenderStoriesRoute: typeof ApiPublicRenderStoriesRoute
+  ApiPublicStoryImageDayFileRoute: typeof ApiPublicStoryImageDayFileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -439,6 +504,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ElIndexRouteImport
       parentRoute: typeof ElRoute
     }
+    '/el/analitika': {
+      id: '/el/analitika'
+      path: '/analitika'
+      fullPath: '/el/analitika'
+      preLoaderRoute: typeof ElAnalitikaRouteImport
+      parentRoute: typeof ElRoute
+    }
     '/el/epikoinonia': {
       id: '/el/epikoinonia'
       path: '/epikoinonia'
@@ -481,6 +553,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAboutRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/analytics': {
+      id: '/en/analytics'
+      path: '/analytics'
+      fullPath: '/en/analytics'
+      preLoaderRoute: typeof EnAnalyticsRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/contact': {
       id: '/en/contact'
       path: '/contact'
@@ -516,11 +595,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicGenerateHoroscopesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/publish-instagram': {
+      id: '/api/public/publish-instagram'
+      path: '/api/public/publish-instagram'
+      fullPath: '/api/public/publish-instagram'
+      preLoaderRoute: typeof ApiPublicPublishInstagramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/publish-watch': {
       id: '/api/public/publish-watch'
       path: '/api/public/publish-watch'
       fullPath: '/api/public/publish-watch'
       preLoaderRoute: typeof ApiPublicPublishWatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/render-stories': {
+      id: '/api/public/render-stories'
+      path: '/api/public/render-stories'
+      fullPath: '/api/public/render-stories'
+      preLoaderRoute: typeof ApiPublicRenderStoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/el/zodia/': {
@@ -607,10 +700,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnZodiacSignYearRouteImport
       parentRoute: typeof EnRoute
     }
+    '/api/public/story-image/$day/$file': {
+      id: '/api/public/story-image/$day/$file'
+      path: '/api/public/story-image/$day/$file'
+      fullPath: '/api/public/story-image/$day/$file'
+      preLoaderRoute: typeof ApiPublicStoryImageDayFileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 interface ElRouteChildren {
+  ElAnalitikaRoute: typeof ElAnalitikaRoute
   ElEpikoinoniaRoute: typeof ElEpikoinoniaRoute
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
@@ -625,6 +726,7 @@ interface ElRouteChildren {
 }
 
 const ElRouteChildren: ElRouteChildren = {
+  ElAnalitikaRoute: ElAnalitikaRoute,
   ElEpikoinoniaRoute: ElEpikoinoniaRoute,
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
@@ -642,6 +744,7 @@ const ElRouteWithChildren = ElRoute._addFileChildren(ElRouteChildren)
 
 interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
+  EnAnalyticsRoute: typeof EnAnalyticsRoute
   EnContactRoute: typeof EnContactRoute
   EnPrivacyRoute: typeof EnPrivacyRoute
   EnTermsRoute: typeof EnTermsRoute
@@ -656,6 +759,7 @@ interface EnRouteChildren {
 
 const EnRouteChildren: EnRouteChildren = {
   EnAboutRoute: EnAboutRoute,
+  EnAnalyticsRoute: EnAnalyticsRoute,
   EnContactRoute: EnContactRoute,
   EnPrivacyRoute: EnPrivacyRoute,
   EnTermsRoute: EnTermsRoute,
@@ -678,7 +782,10 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicGenerateHoroscopesRoute: ApiPublicGenerateHoroscopesRoute,
+  ApiPublicPublishInstagramRoute: ApiPublicPublishInstagramRoute,
   ApiPublicPublishWatchRoute: ApiPublicPublishWatchRoute,
+  ApiPublicRenderStoriesRoute: ApiPublicRenderStoriesRoute,
+  ApiPublicStoryImageDayFileRoute: ApiPublicStoryImageDayFileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
