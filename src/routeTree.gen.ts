@@ -26,7 +26,9 @@ import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
+import { Route as ApiPublicPublishInstagramRouteImport } from './routes/api/public/publish-instagram'
 import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
+import { Route as ApiPublicRenderStoriesRouteImport } from './routes/api/public/render-stories'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
 import { Route as EnZodiacIndexRouteImport } from './routes/en.zodiac.index'
 import { Route as ElZodiaSignIndexRouteImport } from './routes/el.zodia.$sign.index'
@@ -39,6 +41,7 @@ import { Route as EnZodiacSignDateRouteImport } from './routes/en.zodiac.$sign.$
 import { Route as EnZodiacSignMonthRouteImport } from './routes/en.zodiac.$sign.month'
 import { Route as EnZodiacSignTodayRouteImport } from './routes/en.zodiac.$sign.today'
 import { Route as EnZodiacSignYearRouteImport } from './routes/en.zodiac.$sign.year'
+import { Route as ApiPublicStoryImageDayFileRouteImport } from './routes/api/public/story-image.$day.$file'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -126,9 +129,20 @@ const ApiPublicGenerateHoroscopesRoute =
     path: '/api/public/generate-horoscopes',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicPublishInstagramRoute =
+  ApiPublicPublishInstagramRouteImport.update({
+    id: '/api/public/publish-instagram',
+    path: '/api/public/publish-instagram',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPublishWatchRoute = ApiPublicPublishWatchRouteImport.update({
   id: '/api/public/publish-watch',
   path: '/api/public/publish-watch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicRenderStoriesRoute = ApiPublicRenderStoriesRouteImport.update({
+  id: '/api/public/render-stories',
+  path: '/api/public/render-stories',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ElZodiaIndexRoute = ElZodiaIndexRouteImport.update({
@@ -191,6 +205,12 @@ const EnZodiacSignYearRoute = EnZodiacSignYearRouteImport.update({
   path: '/zodiac/$sign/year',
   getParentRoute: () => EnRoute,
 } as any)
+const ApiPublicStoryImageDayFileRoute =
+  ApiPublicStoryImageDayFileRouteImport.update({
+    id: '/api/public/story-image/$day/$file',
+    path: '/api/public/story-image/$day/$file',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -210,7 +230,9 @@ export interface FileRoutesByFullPath {
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
+  '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
+  '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -223,6 +245,7 @@ export interface FileRoutesByFullPath {
   '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
   '/el/zodia/$sign/': typeof ElZodiaSignIndexRoute
   '/en/zodiac/$sign/': typeof EnZodiacSignIndexRoute
+  '/api/public/story-image/$day/$file': typeof ApiPublicStoryImageDayFileRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -240,7 +263,9 @@ export interface FileRoutesByTo {
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
+  '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
+  '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia': typeof ElZodiaIndexRoute
   '/en/zodiac': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -253,6 +278,7 @@ export interface FileRoutesByTo {
   '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
   '/el/zodia/$sign': typeof ElZodiaSignIndexRoute
   '/en/zodiac/$sign': typeof EnZodiacSignIndexRoute
+  '/api/public/story-image/$day/$file': typeof ApiPublicStoryImageDayFileRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -273,7 +299,9 @@ export interface FileRoutesById {
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
+  '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
+  '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
   '/el/zodia/$sign/$date': typeof ElZodiaSignDateRoute
@@ -286,6 +314,7 @@ export interface FileRoutesById {
   '/en/zodiac/$sign/year': typeof EnZodiacSignYearRoute
   '/el/zodia/$sign/': typeof ElZodiaSignIndexRoute
   '/en/zodiac/$sign/': typeof EnZodiacSignIndexRoute
+  '/api/public/story-image/$day/$file': typeof ApiPublicStoryImageDayFileRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -307,7 +336,9 @@ export interface FileRouteTypes {
     | '/en/'
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
+    | '/api/public/publish-instagram'
     | '/api/public/publish-watch'
+    | '/api/public/render-stories'
     | '/el/zodia/'
     | '/en/zodiac/'
     | '/el/zodia/$sign/$date'
@@ -320,6 +351,7 @@ export interface FileRouteTypes {
     | '/en/zodiac/$sign/year'
     | '/el/zodia/$sign/'
     | '/en/zodiac/$sign/'
+    | '/api/public/story-image/$day/$file'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -337,7 +369,9 @@ export interface FileRouteTypes {
     | '/en'
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
+    | '/api/public/publish-instagram'
     | '/api/public/publish-watch'
+    | '/api/public/render-stories'
     | '/el/zodia'
     | '/en/zodiac'
     | '/el/zodia/$sign/$date'
@@ -350,6 +384,7 @@ export interface FileRouteTypes {
     | '/en/zodiac/$sign/year'
     | '/el/zodia/$sign'
     | '/en/zodiac/$sign'
+    | '/api/public/story-image/$day/$file'
   id:
     | '__root__'
     | '/'
@@ -369,7 +404,9 @@ export interface FileRouteTypes {
     | '/en/'
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
+    | '/api/public/publish-instagram'
     | '/api/public/publish-watch'
+    | '/api/public/render-stories'
     | '/el/zodia/'
     | '/en/zodiac/'
     | '/el/zodia/$sign/$date'
@@ -382,6 +419,7 @@ export interface FileRouteTypes {
     | '/en/zodiac/$sign/year'
     | '/el/zodia/$sign/'
     | '/en/zodiac/$sign/'
+    | '/api/public/story-image/$day/$file'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -392,7 +430,10 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicGenerateHoroscopesRoute: typeof ApiPublicGenerateHoroscopesRoute
+  ApiPublicPublishInstagramRoute: typeof ApiPublicPublishInstagramRoute
   ApiPublicPublishWatchRoute: typeof ApiPublicPublishWatchRoute
+  ApiPublicRenderStoriesRoute: typeof ApiPublicRenderStoriesRoute
+  ApiPublicStoryImageDayFileRoute: typeof ApiPublicStoryImageDayFileRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -516,11 +557,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicGenerateHoroscopesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/publish-instagram': {
+      id: '/api/public/publish-instagram'
+      path: '/api/public/publish-instagram'
+      fullPath: '/api/public/publish-instagram'
+      preLoaderRoute: typeof ApiPublicPublishInstagramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/publish-watch': {
       id: '/api/public/publish-watch'
       path: '/api/public/publish-watch'
       fullPath: '/api/public/publish-watch'
       preLoaderRoute: typeof ApiPublicPublishWatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/render-stories': {
+      id: '/api/public/render-stories'
+      path: '/api/public/render-stories'
+      fullPath: '/api/public/render-stories'
+      preLoaderRoute: typeof ApiPublicRenderStoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/el/zodia/': {
@@ -607,6 +662,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnZodiacSignYearRouteImport
       parentRoute: typeof EnRoute
     }
+    '/api/public/story-image/$day/$file': {
+      id: '/api/public/story-image/$day/$file'
+      path: '/api/public/story-image/$day/$file'
+      fullPath: '/api/public/story-image/$day/$file'
+      preLoaderRoute: typeof ApiPublicStoryImageDayFileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -678,7 +740,10 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicGenerateHoroscopesRoute: ApiPublicGenerateHoroscopesRoute,
+  ApiPublicPublishInstagramRoute: ApiPublicPublishInstagramRoute,
   ApiPublicPublishWatchRoute: ApiPublicPublishWatchRoute,
+  ApiPublicRenderStoriesRoute: ApiPublicRenderStoriesRoute,
+  ApiPublicStoryImageDayFileRoute: ApiPublicStoryImageDayFileRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

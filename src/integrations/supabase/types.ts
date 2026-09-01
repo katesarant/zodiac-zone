@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      analytics_config: {
+        Row: {
+          id: string
+          password: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          password: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          password?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       horoscope_cron_config: {
         Row: {
           created_at: string
@@ -62,6 +80,72 @@ export type Database = {
         }
         Relationships: []
       }
+      instagram_config: {
+        Row: {
+          access_token: string | null
+          enabled: boolean
+          id: string
+          ig_user_id: string | null
+          token_expires_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          access_token?: string | null
+          enabled?: boolean
+          id?: string
+          ig_user_id?: string | null
+          token_expires_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string | null
+          enabled?: boolean
+          id?: string
+          ig_user_id?: string | null
+          token_expires_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      instagram_posts: {
+        Row: {
+          created_at: string
+          day: string
+          error: string | null
+          id: string
+          image_url: string | null
+          lang: string
+          media_id: string | null
+          sign: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          day: string
+          error?: string | null
+          id?: string
+          image_url?: string | null
+          lang?: string
+          media_id?: string | null
+          sign: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          error?: string | null
+          id?: string
+          image_url?: string | null
+          lang?: string
+          media_id?: string | null
+          sign?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       interpretations: {
         Row: {
           chart_hash: string
@@ -83,6 +167,33 @@ export type Database = {
           created_at?: string | null
           kind?: string
           lang?: string
+        }
+        Relationships: []
+      }
+      page_views: {
+        Row: {
+          created_at: string
+          day: string
+          id: number
+          lang: string | null
+          path: string
+          referrer_host: string | null
+        }
+        Insert: {
+          created_at?: string
+          day?: string
+          id?: number
+          lang?: string | null
+          path: string
+          referrer_host?: string | null
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          id?: number
+          lang?: string | null
+          path?: string
+          referrer_host?: string | null
         }
         Relationships: []
       }
