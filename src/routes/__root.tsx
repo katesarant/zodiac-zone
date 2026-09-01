@@ -4,6 +4,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { CookieConsent } from "@/components/site/CookieConsent";
 
 import appCss from "../styles.css?url";
@@ -255,6 +256,7 @@ function RootComponent() {
       <Outlet />
       <SiteFooter />
       <CookieConsent />
+      <PageViewTracker />
     </QueryClientProvider>
   );
 }
