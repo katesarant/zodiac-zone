@@ -25,6 +25,7 @@ import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
 import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
 import { Route as EnZodiacIndexRouteImport } from './routes/en.zodiac.index'
@@ -119,6 +120,12 @@ const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   path: '/api/public/build-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicGenerateHoroscopesRoute =
+  ApiPublicGenerateHoroscopesRouteImport.update({
+    id: '/api/public/generate-horoscopes',
+    path: '/api/public/generate-horoscopes',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPublishWatchRoute = ApiPublicPublishWatchRouteImport.update({
   id: '/api/public/publish-watch',
   path: '/api/public/publish-watch',
@@ -202,6 +209,7 @@ export interface FileRoutesByFullPath {
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
@@ -231,6 +239,7 @@ export interface FileRoutesByTo {
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/el/zodia': typeof ElZodiaIndexRoute
   '/en/zodiac': typeof EnZodiacIndexRoute
@@ -263,6 +272,7 @@ export interface FileRoutesById {
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
   '/en/zodiac/': typeof EnZodiacIndexRoute
@@ -296,6 +306,7 @@ export interface FileRouteTypes {
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
+    | '/api/public/generate-horoscopes'
     | '/api/public/publish-watch'
     | '/el/zodia/'
     | '/en/zodiac/'
@@ -325,6 +336,7 @@ export interface FileRouteTypes {
     | '/el'
     | '/en'
     | '/api/public/build-info'
+    | '/api/public/generate-horoscopes'
     | '/api/public/publish-watch'
     | '/el/zodia'
     | '/en/zodiac'
@@ -356,6 +368,7 @@ export interface FileRouteTypes {
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
+    | '/api/public/generate-horoscopes'
     | '/api/public/publish-watch'
     | '/el/zodia/'
     | '/en/zodiac/'
@@ -378,6 +391,7 @@ export interface RootRouteChildren {
   MyChartsRoute: typeof MyChartsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
+  ApiPublicGenerateHoroscopesRoute: typeof ApiPublicGenerateHoroscopesRoute
   ApiPublicPublishWatchRoute: typeof ApiPublicPublishWatchRoute
 }
 
@@ -493,6 +507,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/build-info'
       fullPath: '/api/public/build-info'
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/generate-horoscopes': {
+      id: '/api/public/generate-horoscopes'
+      path: '/api/public/generate-horoscopes'
+      fullPath: '/api/public/generate-horoscopes'
+      preLoaderRoute: typeof ApiPublicGenerateHoroscopesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/publish-watch': {
@@ -656,6 +677,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyChartsRoute: MyChartsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
+  ApiPublicGenerateHoroscopesRoute: ApiPublicGenerateHoroscopesRoute,
   ApiPublicPublishWatchRoute: ApiPublicPublishWatchRoute,
 }
 export const routeTree = rootRouteImport

@@ -5,6 +5,7 @@ import {
   p2Aspect,
   p3Synthesis,
   p5Horoscope,
+  p5HoroscopeBatch,
   sysBase,
   sysHoroscope,
   TEMPERATURE,
@@ -186,4 +187,23 @@ export function generateHoroscope(
     TEMPERATURE.horoscope,
     sysHoroscope(lang),
   );
+}
+
+/**
+ * All twelve signs in a single call — used by the scheduled generator, where
+ * one request per language replaces twelve.
+ */
+export async function generateHoroscopeBatch(
+  input: { period: HoroscopePeriod; date: string; signs: Array<{ sign: string; sky: unknown }> },
+  lang: Lang,
+): Promise<GenerationResult<Horoscope[]>> {
+  const res = await generate<{ readings?: Horoscope[] } | Horoscope[]>(
+    lang,
+    p5HoroscopeBatch(input),
+    TEMPERATURE.horoscope,
+    sysHoroscope(lang),
+  );
+  if (!res.data) return { ...res, data: null };
+  const list = Array.isArray(res.data) ? res.data : (res.data.readings ?? []);
+  return { ...res, data: list };
 }
