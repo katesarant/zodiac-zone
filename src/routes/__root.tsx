@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { CookieConsent } from "@/components/site/CookieConsent";
+import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 
@@ -257,6 +258,7 @@ function RootComponent() {
       <SiteFooter />
       <CookieConsent />
       <PageViewTracker />
+      <Toaster position="bottom-right" richColors closeButton />
     </QueryClientProvider>
   );
 }
