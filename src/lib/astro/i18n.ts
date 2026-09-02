@@ -273,8 +273,27 @@ const EL = {
       more: "Περισσότερα",
     },
     contactIntro:
-      "Για απορίες, διορθώσεις ή συνεργασίες, στείλε μας email. Απαντάμε συνήθως μέσα σε λίγες μέρες.",
+      "Για απορίες, διορθώσεις ή συνεργασίες, συμπλήρωσε τη φόρμα. Απαντάμε συνήθως μέσα σε λίγες μέρες.",
     contactCta: "Στείλε email",
+    contactForm: {
+      name: "Όνομα",
+      email: "Το email σου",
+      subject: "Θέμα (προαιρετικό)",
+      message: "Μήνυμα",
+      submit: "Αποστολή μηνύματος",
+      sending: "Αποστολή…",
+      success: "Ευχαριστούμε! Το μήνυμά σου στάλθηκε.",
+      error: "Το μήνυμα δεν στάλθηκε. Δοκίμασε ξανά.",
+      allowed:
+        "Επιτρεπτοί χαρακτήρες: γράμματα, αριθμοί, κενά και . , ; : ! ? ' \" ( ) - @ & % + /",
+      errors: {
+        name: "Χρησιμοποίησε 2–80 χαρακτήρες: μόνο γράμματα, κενά, απόστροφο ή παύλα.",
+        email: "Δώσε μια έγκυρη διεύθυνση email.",
+        subject: "Το θέμα περιέχει μη επιτρεπτούς χαρακτήρες.",
+        message: "Γράψε 10–2000 χαρακτήρες μόνο με επιτρεπτούς χαρακτήρες.",
+      },
+    },
+
   },
 
   legal: {
@@ -633,8 +652,27 @@ const EN: typeof EL = {
       more: "Learn more",
     },
     contactIntro:
-      "For questions, corrections or partnerships, send us an email. We usually reply within a few days.",
+      "For questions, corrections or partnerships, use the form below. We usually reply within a few days.",
     contactCta: "Send an email",
+    contactForm: {
+      name: "Name",
+      email: "Your email",
+      subject: "Subject (optional)",
+      message: "Message",
+      submit: "Send message",
+      sending: "Sending…",
+      success: "Thanks! Your message has been sent.",
+      error: "Your message could not be sent. Please try again.",
+      allowed:
+        "Allowed characters: letters, numbers, spaces and . , ; : ! ? ' \" ( ) - @ & % + /",
+      errors: {
+        name: "Use 2–80 characters: letters, spaces, apostrophe or hyphen only.",
+        email: "Enter a valid email address.",
+        subject: "The subject contains characters that are not allowed.",
+        message: "Write 10–2000 characters using allowed characters only.",
+      },
+    },
+
   },
 
   legal: {
