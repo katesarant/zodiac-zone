@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 
@@ -14,8 +14,9 @@ import {
   sanitizeText,
 } from "@/lib/site/contact-schema";
 import { sendContactMessage } from "@/lib/site/contact.functions";
+import { getCaptchaChallenge } from "@/lib/site/captcha.functions";
 
-type Errors = Partial<Record<"name" | "email" | "subject" | "message", string>>;
+type Errors = Partial<Record<"name" | "email" | "subject" | "message" | "captcha", string>>;
 
 function Spinner({ className = "" }: { className?: string }) {
   return (
@@ -39,9 +40,29 @@ function Spinner({ className = "" }: { className?: string }) {
 export function ContactForm({ lang }: { lang: Lang }) {
   const t = dict(lang).site.contactForm;
   const send = useServerFn(sendContactMessage);
+  const newChallenge = useServerFn(getCaptchaChallenge);
+
+  const [captcha, setCaptcha] = useState<{ token: string; question: string } | null>(null);
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+
+  const loadCaptcha = useCallback(async () => {
+    setCaptcha(null);
+    setCaptchaAnswer("");
+    try {
+      const c = await newChallenge({ data: { lang } });
+      setCaptcha(c);
+    } catch {
+      setCaptcha(null);
+    }
+  }, [newChallenge, lang]);
+
+  useEffect(() => {
+    void loadCaptcha();
+  }, [loadCaptcha]);
 
   const [values, setValues] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const set = (key: keyof typeof values, value: string) =>
@@ -57,6 +78,7 @@ export function ContactForm({ lang }: { lang: Lang }) {
     if (name.length < 2 || name.length > 80 || !NAME_RE.test(name)) next.name = t.errors.name;
     if (!EMAIL_RE.test(email) || email.length > 160) next.email = t.errors.email;
     if (subject && (subject.length > 120 || !TEXT_RE.test(subject))) next.subject = t.errors.subject;
+    if (!captcha || !/^\d{1,3}$/.test(captchaAnswer.trim())) next.captcha = t.errors.captcha;
     if (message.length < 10 || message.length > 2000 || !TEXT_RE.test(message))
       next.message = t.errors.message;
     return next;
@@ -80,14 +102,20 @@ export function ContactForm({ lang }: { lang: Lang }) {
           subject: values.subject.trim(),
           message: values.message.trim(),
           lang,
+          captchaToken: captcha!.token,
+          captchaAnswer: captchaAnswer.trim(),
+          website: honeypot,
         },
       });
       setStatus("sent");
       setValues({ name: "", email: "", subject: "", message: "" });
       toast.success(t.success);
+      void loadCaptcha();
     } catch {
       setStatus("error");
+      setErrors((prev) => ({ ...prev, captcha: t.errors.captcha }));
       toast.error(t.error);
+      void loadCaptcha();
     }
   }
 
@@ -159,6 +187,48 @@ export function ContactForm({ lang }: { lang: Lang }) {
         {errors.message ? (
           <p className="mt-1 font-body text-xs text-destructive">{errors.message}</p>
         ) : null}
+      </div>
+
+      <div>
+        <label htmlFor="cf-captcha" className="font-body text-sm text-foreground">
+          {t.captcha}
+        </label>
+        <div className="mt-1 flex flex-wrap items-center gap-3">
+          <span className="rounded-lg border border-border bg-muted/40 px-3 py-2 font-body text-sm text-foreground">
+            {captcha ? captcha.question : t.captchaLoading}
+          </span>
+          <input
+            id="cf-captcha"
+            inputMode="numeric"
+            value={captchaAnswer}
+            onChange={(e) => setCaptchaAnswer(e.target.value.replace(/\D/g, "").slice(0, 3))}
+            className={`w-24 ${errors.captcha ? fieldError : field}`}
+            autoComplete="off"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => void loadCaptcha()}
+            className="font-body text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+          >
+            {t.captchaRefresh}
+          </button>
+        </div>
+        <p className="mt-1 font-body text-xs text-muted-foreground">{t.captchaHint}</p>
+        {errors.captcha ? (
+          <p className="mt-1 font-body text-xs text-destructive">{errors.captcha}</p>
+        ) : null}
+      </div>
+
+      <div aria-hidden="true" className="hidden">
+        <label htmlFor="cf-website">Website</label>
+        <input
+          id="cf-website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
       </div>
 
       <button
