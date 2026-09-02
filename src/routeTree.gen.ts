@@ -28,6 +28,7 @@ import { Route as EnAnalyticsRouteImport } from './routes/en.analytics'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
+import { Route as EnWhatIsMyRisingSignRouteImport } from './routes/en.what-is-my-rising-sign'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
 import { Route as ApiPublicPublishInstagramRouteImport } from './routes/api/public/publish-instagram'
@@ -143,6 +144,11 @@ const EnTermsRoute = EnTermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => EnRoute,
 } as any)
+const EnWhatIsMyRisingSignRoute = EnWhatIsMyRisingSignRouteImport.update({
+  id: '/what-is-my-rising-sign',
+  path: '/what-is-my-rising-sign',
+  getParentRoute: () => EnRoute,
+} as any)
 const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   id: '/api/public/build-info',
   path: '/api/public/build-info',
@@ -255,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/en/contact': typeof EnContactRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -292,6 +299,7 @@ export interface FileRoutesByTo {
   '/en/contact': typeof EnContactRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -332,6 +340,7 @@ export interface FileRoutesById {
   '/en/contact': typeof EnContactRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -373,6 +382,7 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-rising-sign'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -410,6 +420,7 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-rising-sign'
     | '/el'
     | '/en'
     | '/api/public/build-info'
@@ -449,6 +460,7 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-rising-sign'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -618,6 +630,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/en/terms'
       preLoaderRoute: typeof EnTermsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/what-is-my-rising-sign': {
+      id: '/en/what-is-my-rising-sign'
+      path: '/what-is-my-rising-sign'
+      fullPath: '/en/what-is-my-rising-sign'
+      preLoaderRoute: typeof EnWhatIsMyRisingSignRouteImport
       parentRoute: typeof EnRoute
     }
     '/api/public/build-info': {
@@ -791,6 +810,7 @@ interface EnRouteChildren {
   EnContactRoute: typeof EnContactRoute
   EnPrivacyRoute: typeof EnPrivacyRoute
   EnTermsRoute: typeof EnTermsRoute
+  EnWhatIsMyRisingSignRoute: typeof EnWhatIsMyRisingSignRoute
   EnIndexRoute: typeof EnIndexRoute
   EnZodiacIndexRoute: typeof EnZodiacIndexRoute
   EnZodiacSignDateRoute: typeof EnZodiacSignDateRoute
@@ -806,6 +826,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnContactRoute: EnContactRoute,
   EnPrivacyRoute: EnPrivacyRoute,
   EnTermsRoute: EnTermsRoute,
+  EnWhatIsMyRisingSignRoute: EnWhatIsMyRisingSignRoute,
   EnIndexRoute: EnIndexRoute,
   EnZodiacIndexRoute: EnZodiacIndexRoute,
   EnZodiacSignDateRoute: EnZodiacSignDateRoute,
