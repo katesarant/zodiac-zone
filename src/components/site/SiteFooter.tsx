@@ -28,9 +28,9 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-border/60 print:hidden">
       <div className="mx-auto w-full max-w-5xl px-4 py-8">
-        <div className="flex items-center gap-2">
-          <Logo className="h-5 w-5" />
-          <span className="font-display text-sm font-semibold tracking-tight text-foreground">
+        <div className="inline-flex items-baseline gap-[2px]">
+          <Logo className="h-5 w-5 shrink-0 translate-y-[3px]" />
+          <span className="font-display text-sm font-semibold tracking-tight whitespace-nowrap text-foreground">
             My Zodiac Maps
           </span>
         </div>

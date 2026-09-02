@@ -8,20 +8,23 @@ import type { ComponentType, ReactNode } from "react";
 const AnyLink = Link as unknown as ComponentType<{
   to: string;
   className?: string;
+  onClick?: (() => void) | undefined;
   children: ReactNode;
 }>;
 
 export function PathLink({
   href,
   className,
+  onClick,
   children,
 }: {
   href: string;
   className?: string;
+  onClick?: () => void;
   children: ReactNode;
 }) {
   return (
-    <AnyLink to={href} className={className ?? ""}>
+    <AnyLink to={href} className={className ?? ""} onClick={onClick}>
       {children}
     </AnyLink>
   );
