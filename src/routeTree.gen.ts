@@ -19,13 +19,17 @@ import { Route as ElAnalitikaRouteImport } from './routes/el.analitika'
 import { Route as ElEpikoinoniaRouteImport } from './routes/el.epikoinonia'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
+import { Route as ElPwsDiavazwGenethlioChartiRouteImport } from './routes/el.pws-diavazw-genethlio-charti'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
+import { Route as ElTiOroskopoEhoRouteImport } from './routes/el.ti-oroskopo-eho'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAnalyticsRouteImport } from './routes/en.analytics'
 import { Route as EnContactRouteImport } from './routes/en.contact'
+import { Route as EnHowToReadBirthChartRouteImport } from './routes/en.how-to-read-birth-chart'
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
+import { Route as EnWhatIsMyRisingSignRouteImport } from './routes/en.what-is-my-rising-sign'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
 import { Route as ApiPublicPublishInstagramRouteImport } from './routes/api/public/publish-instagram'
@@ -95,9 +99,20 @@ const ElPolitikiAporritouRoute = ElPolitikiAporritouRouteImport.update({
   path: '/politiki-aporritou',
   getParentRoute: () => ElRoute,
 } as any)
+const ElPwsDiavazwGenethlioChartiRoute =
+  ElPwsDiavazwGenethlioChartiRouteImport.update({
+    id: '/pws-diavazw-genethlio-charti',
+    path: '/pws-diavazw-genethlio-charti',
+    getParentRoute: () => ElRoute,
+  } as any)
 const ElSchetikaRoute = ElSchetikaRouteImport.update({
   id: '/schetika',
   path: '/schetika',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElTiOroskopoEhoRoute = ElTiOroskopoEhoRouteImport.update({
+  id: '/ti-oroskopo-eho',
+  path: '/ti-oroskopo-eho',
   getParentRoute: () => ElRoute,
 } as any)
 const EnIndexRoute = EnIndexRouteImport.update({
@@ -120,6 +135,11 @@ const EnContactRoute = EnContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => EnRoute,
 } as any)
+const EnHowToReadBirthChartRoute = EnHowToReadBirthChartRouteImport.update({
+  id: '/how-to-read-birth-chart',
+  path: '/how-to-read-birth-chart',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnPrivacyRoute = EnPrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -128,6 +148,11 @@ const EnPrivacyRoute = EnPrivacyRouteImport.update({
 const EnTermsRoute = EnTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnWhatIsMyRisingSignRoute = EnWhatIsMyRisingSignRouteImport.update({
+  id: '/what-is-my-rising-sign',
+  path: '/what-is-my-rising-sign',
   getParentRoute: () => EnRoute,
 } as any)
 const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
@@ -234,12 +259,16 @@ export interface FileRoutesByFullPath {
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
+  '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -269,12 +298,16 @@ export interface FileRoutesByTo {
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
+  '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -307,12 +340,16 @@ export interface FileRoutesById {
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
+  '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
@@ -346,12 +383,16 @@ export interface FileRouteTypes {
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
+    | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
+    | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-rising-sign'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -381,12 +422,16 @@ export interface FileRouteTypes {
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
+    | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
+    | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-rising-sign'
     | '/el'
     | '/en'
     | '/api/public/build-info'
@@ -418,12 +463,16 @@ export interface FileRouteTypes {
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
+    | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
+    | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-rising-sign'
     | '/el/'
     | '/en/'
     | '/api/public/build-info'
@@ -532,11 +581,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ElPolitikiAporritouRouteImport
       parentRoute: typeof ElRoute
     }
+    '/el/pws-diavazw-genethlio-charti': {
+      id: '/el/pws-diavazw-genethlio-charti'
+      path: '/pws-diavazw-genethlio-charti'
+      fullPath: '/el/pws-diavazw-genethlio-charti'
+      preLoaderRoute: typeof ElPwsDiavazwGenethlioChartiRouteImport
+      parentRoute: typeof ElRoute
+    }
     '/el/schetika': {
       id: '/el/schetika'
       path: '/schetika'
       fullPath: '/el/schetika'
       preLoaderRoute: typeof ElSchetikaRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/ti-oroskopo-eho': {
+      id: '/el/ti-oroskopo-eho'
+      path: '/ti-oroskopo-eho'
+      fullPath: '/el/ti-oroskopo-eho'
+      preLoaderRoute: typeof ElTiOroskopoEhoRouteImport
       parentRoute: typeof ElRoute
     }
     '/en/': {
@@ -567,6 +630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnContactRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/how-to-read-birth-chart': {
+      id: '/en/how-to-read-birth-chart'
+      path: '/how-to-read-birth-chart'
+      fullPath: '/en/how-to-read-birth-chart'
+      preLoaderRoute: typeof EnHowToReadBirthChartRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/privacy': {
       id: '/en/privacy'
       path: '/privacy'
@@ -579,6 +649,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/en/terms'
       preLoaderRoute: typeof EnTermsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/what-is-my-rising-sign': {
+      id: '/en/what-is-my-rising-sign'
+      path: '/what-is-my-rising-sign'
+      fullPath: '/en/what-is-my-rising-sign'
+      preLoaderRoute: typeof EnWhatIsMyRisingSignRouteImport
       parentRoute: typeof EnRoute
     }
     '/api/public/build-info': {
@@ -715,7 +792,9 @@ interface ElRouteChildren {
   ElEpikoinoniaRoute: typeof ElEpikoinoniaRoute
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
+  ElPwsDiavazwGenethlioChartiRoute: typeof ElPwsDiavazwGenethlioChartiRoute
   ElSchetikaRoute: typeof ElSchetikaRoute
+  ElTiOroskopoEhoRoute: typeof ElTiOroskopoEhoRoute
   ElIndexRoute: typeof ElIndexRoute
   ElZodiaIndexRoute: typeof ElZodiaIndexRoute
   ElZodiaSignDateRoute: typeof ElZodiaSignDateRoute
@@ -730,7 +809,9 @@ const ElRouteChildren: ElRouteChildren = {
   ElEpikoinoniaRoute: ElEpikoinoniaRoute,
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
+  ElPwsDiavazwGenethlioChartiRoute: ElPwsDiavazwGenethlioChartiRoute,
   ElSchetikaRoute: ElSchetikaRoute,
+  ElTiOroskopoEhoRoute: ElTiOroskopoEhoRoute,
   ElIndexRoute: ElIndexRoute,
   ElZodiaIndexRoute: ElZodiaIndexRoute,
   ElZodiaSignDateRoute: ElZodiaSignDateRoute,
@@ -746,8 +827,10 @@ interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
   EnAnalyticsRoute: typeof EnAnalyticsRoute
   EnContactRoute: typeof EnContactRoute
+  EnHowToReadBirthChartRoute: typeof EnHowToReadBirthChartRoute
   EnPrivacyRoute: typeof EnPrivacyRoute
   EnTermsRoute: typeof EnTermsRoute
+  EnWhatIsMyRisingSignRoute: typeof EnWhatIsMyRisingSignRoute
   EnIndexRoute: typeof EnIndexRoute
   EnZodiacIndexRoute: typeof EnZodiacIndexRoute
   EnZodiacSignDateRoute: typeof EnZodiacSignDateRoute
@@ -761,8 +844,10 @@ const EnRouteChildren: EnRouteChildren = {
   EnAboutRoute: EnAboutRoute,
   EnAnalyticsRoute: EnAnalyticsRoute,
   EnContactRoute: EnContactRoute,
+  EnHowToReadBirthChartRoute: EnHowToReadBirthChartRoute,
   EnPrivacyRoute: EnPrivacyRoute,
   EnTermsRoute: EnTermsRoute,
+  EnWhatIsMyRisingSignRoute: EnWhatIsMyRisingSignRoute,
   EnIndexRoute: EnIndexRoute,
   EnZodiacIndexRoute: EnZodiacIndexRoute,
   EnZodiacSignDateRoute: EnZodiacSignDateRoute,
