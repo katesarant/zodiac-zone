@@ -258,6 +258,7 @@ function RootComponent() {
       <SiteFooter />
       <CookieConsent />
       <PageViewTracker />
+      <Toaster position="bottom-right" richColors closeButton />
     </QueryClientProvider>
   );
 }
