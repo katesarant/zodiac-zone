@@ -33,38 +33,38 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="border-b border-border/60">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="mx-auto flex min-h-[72px] max-w-5xl items-center justify-between gap-3 px-4 py-5 sm:min-h-[84px] sm:px-6 sm:py-6">
         <Link
           to="/"
-          className="inline-flex shrink-0 items-baseline gap-[2px] font-display text-base font-semibold tracking-tight whitespace-nowrap text-foreground sm:text-lg"
+          className="inline-flex shrink-0 items-baseline gap-[2px] font-display text-xl font-semibold tracking-tight whitespace-nowrap text-foreground transition-opacity hover:opacity-90 sm:text-2xl"
           aria-label="MyZodiacMaps home"
         >
-          <Logo className="h-5 w-5 shrink-0 translate-y-[3px] sm:h-6 sm:w-6 sm:translate-y-[4px]" />
+          <Logo className="h-7 w-7 shrink-0 translate-y-[4px] sm:h-8 sm:w-8 sm:translate-y-[5px]" />
           <span>My Zodiac Maps</span>
         </Link>
 
-        <nav className="flex min-w-0 items-center gap-2 pr-[5px]">
+        <nav className="flex min-w-0 items-center gap-2 pr-[5px] sm:gap-3">
           <PathLink
             href={zodiacHref}
-            className="hidden items-center justify-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary sm:inline-flex"
+            className="hidden items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary sm:inline-flex"
           >
             {z.nav}
           </PathLink>
 
           <Link
             to="/my-charts"
-            className="hidden items-center justify-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary sm:inline-flex"
+            className="hidden items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary sm:inline-flex"
           >
             {t.myCharts}
           </Link>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border text-foreground transition-colors hover:bg-secondary"
+              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary"
               aria-label={lang === "en" ? "Open menu" : "Άνοιγμα μενού"}
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="h-5 w-5" />
             </SheetTrigger>
             <SheetContent side="right" className="w-[85vw] max-w-xs">
               <SheetHeader>
@@ -103,7 +103,7 @@ export function SiteHeader() {
                     void navigate({ to: code === "en" ? "/en" : "/el", replace: true });
                   }
                 }}
-                className={`rounded-md px-2 py-1 text-xs font-medium uppercase transition-colors ${
+                className={`min-h-9 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition-all duration-200 ${
                   lang === code ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
                 }`}
               >
