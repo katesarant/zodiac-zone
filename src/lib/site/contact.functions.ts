@@ -12,9 +12,19 @@ export const sendContactMessage = createServerFn({ method: "POST" })
     const ok = await verifyChallenge(data.captchaToken, data.captchaAnswer);
     if (!ok) throw new Error("captcha_failed");
 
+    const { senderHash, checkRateLimit } = await import("./contact-ratelimit.server");
+    const hash = await senderHash();
+    const rate = await checkRateLimit(hash);
+    if (!rate.allowed) {
+      const err = new Error("rate_limited") as Error & { retryAfterSec?: number };
+      err.retryAfterSec = rate.retryAfterSec;
+      throw err;
+    }
+
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
     const { error } = await supabaseAdmin.from("contact_messages").insert({
+      sender_hash: hash,
       name: data.name,
       email: data.email,
       subject: data.subject || null,
