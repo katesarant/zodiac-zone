@@ -1,5 +1,6 @@
 import { SIGN_SLUGS, SITE_URL } from "./signs";
 import { sitePageUrls } from "@/lib/site/pages";
+import { guideUrls } from "@/lib/site/guides";
 import { isValidKey } from "./dates";
 
 
@@ -26,6 +27,7 @@ export function buildSitemapUrls(keys: Record<"el" | "en", ArchiveKeys>): string
     `${SITE_URL}/el/zodia`,
     `${SITE_URL}/en/zodiac`,
     ...sitePageUrls(),
+    ...guideUrls(),
   ];
 
 

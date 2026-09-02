@@ -26,6 +26,7 @@ import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAnalyticsRouteImport } from './routes/en.analytics'
 import { Route as EnContactRouteImport } from './routes/en.contact'
+import { Route as EnHowToReadBirthChartRouteImport } from './routes/en.how-to-read-birth-chart'
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnWhatIsMyRisingSignRouteImport } from './routes/en.what-is-my-rising-sign'
@@ -132,6 +133,11 @@ const EnAnalyticsRoute = EnAnalyticsRouteImport.update({
 const EnContactRoute = EnContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnHowToReadBirthChartRoute = EnHowToReadBirthChartRouteImport.update({
+  id: '/how-to-read-birth-chart',
+  path: '/how-to-read-birth-chart',
   getParentRoute: () => EnRoute,
 } as any)
 const EnPrivacyRoute = EnPrivacyRouteImport.update({
@@ -259,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
+  '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
   '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
@@ -297,6 +304,7 @@ export interface FileRoutesByTo {
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
+  '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
   '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
@@ -338,6 +346,7 @@ export interface FileRoutesById {
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
+  '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
   '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
@@ -380,6 +389,7 @@ export interface FileRouteTypes {
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
+    | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
     | '/en/what-is-my-rising-sign'
@@ -418,6 +428,7 @@ export interface FileRouteTypes {
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
+    | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
     | '/en/what-is-my-rising-sign'
@@ -458,6 +469,7 @@ export interface FileRouteTypes {
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
+    | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
     | '/en/what-is-my-rising-sign'
@@ -616,6 +628,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/en/contact'
       preLoaderRoute: typeof EnContactRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/how-to-read-birth-chart': {
+      id: '/en/how-to-read-birth-chart'
+      path: '/how-to-read-birth-chart'
+      fullPath: '/en/how-to-read-birth-chart'
+      preLoaderRoute: typeof EnHowToReadBirthChartRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/privacy': {
@@ -808,6 +827,7 @@ interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
   EnAnalyticsRoute: typeof EnAnalyticsRoute
   EnContactRoute: typeof EnContactRoute
+  EnHowToReadBirthChartRoute: typeof EnHowToReadBirthChartRoute
   EnPrivacyRoute: typeof EnPrivacyRoute
   EnTermsRoute: typeof EnTermsRoute
   EnWhatIsMyRisingSignRoute: typeof EnWhatIsMyRisingSignRoute
@@ -824,6 +844,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnAboutRoute: EnAboutRoute,
   EnAnalyticsRoute: EnAnalyticsRoute,
   EnContactRoute: EnContactRoute,
+  EnHowToReadBirthChartRoute: EnHowToReadBirthChartRoute,
   EnPrivacyRoute: EnPrivacyRoute,
   EnTermsRoute: EnTermsRoute,
   EnWhatIsMyRisingSignRoute: EnWhatIsMyRisingSignRoute,

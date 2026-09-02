@@ -4,6 +4,7 @@ import { dict } from "@/lib/astro/i18n";
 import type { Lang } from "@/lib/astro/types";
 import { PathLink } from "@/components/horoscope/PathLink";
 import { sitePagePath } from "@/lib/site/pages";
+import { guide, guidePath } from "@/lib/site/guides";
 import { Logo } from "./Logo";
 
 export function SiteFooter() {
@@ -16,6 +17,8 @@ export function SiteFooter() {
   const links = [
     { href: `/${lang}`, label: s.nav.home },
     { href: lang === "en" ? "/en/zodiac" : "/el/zodia", label: s.nav.forecasts },
+    { href: guidePath("rising", lang), label: guide("rising", lang).title },
+    { href: guidePath("readChart", lang), label: guide("readChart", lang).title },
     { href: sitePagePath("about", lang), label: s.nav.about },
     { href: sitePagePath("contact", lang), label: s.nav.contact },
     { href: sitePagePath("privacy", lang), label: s.nav.privacy },
