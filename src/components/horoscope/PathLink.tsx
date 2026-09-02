@@ -8,7 +8,7 @@ import type { ComponentType, ReactNode } from "react";
 const AnyLink = Link as unknown as ComponentType<{
   to: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (() => void) | undefined;
   children: ReactNode;
 }>;
 
