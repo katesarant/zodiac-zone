@@ -20,6 +20,7 @@ import { Route as ElEpikoinoniaRouteImport } from './routes/el.epikoinonia'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
+import { Route as ElTiOroskopoEhoRouteImport } from './routes/el.ti-oroskopo-eho'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAnalyticsRouteImport } from './routes/en.analytics'
@@ -98,6 +99,11 @@ const ElPolitikiAporritouRoute = ElPolitikiAporritouRouteImport.update({
 const ElSchetikaRoute = ElSchetikaRouteImport.update({
   id: '/schetika',
   path: '/schetika',
+  getParentRoute: () => ElRoute,
+} as any)
+const ElTiOroskopoEhoRoute = ElTiOroskopoEhoRouteImport.update({
+  id: '/ti-oroskopo-eho',
+  path: '/ti-oroskopo-eho',
   getParentRoute: () => ElRoute,
 } as any)
 const EnIndexRoute = EnIndexRouteImport.update({
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
@@ -270,6 +277,7 @@ export interface FileRoutesByTo {
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
@@ -308,6 +316,7 @@ export interface FileRoutesById {
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
   '/en/contact': typeof EnContactRoute
@@ -347,6 +356,7 @@ export interface FileRouteTypes {
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
+    | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
@@ -382,6 +392,7 @@ export interface FileRouteTypes {
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
+    | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
@@ -419,6 +430,7 @@ export interface FileRouteTypes {
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/schetika'
+    | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
     | '/en/contact'
@@ -537,6 +549,13 @@ declare module '@tanstack/react-router' {
       path: '/schetika'
       fullPath: '/el/schetika'
       preLoaderRoute: typeof ElSchetikaRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/ti-oroskopo-eho': {
+      id: '/el/ti-oroskopo-eho'
+      path: '/ti-oroskopo-eho'
+      fullPath: '/el/ti-oroskopo-eho'
+      preLoaderRoute: typeof ElTiOroskopoEhoRouteImport
       parentRoute: typeof ElRoute
     }
     '/en/': {
@@ -716,6 +735,7 @@ interface ElRouteChildren {
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
   ElSchetikaRoute: typeof ElSchetikaRoute
+  ElTiOroskopoEhoRoute: typeof ElTiOroskopoEhoRoute
   ElIndexRoute: typeof ElIndexRoute
   ElZodiaIndexRoute: typeof ElZodiaIndexRoute
   ElZodiaSignDateRoute: typeof ElZodiaSignDateRoute
@@ -731,6 +751,7 @@ const ElRouteChildren: ElRouteChildren = {
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
   ElSchetikaRoute: ElSchetikaRoute,
+  ElTiOroskopoEhoRoute: ElTiOroskopoEhoRoute,
   ElIndexRoute: ElIndexRoute,
   ElZodiaIndexRoute: ElZodiaIndexRoute,
   ElZodiaSignDateRoute: ElZodiaSignDateRoute,
