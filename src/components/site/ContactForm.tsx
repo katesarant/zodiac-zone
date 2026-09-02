@@ -161,19 +161,46 @@ export function ContactForm({ lang }: { lang: Lang }) {
         ) : null}
       </div>
 
-      <button type="submit" disabled={status === "sending"} className={btnPrimary}>
-        {status === "sending" ? t.sending : t.submit}
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className={`${btnPrimary} inline-flex items-center justify-center gap-2`}
+      >
+        {status === "sending" ? (
+          <>
+            <Spinner className="h-4 w-4" />
+            {t.sending}
+          </>
+        ) : (
+          t.submit
+        )}
       </button>
 
       {status === "sent" ? (
-        <p role="status" className="font-body text-sm text-primary">
-          {t.success}
-        </p>
+        <div
+          role="status"
+          className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400"
+        >
+          <div className="flex items-start gap-3">
+            <span aria-hidden="true" className="text-lg leading-none">
+              ✓
+            </span>
+            <span className="font-body">{t.success}</span>
+          </div>
+        </div>
       ) : null}
       {status === "error" ? (
-        <p role="alert" className="font-body text-sm text-destructive">
-          {t.error}
-        </p>
+        <div
+          role="alert"
+          className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        >
+          <div className="flex items-start gap-3">
+            <span aria-hidden="true" className="text-lg leading-none">
+              ✕
+            </span>
+            <span className="font-body">{t.error}</span>
+          </div>
+        </div>
       ) : null}
     </form>
   );
