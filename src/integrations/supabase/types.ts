@@ -40,6 +40,7 @@ export type Database = {
           lang: string
           message: string
           name: string
+          sender_hash: string | null
           subject: string | null
         }
         Insert: {
@@ -49,6 +50,7 @@ export type Database = {
           lang?: string
           message: string
           name: string
+          sender_hash?: string | null
           subject?: string | null
         }
         Update: {
@@ -58,6 +60,7 @@ export type Database = {
           lang?: string
           message?: string
           name?: string
+          sender_hash?: string | null
           subject?: string | null
         }
         Relationships: []

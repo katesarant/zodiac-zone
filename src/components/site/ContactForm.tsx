@@ -63,7 +63,7 @@ export function ContactForm({ lang }: { lang: Lang }) {
   const [values, setValues] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [honeypot, setHoneypot] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error" | "limited">("idle");
 
   const set = (key: keyof typeof values, value: string) =>
     setValues((v) => ({ ...v, [key]: value }));
@@ -111,10 +111,12 @@ export function ContactForm({ lang }: { lang: Lang }) {
       setValues({ name: "", email: "", subject: "", message: "" });
       toast.success(t.success);
       void loadCaptcha();
-    } catch {
-      setStatus("error");
-      setErrors((prev) => ({ ...prev, captcha: t.errors.captcha }));
-      toast.error(t.error);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      const limited = /rate_limited|429|too many/i.test(msg);
+      setStatus(limited ? "limited" : "error");
+      if (!limited) setErrors((prev) => ({ ...prev, captcha: t.errors.captcha }));
+      toast.error(limited ? t.rateLimited : t.error);
       void loadCaptcha();
     }
   }
@@ -233,7 +235,7 @@ export function ContactForm({ lang }: { lang: Lang }) {
 
       <button
         type="submit"
-        disabled={status === "sending"}
+        disabled={status === "sending" || status === "limited"}
         className={`${btnPrimary} inline-flex items-center justify-center gap-2`}
       >
         {status === "sending" ? (
@@ -256,6 +258,19 @@ export function ContactForm({ lang }: { lang: Lang }) {
               ✓
             </span>
             <span className="font-body">{t.success}</span>
+          </div>
+        </div>
+      ) : null}
+      {status === "limited" ? (
+        <div
+          role="alert"
+          className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-400"
+        >
+          <div className="flex items-start gap-3">
+            <span aria-hidden="true" className="text-lg leading-none">
+              ⏳
+            </span>
+            <span className="font-body">{t.rateLimited}</span>
           </div>
         </div>
       ) : null}

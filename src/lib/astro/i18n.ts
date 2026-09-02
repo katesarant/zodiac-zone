@@ -284,6 +284,7 @@ const EL = {
       sending: "Αποστολή…",
       success: "Ευχαριστούμε! Το μήνυμά σου στάλθηκε.",
       error: "Το μήνυμα δεν στάλθηκε. Δοκίμασε ξανά.",
+      rateLimited: "Έστειλες πολλά μηνύματα σε μικρό διάστημα. Δοκίμασε ξανά αργότερα.",
       allowed:
         "Επιτρεπτοί χαρακτήρες: γράμματα, αριθμοί, κενά και . , ; : ! ? ' \" ( ) - @ & % + /",
       captcha: "Έλεγχος ασφαλείας",
@@ -668,6 +669,7 @@ const EN: typeof EL = {
       sending: "Sending…",
       success: "Thanks! Your message has been sent.",
       error: "Your message could not be sent. Please try again.",
+      rateLimited: "You have sent too many messages in a short time. Please try again later.",
       allowed:
         "Allowed characters: letters, numbers, spaces and . , ; : ! ? ' \" ( ) - @ & % + /",
       captcha: "Security check",
