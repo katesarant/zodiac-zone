@@ -19,6 +19,7 @@ import { Route as ElAnalitikaRouteImport } from './routes/el.analitika'
 import { Route as ElEpikoinoniaRouteImport } from './routes/el.epikoinonia'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
+import { Route as ElPwsDiavazwGenethlioChartiRouteImport } from './routes/el.pws-diavazw-genethlio-charti'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
 import { Route as ElTiOroskopoEhoRouteImport } from './routes/el.ti-oroskopo-eho'
 import { Route as EnIndexRouteImport } from './routes/en.index'
@@ -96,6 +97,12 @@ const ElPolitikiAporritouRoute = ElPolitikiAporritouRouteImport.update({
   path: '/politiki-aporritou',
   getParentRoute: () => ElRoute,
 } as any)
+const ElPwsDiavazwGenethlioChartiRoute =
+  ElPwsDiavazwGenethlioChartiRouteImport.update({
+    id: '/pws-diavazw-genethlio-charti',
+    path: '/pws-diavazw-genethlio-charti',
+    getParentRoute: () => ElRoute,
+  } as any)
 const ElSchetikaRoute = ElSchetikaRouteImport.update({
   id: '/schetika',
   path: '/schetika',
@@ -240,6 +247,7 @@ export interface FileRoutesByFullPath {
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
   '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
@@ -276,6 +284,7 @@ export interface FileRoutesByTo {
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
   '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
@@ -315,6 +324,7 @@ export interface FileRoutesById {
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
+  '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
   '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
     | '/el/ti-oroskopo-eho'
     | '/en/about'
@@ -391,6 +402,7 @@ export interface FileRouteTypes {
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
     | '/el/ti-oroskopo-eho'
     | '/en/about'
@@ -429,6 +441,7 @@ export interface FileRouteTypes {
     | '/el/epikoinonia'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
+    | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
     | '/el/ti-oroskopo-eho'
     | '/en/about'
@@ -542,6 +555,13 @@ declare module '@tanstack/react-router' {
       path: '/politiki-aporritou'
       fullPath: '/el/politiki-aporritou'
       preLoaderRoute: typeof ElPolitikiAporritouRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/pws-diavazw-genethlio-charti': {
+      id: '/el/pws-diavazw-genethlio-charti'
+      path: '/pws-diavazw-genethlio-charti'
+      fullPath: '/el/pws-diavazw-genethlio-charti'
+      preLoaderRoute: typeof ElPwsDiavazwGenethlioChartiRouteImport
       parentRoute: typeof ElRoute
     }
     '/el/schetika': {
@@ -734,6 +754,7 @@ interface ElRouteChildren {
   ElEpikoinoniaRoute: typeof ElEpikoinoniaRoute
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
+  ElPwsDiavazwGenethlioChartiRoute: typeof ElPwsDiavazwGenethlioChartiRoute
   ElSchetikaRoute: typeof ElSchetikaRoute
   ElTiOroskopoEhoRoute: typeof ElTiOroskopoEhoRoute
   ElIndexRoute: typeof ElIndexRoute
@@ -750,6 +771,7 @@ const ElRouteChildren: ElRouteChildren = {
   ElEpikoinoniaRoute: ElEpikoinoniaRoute,
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
+  ElPwsDiavazwGenethlioChartiRoute: ElPwsDiavazwGenethlioChartiRoute,
   ElSchetikaRoute: ElSchetikaRoute,
   ElTiOroskopoEhoRoute: ElTiOroskopoEhoRoute,
   ElIndexRoute: ElIndexRoute,
