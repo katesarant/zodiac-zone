@@ -66,7 +66,10 @@ export function ContactForm({ lang }: { lang: Lang }) {
     e.preventDefault();
     const next = validate();
     setErrors(next);
-    if (Object.keys(next).length > 0) return;
+    if (Object.keys(next).length > 0) {
+      toast.error(lang === "el" ? "Έλεγξε τα πεδία της φόρμας" : "Please check the form fields");
+      return;
+    }
 
     setStatus("sending");
     try {
@@ -81,8 +84,10 @@ export function ContactForm({ lang }: { lang: Lang }) {
       });
       setStatus("sent");
       setValues({ name: "", email: "", subject: "", message: "" });
+      toast.success(t.success);
     } catch {
       setStatus("error");
+      toast.error(t.error);
     }
   }
 
