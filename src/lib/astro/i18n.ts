@@ -286,7 +286,12 @@ const EL = {
       error: "Το μήνυμα δεν στάλθηκε. Δοκίμασε ξανά.",
       allowed:
         "Επιτρεπτοί χαρακτήρες: γράμματα, αριθμοί, κενά και . , ; : ! ? ' \" ( ) - @ & % + /",
+      captcha: "Έλεγχος ασφαλείας",
+      captchaHint: "Απάντησε στην απλή πράξη για να αποδείξεις ότι δεν είσαι ρομπότ.",
+      captchaRefresh: "Νέα ερώτηση",
+      captchaLoading: "Φόρτωση ερώτησης…",
       errors: {
+        captcha: "Λάθος απάντηση στον έλεγχο ασφαλείας. Δοκίμασε ξανά.",
         name: "Χρησιμοποίησε 2–80 χαρακτήρες: μόνο γράμματα, κενά, απόστροφο ή παύλα.",
         email: "Δώσε μια έγκυρη διεύθυνση email.",
         subject: "Το θέμα περιέχει μη επιτρεπτούς χαρακτήρες.",
@@ -665,7 +670,12 @@ const EN: typeof EL = {
       error: "Your message could not be sent. Please try again.",
       allowed:
         "Allowed characters: letters, numbers, spaces and . , ; : ! ? ' \" ( ) - @ & % + /",
+      captcha: "Security check",
+      captchaHint: "Answer the simple sum to prove you are not a robot.",
+      captchaRefresh: "New question",
+      captchaLoading: "Loading question…",
       errors: {
+        captcha: "Wrong answer to the security check. Please try again.",
         name: "Use 2–80 characters: letters, spaces, apostrophe or hyphen only.",
         email: "Enter a valid email address.",
         subject: "The subject contains characters that are not allowed.",

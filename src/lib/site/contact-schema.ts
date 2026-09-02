@@ -14,6 +14,9 @@ export const contactSchema = z.object({
   subject: z.string().trim().max(120).regex(TEXT_RE).optional().or(z.literal("")),
   message: z.string().trim().min(10).max(2000).regex(TEXT_RE),
   lang: z.enum(["el", "en"]).default("el"),
+  captchaToken: z.string().min(10).max(400),
+  captchaAnswer: z.string().trim().regex(/^\d{1,3}$/),
+  website: z.string().max(0).optional().or(z.literal("")),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
