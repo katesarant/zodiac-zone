@@ -18,5 +18,9 @@ export const sendContactMessage = createServerFn({ method: "POST" })
 
     if (error) throw new Error("insert_failed");
 
+    const { notifyContactMessage } = await import("./contact-notify.server");
+    await notifyContactMessage(data);
+
     return { ok: true as const };
   });
+
