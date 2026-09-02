@@ -1,0 +1,2 @@
+ALTER TABLE public.contact_messages ADD COLUMN IF NOT EXISTS sender_hash text;
+CREATE INDEX IF NOT EXISTS contact_messages_sender_hash_created_idx ON public.contact_messages (sender_hash, created_at DESC);
