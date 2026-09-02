@@ -34,30 +34,32 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex min-h-[72px] max-w-5xl items-center justify-between gap-3 px-4 py-5 sm:min-h-[84px] sm:px-6 sm:py-6">
+      <div className="mx-auto grid min-h-[72px] max-w-5xl grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-5 md:min-h-[88px] md:px-6 md:py-6">
         <Link
           to="/"
-          className="inline-flex shrink-0 items-baseline gap-[2px] font-display text-xl font-semibold tracking-tight whitespace-nowrap text-foreground transition-opacity hover:opacity-90 sm:text-2xl"
+          className="inline-flex shrink-0 items-baseline gap-[2px] font-display text-xl font-semibold tracking-tight whitespace-nowrap text-foreground transition-opacity hover:opacity-90 md:text-2xl"
           aria-label="MyZodiacMaps home"
         >
-          <Logo className="h-7 w-7 shrink-0 translate-y-[4px] sm:h-8 sm:w-8 sm:translate-y-[5px]" />
+          <Logo className="h-7 w-7 shrink-0 translate-y-[4px] md:h-8 md:w-8 md:translate-y-[5px]" />
           <span>My Zodiac Maps</span>
         </Link>
 
-        <nav className="flex min-w-0 items-center gap-2 pr-[5px] sm:gap-3">
-          <PathLink
-            href={zodiacHref}
-            className="hidden items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary sm:inline-flex"
-          >
-            {z.nav}
-          </PathLink>
+        <div className="flex min-w-0 items-center justify-end gap-2 md:gap-3">
+          <nav className="hidden min-w-0 items-center gap-2 md:flex md:gap-3">
+            <PathLink
+              href={zodiacHref}
+              className="inline-flex items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary"
+            >
+              {z.nav}
+            </PathLink>
 
-          <Link
-            to="/my-charts"
-            className="hidden items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary sm:inline-flex"
-          >
-            {t.myCharts}
-          </Link>
+            <Link
+              to="/my-charts"
+              className="inline-flex items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary"
+            >
+              {t.myCharts}
+            </Link>
+          </nav>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
@@ -91,27 +93,27 @@ export function SiteHeader() {
               </div>
             </SheetContent>
           </Sheet>
+        </div>
 
-          <div className="flex shrink-0 items-center rounded-lg border border-border p-0.5">
-            {(["el", "en"] as const).map((code) => (
-              <button
-                key={code}
-                type="button"
-                onClick={() => {
-                  setLang(code);
-                  if (routeLang && routeLang !== code) {
-                    void navigate({ to: code === "en" ? "/en" : "/el", replace: true });
-                  }
-                }}
-                className={`min-h-9 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition-all duration-200 ${
-                  lang === code ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
-                }`}
-              >
-                {code}
-              </button>
-            ))}
-          </div>
-        </nav>
+        <div className="flex shrink-0 items-center justify-self-end rounded-lg border border-border p-0.5">
+          {(["el", "en"] as const).map((code) => (
+            <button
+              key={code}
+              type="button"
+              onClick={() => {
+                setLang(code);
+                if (routeLang && routeLang !== code) {
+                  void navigate({ to: code === "en" ? "/en" : "/el", replace: true });
+                }
+              }}
+              className={`min-h-9 rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition-all duration-200 ${
+                lang === code ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
+              }`}
+            >
+              {code}
+            </button>
+          ))}
+        </div>
       </div>
     </header>
   );
