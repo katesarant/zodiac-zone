@@ -1,12 +1,13 @@
 import type { Lang } from "@/lib/astro/types";
 import { dict } from "@/lib/astro/i18n";
 import type { SitePageKey } from "@/lib/site/pages";
+import { ContactForm } from "./ContactForm";
 
 /** Shared layout for the legal / about / contact pages. */
 export function StaticPage({ lang, pageKey }: { lang: Lang; pageKey: SitePageKey }) {
   const t = dict(lang);
   const page = t.legal[pageKey];
-  const email = t.site.contactEmail;
+
 
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-12">
@@ -32,15 +33,10 @@ export function StaticPage({ lang, pageKey }: { lang: Lang; pageKey: SitePageKey
           <p className="max-w-[62ch] font-body text-sm leading-relaxed text-foreground/90">
             {t.site.contactIntro}
           </p>
-          <a
-            href={`mailto:${email}`}
-            className="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 font-body text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            {t.site.contactCta}
-          </a>
-          <p className="mt-3 font-body text-xs text-muted-foreground">{email}</p>
+          <ContactForm lang={lang} />
         </div>
       ) : null}
+
 
       <p className="mt-10 font-body text-xs text-muted-foreground">{t.site.disclaimer}</p>
     </main>
