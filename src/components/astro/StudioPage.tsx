@@ -1,4 +1,6 @@
 import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
@@ -160,6 +162,13 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           <h1 className="mt-3 text-4xl md:text-5xl">{t.title}</h1>
           <p className="mt-3 max-w-xl text-sm text-muted-foreground">{t.intro}</p>
         </div>
+        <Link
+          to="/my-charts"
+          className="inline-flex min-h-12 shrink-0 items-center gap-2 rounded-xl border border-primary bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:shadow-lg hover:brightness-110"
+        >
+          {t.auth.myCharts}
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </header>
 
       <nav data-print-hide className="mb-6 grid gap-2 sm:grid-cols-4">
@@ -379,6 +388,23 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           )}
         </section>
       )}
+
+      <section
+        data-print-hide
+        className="panel mt-8 flex flex-wrap items-center justify-between gap-5 p-6"
+      >
+        <div>
+          <h2 className="font-display text-xl text-primary md:text-2xl">{t.chartsCta.title}</h2>
+          <p className="mt-1 max-w-md text-sm text-muted-foreground">{t.chartsCta.body}</p>
+        </div>
+        <Link
+          to="/my-charts"
+          className="inline-flex min-h-12 shrink-0 items-center gap-2 rounded-xl border border-primary bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:shadow-lg hover:brightness-110"
+        >
+          {t.auth.myCharts}
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      </section>
 
       <footer className="mt-10 text-center text-xs text-muted-foreground">{t.footer}</footer>
     </div>
