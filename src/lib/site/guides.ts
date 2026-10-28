@@ -1,7 +1,7 @@
 import type { Lang } from "@/lib/astro/types";
 import { SITE_URL } from "@/lib/horoscope/signs";
 
-export type GuideKey = "rising" | "readChart";
+export type GuideKey = "rising" | "readChart" | "moon" | "calculator";
 
 export interface GuideSection {
   h: string;
@@ -30,6 +30,8 @@ export interface GuideContent {
 export const GUIDE_SLUGS: Record<GuideKey, Record<Lang, string>> = {
   rising: { el: "ti-oroskopo-eho", en: "what-is-my-rising-sign" },
   readChart: { el: "pws-diavazw-genethlio-charti", en: "how-to-read-birth-chart" },
+  moon: { el: "se-ti-zodio-einai-i-selini-mou", en: "what-is-my-moon-sign" },
+  calculator: { el: "genethlios-chartis-dorean", en: "birth-chart-calculator" },
 };
 
 export function guidePath(key: GuideKey, lang: Lang): string {
@@ -177,6 +179,89 @@ const GUIDES: Record<Lang, Record<GuideKey, GuideContent>> = {
       ctaLabel: "Δημιουργία γενέθλιου χάρτη",
       ctaHref: "/el",
     },
+    moon: {
+      title: "Σε τι ζώδιο είναι η Σελήνη μου;",
+      metaTitle: "Σε τι ζώδιο είναι η Σελήνη μου; Βρες τη δωρεάν",
+      description:
+        "Η Σελήνη δείχνει τις συναισθηματικές σου ανάγκες και τι σε κάνει να νιώθεις ασφάλεια. Δες πώς τη βρίσκεις δωρεάν και τι σημαίνει.",
+      intro:
+        "Το ζώδιο της Σελήνης σου είναι το ζώδιο όπου βρισκόταν η Σελήνη τη στιγμή που γεννήθηκες. Αλλάζει ζώδιο περίπου κάθε δυόμισι μέρες.",
+      sections: [
+        {
+          h: "Σελήνη και ηλιακό ζώδιο",
+          p: [
+            "Ο Ήλιος περιγράφει τον πυρήνα και την κατεύθυνσή σου. Η Σελήνη περιγράφει τον εσωτερικό σου κόσμο: διαθέσεις, αντιδράσεις και την άνεση που χρειάζεσαι.",
+          ],
+        },
+        {
+          h: "Πώς βρίσκεις τη Σελήνη σου",
+          p: [
+            "Χρειάζεσαι ημερομηνία και πόλη γέννησης. Η ώρα την κάνει ακριβή, γιατί τις μέρες που η Σελήνη αλλάζει ζώδιο η ώρα αποφασίζει.",
+            "Βάλε τα στοιχεία σου στον δωρεάν γενέθλιο χάρτη και θα δεις τη Σελήνη δίπλα στον Ήλιο και τον ωροσκόπο.",
+          ],
+        },
+        {
+          h: "Η Σελήνη ανά στοιχείο",
+          p: [
+            "Φωτιά: χρειάζεται ενθουσιασμό και ελευθερία. Γη: σταθερότητα και ρουτίνα. Αέρας: κουβέντα και χώρο για σκέψη. Νερό: εγγύτητα και συναισθηματικό βάθος.",
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Μπορώ να βρω τη Σελήνη χωρίς ώρα γέννησης;",
+          a: "Συνήθως ναι. Μόνο αν η Σελήνη άλλαξε ζώδιο τη μέρα που γεννήθηκες χρειάζεται η ώρα.",
+        },
+        {
+          q: "Είναι δωρεάν;",
+          a: "Ναι, ο χάρτης και η ερμηνεία του είναι δωρεάν χωρίς εγγραφή.",
+        },
+      ],
+      faqTitle: "Συχνές ερωτήσεις",
+      ctaTitle: "Βρες τη Σελήνη σου τώρα",
+      ctaText: "Αρκούν ημερομηνία, ώρα και πόλη γέννησης.",
+      ctaLabel: "Φτιάξε τον χάρτη σου",
+      ctaHref: "/el",
+    },
+    calculator: {
+      title: "Γενέθλιος χάρτης δωρεάν",
+      metaTitle: "Γενέθλιος χάρτης δωρεάν με ερμηνεία",
+      description:
+        "Υπολόγισε δωρεάν τον γενέθλιο χάρτη σου: πλανήτες, οίκοι, όψεις, Ήλιος, Σελήνη και ωροσκόπος, με γραπτή ερμηνεία. Χωρίς εγγραφή.",
+      intro:
+        "Ο γενέθλιος χάρτης μετατρέπει ημερομηνία, ώρα και τόπο γέννησης σε χάρτη του ουρανού εκείνης της στιγμής. Το MyZodiacMaps τον υπολογίζει με ακριβή αστρονομικά δεδομένα και τον εξηγεί απλά.",
+      sections: [
+        {
+          h: "Τι χρειάζεσαι",
+          p: ["Ημερομηνία γέννησης, ώρα όσο πιο ακριβή γίνεται και πόλη γέννησης."],
+        },
+        {
+          h: "Τι παίρνεις",
+          p: [
+            "Ήλιο, Σελήνη και ωροσκόπο, κάθε πλανήτη σε ζώδιο και οίκο, τις κύριες όψεις και γραπτή ερμηνεία που διαβάζει τον χάρτη ως σύνολο.",
+          ],
+        },
+        {
+          h: "Αποθήκευση χαρτών",
+          p: ["Με δωρεάν λογαριασμό αποθηκεύεις χάρτες για σένα και τους δικούς σου στο «Οι χάρτες μου»."],
+        },
+      ],
+      faq: [
+        {
+          q: "Είναι πραγματικά δωρεάν;",
+          a: "Ναι, ο χάρτης και η βασική ερμηνεία είναι δωρεάν χωρίς εγγραφή.",
+        },
+        {
+          q: "Ποιο σύστημα οίκων χρησιμοποιείτε;",
+          a: "Ολόκληρα ζώδια (Whole Sign), το αρχαιότερο σύστημα, όπου κάθε ζώδιο είναι ένας ολόκληρος οίκος.",
+        },
+      ],
+      faqTitle: "Συχνές ερωτήσεις",
+      ctaTitle: "Υπολόγισε τον χάρτη σου",
+      ctaText: "Χρειάζεται λιγότερο από ένα λεπτό.",
+      ctaLabel: "Ξεκίνα",
+      ctaHref: "/el",
+    },
   },
   en: {
     rising: {
@@ -308,6 +393,119 @@ const GUIDES: Record<Lang, Record<GuideKey, GuideContent>> = {
       ctaTitle: "See your own chart",
       ctaText: "Calculate your birth chart and read the interpretation layer by layer.",
       ctaLabel: "Create your birth chart",
+      ctaHref: "/en",
+    },
+    moon: {
+      title: "What is my moon sign?",
+      metaTitle: "What Is My Moon Sign? Free Moon Sign Calculator & Meaning",
+      description:
+        "Your moon sign shows your emotional needs and what makes you feel safe. Learn how to find your moon sign for free and what it means next to your sun and rising.",
+      intro:
+        "Your moon sign is the zodiac sign the Moon was in when you were born. The Moon changes sign about every two and a half days, so two people born in the same month can have very different moons.",
+      sections: [
+        {
+          h: "Moon sign vs sun sign",
+          p: [
+            "Your sun sign describes your core identity and direction. Your moon sign describes your inner world: moods, emotional reactions and the comfort you need.",
+            "Many people who 'don't feel like their sign' actually relate far more to their moon.",
+          ],
+        },
+        {
+          h: "How to find your moon sign",
+          p: [
+            "You need your birth date and city. A birth time makes it exact, because on days when the Moon changes sign the time decides which sign it is.",
+            "Enter your details in the free birth chart calculator and your moon sign appears instantly next to your sun and rising sign.",
+          ],
+        },
+        {
+          h: "What the moon shows in each element",
+          p: [
+            "Fire moons (Aries, Leo, Sagittarius) need excitement and freedom. Earth moons (Taurus, Virgo, Capricorn) need stability and routine.",
+            "Air moons (Gemini, Libra, Aquarius) need conversation and space to think. Water moons (Cancer, Scorpio, Pisces) need closeness and emotional depth.",
+          ],
+        },
+        {
+          h: "Reading the moon in your chart",
+          p: [
+            "Look at the house your Moon sits in: it shows the life area where you seek emotional security, such as home, work or relationships.",
+            "Aspects to the Moon show how easily you express feelings. Trines feel smooth; squares bring intensity you learn to work with.",
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Can I find my moon sign without a birth time?",
+          a: "Usually yes. Only if the Moon changed sign on your birth day do you need the time to know which one it was.",
+        },
+        {
+          q: "Is the moon sign important in relationships?",
+          a: "Very. Comparing moon signs shows how two people comfort each other and handle emotions together.",
+        },
+        {
+          q: "Is the moon sign calculator free?",
+          a: "Yes. The MyZodiacMaps birth chart and its interpretation are free and need no signup.",
+        },
+      ],
+      faqTitle: "Frequently asked questions",
+      ctaTitle: "Find your moon sign now",
+      ctaText: "Enter your birth date, time and city to see your moon, sun and rising sign.",
+      ctaLabel: "Calculate my chart",
+      ctaHref: "/en",
+    },
+    calculator: {
+      title: "Free birth chart calculator",
+      metaTitle: "Free Birth Chart Calculator — Natal Chart With Interpretation",
+      description:
+        "Calculate your natal chart for free: planets, houses, aspects and your big three (sun, moon, rising), with a clear written interpretation. No signup needed.",
+      intro:
+        "A birth chart calculator turns your birth date, time and place into a map of the sky at that moment. MyZodiacMaps calculates it with precise astronomical data and explains it in plain language.",
+      sections: [
+        {
+          h: "What you need",
+          p: [
+            "Your date of birth, the time as exact as possible (check a birth certificate) and the city you were born in.",
+            "Without a time you still get planets in signs, but the rising sign and houses will not be accurate.",
+          ],
+        },
+        {
+          h: "What you get",
+          p: [
+            "Your sun, moon and rising sign, every planet with its sign and house, the major aspects between them and a chart wheel.",
+            "A written interpretation that reads the chart as a whole, describing tendencies, not fixed fate.",
+          ],
+        },
+        {
+          h: "How the calculation works",
+          p: [
+            "Your birth city is converted to coordinates and its historical time zone, including daylight saving at the time.",
+            "Planet positions come from astronomical ephemeris data, and houses are calculated from the exact local time and place.",
+          ],
+        },
+        {
+          h: "Save and compare charts",
+          p: [
+            "Create a free account to save charts for yourself, your partner, friends or family and come back to them anytime from My Charts.",
+          ],
+        },
+      ],
+      faq: [
+        {
+          q: "Is this birth chart calculator really free?",
+          a: "Yes. The chart and its core interpretation are free and require no signup.",
+        },
+        {
+          q: "Which house system do you use?",
+          a: "Whole Sign houses, the oldest house system, where each sign fills one whole house.",
+        },
+        {
+          q: "Does it work for births outside Greece?",
+          a: "Yes. Any city worldwide works, including the US, UK, Canada and Australia.",
+        },
+      ],
+      faqTitle: "Frequently asked questions",
+      ctaTitle: "Calculate your birth chart",
+      ctaText: "It takes less than a minute.",
+      ctaLabel: "Start my chart",
       ctaHref: "/en",
     },
   },

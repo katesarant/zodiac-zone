@@ -19,6 +19,8 @@ export function SiteFooter() {
     { href: lang === "en" ? "/en/zodiac" : "/el/zodia", label: s.nav.forecasts },
     { href: guidePath("rising", lang), label: guide("rising", lang).title },
     { href: guidePath("readChart", lang), label: guide("readChart", lang).title },
+    { href: guidePath("moon", lang), label: guide("moon", lang).title },
+    { href: guidePath("calculator", lang), label: guide("calculator", lang).title },
     { href: sitePagePath("about", lang), label: s.nav.about },
     { href: sitePagePath("contact", lang), label: s.nav.contact },
     { href: sitePagePath("privacy", lang), label: s.nav.privacy },
