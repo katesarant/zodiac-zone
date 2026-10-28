@@ -46,9 +46,17 @@ export const Route = createFileRoute("/api/public/publish-reels")({
         if (!item) return json({ ok: true, published: 0 });
 
         try {
+          let videoUrl = item.video_url;
+          if (!/^https?:\/\//.test(videoUrl)) {
+            const { data: signed, error: sErr } = await supabaseAdmin.storage
+              .from("reels")
+              .createSignedUrl(videoUrl, 60 * 60);
+            if (sErr || !signed) throw new Error(`signed url: ${sErr?.message}`);
+            videoUrl = signed.signedUrl;
+          }
           const container = await graph("POST", `${config.ig_user_id}/media`, {
             media_type: "REELS",
-            video_url: item.video_url,
+            video_url: videoUrl,
             caption: item.caption,
             access_token: config.access_token,
           });
