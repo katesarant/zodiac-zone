@@ -4,6 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 
 import type { Lang } from "@/lib/astro/types";
 import { dict, tSign } from "@/lib/astro/i18n";
+import { stripTonos } from "@/lib/greek";
 import { SIGNS } from "@/lib/astro/engine";
 import { SIGN_GLYPHS, formatLongDate, periodPath, signPath } from "@/lib/horoscope/signs";
 import { getAllSignsFn } from "@/lib/horoscope/horoscope.functions";
@@ -33,7 +34,7 @@ export function SignsIndexPage({ lang, dataKey }: { lang: Lang; dataKey: string 
       <div className="mt-6 flex flex-wrap items-end gap-4">
         <label className="block w-auto min-w-[10rem]">
           <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-            {z.periodLabel}
+            {stripTonos(z.periodLabel)}
           </span>
           <select
             value={period}

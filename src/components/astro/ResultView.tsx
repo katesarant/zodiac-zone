@@ -1,5 +1,6 @@
 import { dict, ordinalHouse, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
 import type { AtomAspect, AtomPlacement, Lang, Synthesis } from "@/lib/astro/types";
+import { stripTonos } from "@/lib/greek";
 
 /* ── Helpers ──────────────────────────────────────────────────────────── */
 
@@ -7,7 +8,7 @@ import type { AtomAspect, AtomPlacement, Lang, Synthesis } from "@/lib/astro/typ
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h4 className="mb-1.5 text-xs uppercase tracking-[0.2em] text-primary">{title}</h4>
+      <h4 className="mb-1.5 text-xs uppercase tracking-[0.2em] text-primary">{stripTonos(title)}</h4>
       <div className="text-sm leading-relaxed text-foreground/90" style={{ maxWidth: "65ch" }}>
         {children}
       </div>
@@ -169,7 +170,7 @@ export function ResultView({ kind, data, lang }: { kind: string; data: unknown; 
         {s.signature && (
           <header className="space-y-4">
             <p className="text-xs uppercase text-muted-foreground" style={{ letterSpacing: "0.3em" }}>
-              {t.signatureTitle}
+              {stripTonos(t.signatureTitle)}
             </p>
             <p
               className="font-display text-foreground"
@@ -232,7 +233,7 @@ export function ResultView({ kind, data, lang }: { kind: string; data: unknown; 
             }}
           >
             <p className="mb-3 text-xs uppercase text-primary" style={{ letterSpacing: "0.25em" }}>
-              {t.oneThing}
+              {stripTonos(t.oneThing)}
             </p>
             <p
               className="font-display text-foreground"

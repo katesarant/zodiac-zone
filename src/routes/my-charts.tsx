@@ -6,6 +6,7 @@ import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
 import { ResultView } from "@/components/astro/ResultView";
 import { useLang } from "@/hooks/use-lang";
 import { dict, tSign } from "@/lib/astro/i18n";
+import { stripTonos } from "@/lib/greek";
 import { generateSynthesisFn } from "@/lib/astro/interpretation.functions";
 import type { ChartJson } from "@/lib/astro/types";
 import {
@@ -210,7 +211,7 @@ function MyChartsPage() {
               </select>
             </div>
             <nav className="hidden sm:block">
-              <p className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">{t.folders}</p>
+              <p className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">{stripTonos(t.folders)}</p>
               <ul className="space-y-1">
                 {folderOptions.map((f) => (
                   <li key={f.id}>
@@ -276,12 +277,12 @@ function MyChartsPage() {
                     <thead>
                       <tr className="border-b border-border text-xs uppercase tracking-widest text-muted-foreground">
                         <th className="py-2 pr-2 font-normal">★</th>
-                        <th className="py-2 pr-3 font-normal">{t.colName}</th>
-                        <th className="py-2 pr-3 font-normal">{t.colBirthDate}</th>
-                        <th className="py-2 pr-3 font-normal">{t.colTime}</th>
-                        <th className="py-2 pr-3 font-normal">{t.colPlace}</th>
-                        <th className="py-2 pr-3 font-normal">{t.colSun}</th>
-                        <th className="py-2 font-normal">{t.colActions}</th>
+                        <th className="py-2 pr-3 font-normal">{stripTonos(t.colName)}</th>
+                        <th className="py-2 pr-3 font-normal">{stripTonos(t.colBirthDate)}</th>
+                        <th className="py-2 pr-3 font-normal">{stripTonos(t.colTime)}</th>
+                        <th className="py-2 pr-3 font-normal">{stripTonos(t.colPlace)}</th>
+                        <th className="py-2 pr-3 font-normal">{stripTonos(t.colSun)}</th>
+                        <th className="py-2 font-normal">{stripTonos(t.colActions)}</th>
                       </tr>
                     </thead>
                     <tbody>

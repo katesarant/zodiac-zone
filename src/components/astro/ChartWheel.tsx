@@ -1,5 +1,6 @@
 import { SIGNS } from "@/lib/astro/engine";
 import { dict, ordinalHouse, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
+import { stripTonos } from "@/lib/greek";
 import type { ChartJson, Lang } from "@/lib/astro/types";
 
 const GLYPHS: Record<string, string> = {
@@ -192,7 +193,7 @@ export function ChartTables({ chart, lang }: { chart: ChartJson; lang: Lang }) {
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <section>
-        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">{t.planets}</h4>
+        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">{stripTonos(t.planets)}</h4>
         <ul className="divide-y divide-border text-sm">
           {chart.planets.map((p) => (
             <li key={p.name} className="flex items-center justify-between py-1.5">
@@ -224,7 +225,7 @@ export function ChartTables({ chart, lang }: { chart: ChartJson; lang: Lang }) {
       </section>
 
       <section>
-        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">{t.aspects}</h4>
+        <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-primary">{stripTonos(t.aspects)}</h4>
         <ul className="divide-y divide-border text-sm">
           {chart.aspects.map((a, i) => (
             <li key={i} className="flex items-center justify-between py-1.5">
