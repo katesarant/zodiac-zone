@@ -100,6 +100,11 @@ const EL = {
   footer:
     "Το περιεχόμενο προορίζεται για ψυχαγωγία και αυτογνωσία. Δεν αντικαθιστά ιατρική, ψυχολογική, νομική ή οικονομική συμβουλή.",
 
+  chartsCta: {
+    title: "Οι χάρτες σου",
+    body: "Ξαναδώσε τους χάρτες που έφτιαξες, κατέβασέ τους ή μοιράσου τον κωδικό τους.",
+  },
+
   core: "Ο πυρήνας",
   arena: "Πού φαίνεται",
   growth: "Το στοίχημα",
@@ -484,6 +489,11 @@ const EN: typeof EL = {
 
   footer:
     "This content is for entertainment and self-reflection. It is not medical, psychological, legal or financial advice.",
+
+  chartsCta: {
+    title: "Your charts",
+    body: "Open the charts you made again, download them, or share their code.",
+  },
 
   core: "The core",
   arena: "Where it shows",

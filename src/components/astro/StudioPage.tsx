@@ -1,4 +1,6 @@
 import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { ChartTables, ChartWheel } from "@/components/astro/ChartWheel";
