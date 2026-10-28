@@ -38,6 +38,7 @@ export interface AnalyticsSnapshot {
   langs: { lang: string; views: number }[];
   charts: { total: number; last30: number };
   instagram: { day: string; published: number; failed: number; pending: number }[];
+  reels: { day: string; theme: string | null; status: string; error: string | null }[];
   horoscopes: { period: string; lang: string; key: string; generatedAt: string }[];
 }
 
