@@ -6,11 +6,14 @@ const GRAPH = "https://graph.facebook.com/v21.0";
 
 async function graph(method: "GET" | "POST", path: string, params: Record<string, string>) {
   const qs = new URLSearchParams(params).toString();
-  const res = await fetch(method === "GET" ? `${GRAPH}/${path}?${qs}` : `${GRAPH}/${path}`, {
-    method,
-    headers: method === "POST" ? { "Content-Type": "application/x-www-form-urlencoded" } : undefined,
-    body: method === "POST" ? qs : undefined,
-  });
+  const res =
+    method === "GET"
+      ? await fetch(`${GRAPH}/${path}?${qs}`)
+      : await fetch(`${GRAPH}/${path}`, {
+          method,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: qs,
+        });
   const text = await res.text();
   if (!res.ok) throw new Error(`Instagram API [${res.status}]: ${text}`);
   return JSON.parse(text) as { id?: string; status_code?: string };
