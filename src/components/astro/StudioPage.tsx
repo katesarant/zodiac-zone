@@ -25,6 +25,7 @@ import {
 import { dict, tAspect, tPlanet, tSign } from "@/lib/astro/i18n";
 import { ASPECTS as ASPECT_DEFS, PLANETS as PLANET_NAMES, SIGNS as SIGN_NAMES } from "@/lib/astro/vocab";
 import type { ChartJson, Lang } from "@/lib/astro/types";
+import { stripTonos } from "@/lib/greek";
 
 const SIGNS: string[] = [...SIGN_NAMES];
 const PLANETS: string[] = [...PLANET_NAMES];
@@ -230,7 +231,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           <div className="space-y-4">
             <label className="block">
               <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                {t.chartName}
+                {stripTonos(t.chartName)}
               </span>
               <input
                 type="text"
@@ -243,19 +244,19 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
             <div className="grid gap-4 sm:grid-cols-3">
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                  {t.birthDate}
+                  {stripTonos(t.birthDate)}
                 </span>
                 <DatePicker value={birthDate} onChange={setBirthDate} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                  {t.birthTime}
+                  {stripTonos(t.birthTime)}
                 </span>
                 <TimePicker value={birthTime} onChange={setBirthTime} />
               </label>
               <label className="block">
                 <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                  {t.birthPlace}
+                  {stripTonos(t.birthPlace)}
                 </span>
                 <input
                   type="text"
@@ -324,7 +325,7 @@ export function StudioPage({ initialLang = "el" }: { initialLang?: Lang }) {
           </DialogHeader>
           <label className="block">
             <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-              {t.library.label}
+              {stripTonos(t.library.label)}
             </span>
             <input type="text" className={field} value={saveLabel} onChange={(e) => setSaveLabel(e.target.value)} />
           </label>
@@ -401,7 +402,7 @@ function Select({
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">{label}</span>
+      <span className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">{stripTonos(label)}</span>
       <select className={field} value={value} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o} value={o}>
