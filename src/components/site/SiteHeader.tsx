@@ -20,12 +20,16 @@ export function SiteHeader() {
   const z = dict(lang).zodiac;
   const s = dict(lang).site;
   const zodiacHref = lang === "en" ? "/en/zodiac" : "/el/zodia";
+  const chartsActive = pathname.startsWith("/my-charts");
+  const zodiacActive = pathname.startsWith(zodiacHref);
 
   const menuLinks = [
     { href: `/${lang}`, label: s.nav.home },
     { href: zodiacHref, label: s.nav.forecasts },
     { href: guidePath("rising", lang), label: guide("rising", lang).title },
     { href: guidePath("readChart", lang), label: guide("readChart", lang).title },
+    { href: guidePath("moon", lang), label: guide("moon", lang).title },
+    { href: guidePath("calculator", lang), label: guide("calculator", lang).title },
     { href: sitePagePath("about", lang), label: s.nav.about },
     { href: sitePagePath("contact", lang), label: s.nav.contact },
     { href: sitePagePath("privacy", lang), label: s.nav.privacy },
@@ -46,19 +50,21 @@ export function SiteHeader() {
 
         <div className="flex min-w-0 items-center justify-end gap-2 md:gap-3">
           <nav className="hidden min-w-0 items-center gap-2 md:flex md:gap-3">
-            <PathLink
-              href={zodiacHref}
-              className="inline-flex items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary"
-            >
-              {z.nav}
-            </PathLink>
-
             <Link
               to="/my-charts"
-              className="inline-flex items-center justify-center min-h-11 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:border-primary/50 hover:bg-secondary"
+              aria-current={chartsActive ? "page" : undefined}
+              className={`inline-flex items-center justify-center min-h-11 rounded-lg border px-4 py-2 text-sm font-semibold transition-all duration-200 ${chartsActive ? "border-primary bg-primary text-primary-foreground shadow-md" : "border-primary/70 bg-primary/90 text-primary-foreground hover:bg-primary"}`}
             >
               {t.myCharts}
             </Link>
+
+            <PathLink
+              href={zodiacHref}
+              aria-current={zodiacActive ? "page" : undefined}
+              className={`inline-flex items-center justify-center min-h-11 rounded-lg border px-4 py-2 text-sm font-medium transition-all duration-200 ${zodiacActive ? "border-primary text-primary bg-secondary" : "border-border text-foreground hover:border-primary/50 hover:bg-secondary"}`}
+            >
+              {z.nav}
+            </PathLink>
           </nav>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -73,6 +79,13 @@ export function SiteHeader() {
                 <SheetTitle className="font-display">My Zodiac Maps</SheetTitle>
               </SheetHeader>
               <div className="mt-6 flex flex-col gap-1">
+                <Link
+                  to="/my-charts"
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-3 py-2 font-body text-sm font-semibold text-primary transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  {t.myCharts}
+                </Link>
                 {menuLinks.map((l) => (
                   <PathLink
                     key={l.href}
@@ -83,13 +96,6 @@ export function SiteHeader() {
                     {l.label}
                   </PathLink>
                 ))}
-                <Link
-                  to="/my-charts"
-                  onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2 font-body text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                >
-                  {t.myCharts}
-                </Link>
               </div>
             </SheetContent>
           </Sheet>

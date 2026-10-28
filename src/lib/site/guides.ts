@@ -253,7 +253,7 @@ const GUIDES: Record<Lang, Record<GuideKey, GuideContent>> = {
         },
         {
           q: "Ποιο σύστημα οίκων χρησιμοποιείτε;",
-          a: "Placidus, το πιο διαδεδομένο σύστημα στη σύγχρονη δυτική αστρολογία.",
+          a: "Ολόκληρα ζώδια (Whole Sign), το αρχαιότερο σύστημα, όπου κάθε ζώδιο είναι ένας ολόκληρος οίκος.",
         },
       ],
       faqTitle: "Συχνές ερωτήσεις",
@@ -495,7 +495,7 @@ const GUIDES: Record<Lang, Record<GuideKey, GuideContent>> = {
         },
         {
           q: "Which house system do you use?",
-          a: "Placidus by default, the most widely used system in modern Western astrology.",
+          a: "Whole Sign houses, the oldest house system, where each sign fills one whole house.",
         },
         {
           q: "Does it work for births outside Greece?",
