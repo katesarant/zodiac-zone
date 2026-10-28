@@ -5,16 +5,16 @@ import { StudioPage } from "@/components/astro/StudioPage";
 export const Route = createFileRoute("/en/")({
   head: () => ({
     meta: [
-      { title: "Birth Chart & Interpretation — MyZodiacMaps" },
+      { title: "Free Birth Chart Calculator & Natal Chart Reading — MyZodiacMaps" },
       {
         name: "description",
         content:
-          "Calculate your natal chart and read a clear, psychological interpretation of planets, aspects and synthesis in English.",
+          "Free birth chart calculator: find your sun, moon and rising sign and get a clear natal chart reading of planets, houses and aspects. No signup.",
       },
-      { property: "og:title", content: "Birth Chart & Interpretation — MyZodiacMaps" },
+      { property: "og:title", content: "Free Birth Chart Calculator & Natal Chart Reading — MyZodiacMaps" },
       {
         property: "og:description",
-        content: "Natal chart, aspects and synthesis with a clear psychological reading in English.",
+        content: "Find your sun, moon and rising sign with a free natal chart and a clear psychological reading.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://myzodiacmaps.gr/en" },
