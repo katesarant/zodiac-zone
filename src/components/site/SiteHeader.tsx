@@ -60,7 +60,6 @@ export function SiteHeader() {
 
             <PathLink
               href={zodiacHref}
-              aria-current={zodiacActive ? "page" : undefined}
               className={`inline-flex items-center justify-center min-h-11 rounded-lg border px-4 py-2 text-sm font-medium transition-all duration-200 ${zodiacActive ? "border-primary text-primary bg-secondary" : "border-border text-foreground hover:border-primary/50 hover:bg-secondary"}`}
             >
               {z.nav}
