@@ -233,6 +233,31 @@ export function AnalyticsDashboard({ lang }: { lang: Lang }) {
 
       <Card className="mt-6">
         <CardHeader>
+          <CardTitle className="text-base">Instagram Reels</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {data.reels.length === 0 ? (
+            <p className="text-sm text-muted-foreground">{t.none}</p>
+          ) : (
+            <ul className="space-y-1 text-sm">
+              {data.reels.map((r, i) => (
+                <li key={`${r.day}-${i}`} className="flex justify-between gap-3">
+                  <span className="tabular-nums">
+                    {r.day} {r.theme ? `· ${r.theme}` : ""}
+                  </span>
+                  <span className="text-muted-foreground" title={r.error ?? undefined}>
+                    {r.status === "published" ? t.published : r.status === "failed" ? t.failed : t.pending}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
+
+
+      <Card className="mt-6">
+        <CardHeader>
           <CardTitle className="text-base">{t.horoscopes}</CardTitle>
         </CardHeader>
         <CardContent>

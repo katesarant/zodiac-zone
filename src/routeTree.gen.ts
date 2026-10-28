@@ -37,6 +37,7 @@ import { Route as EnWhatIsMyRisingSignRouteImport } from './routes/en.what-is-my
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
 import { Route as ApiPublicPublishInstagramRouteImport } from './routes/api/public/publish-instagram'
+import { Route as ApiPublicPublishReelsRouteImport } from './routes/api/public/publish-reels'
 import { Route as ApiPublicPublishWatchRouteImport } from './routes/api/public/publish-watch'
 import { Route as ApiPublicRenderStoriesRouteImport } from './routes/api/public/render-stories'
 import { Route as ElZodiaIndexRouteImport } from './routes/el.zodia.index'
@@ -198,6 +199,11 @@ const ApiPublicPublishInstagramRoute =
     path: '/api/public/publish-instagram',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicPublishReelsRoute = ApiPublicPublishReelsRouteImport.update({
+  id: '/api/public/publish-reels',
+  path: '/api/public/publish-reels',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicPublishWatchRoute = ApiPublicPublishWatchRouteImport.update({
   id: '/api/public/publish-watch',
   path: '/api/public/publish-watch',
@@ -304,6 +310,7 @@ export interface FileRoutesByFullPath {
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
   '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
+  '/api/public/publish-reels': typeof ApiPublicPublishReelsRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
@@ -347,6 +354,7 @@ export interface FileRoutesByTo {
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
   '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
+  '/api/public/publish-reels': typeof ApiPublicPublishReelsRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia': typeof ElZodiaIndexRoute
@@ -393,6 +401,7 @@ export interface FileRoutesById {
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/generate-horoscopes': typeof ApiPublicGenerateHoroscopesRoute
   '/api/public/publish-instagram': typeof ApiPublicPublishInstagramRoute
+  '/api/public/publish-reels': typeof ApiPublicPublishReelsRoute
   '/api/public/publish-watch': typeof ApiPublicPublishWatchRoute
   '/api/public/render-stories': typeof ApiPublicRenderStoriesRoute
   '/el/zodia/': typeof ElZodiaIndexRoute
@@ -440,6 +449,7 @@ export interface FileRouteTypes {
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
     | '/api/public/publish-instagram'
+    | '/api/public/publish-reels'
     | '/api/public/publish-watch'
     | '/api/public/render-stories'
     | '/el/zodia/'
@@ -483,6 +493,7 @@ export interface FileRouteTypes {
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
     | '/api/public/publish-instagram'
+    | '/api/public/publish-reels'
     | '/api/public/publish-watch'
     | '/api/public/render-stories'
     | '/el/zodia'
@@ -528,6 +539,7 @@ export interface FileRouteTypes {
     | '/api/public/build-info'
     | '/api/public/generate-horoscopes'
     | '/api/public/publish-instagram'
+    | '/api/public/publish-reels'
     | '/api/public/publish-watch'
     | '/api/public/render-stories'
     | '/el/zodia/'
@@ -554,6 +566,7 @@ export interface RootRouteChildren {
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicGenerateHoroscopesRoute: typeof ApiPublicGenerateHoroscopesRoute
   ApiPublicPublishInstagramRoute: typeof ApiPublicPublishInstagramRoute
+  ApiPublicPublishReelsRoute: typeof ApiPublicPublishReelsRoute
   ApiPublicPublishWatchRoute: typeof ApiPublicPublishWatchRoute
   ApiPublicRenderStoriesRoute: typeof ApiPublicRenderStoriesRoute
   ApiPublicStoryImageDayFileRoute: typeof ApiPublicStoryImageDayFileRoute
@@ -757,6 +770,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPublishInstagramRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/publish-reels': {
+      id: '/api/public/publish-reels'
+      path: '/api/public/publish-reels'
+      fullPath: '/api/public/publish-reels'
+      preLoaderRoute: typeof ApiPublicPublishReelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/publish-watch': {
       id: '/api/public/publish-watch'
       path: '/api/public/publish-watch'
@@ -954,6 +974,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicGenerateHoroscopesRoute: ApiPublicGenerateHoroscopesRoute,
   ApiPublicPublishInstagramRoute: ApiPublicPublishInstagramRoute,
+  ApiPublicPublishReelsRoute: ApiPublicPublishReelsRoute,
   ApiPublicPublishWatchRoute: ApiPublicPublishWatchRoute,
   ApiPublicRenderStoriesRoute: ApiPublicRenderStoriesRoute,
   ApiPublicStoryImageDayFileRoute: ApiPublicStoryImageDayFileRoute,
