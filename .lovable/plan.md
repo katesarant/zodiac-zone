@@ -3,7 +3,8 @@
 Δεν χρειάζεται αναγνωριστικό σελίδας (Page ID) ούτε σελίδα Facebook. Χρειάζεται μόνο το token που ξεκινά με «IG».
 
 ## Βήματα για εσάς (από υπολογιστή)
-1. developers.facebook.com → η εφαρμογή σας → **Instagram** → **API setup with Instagram login**.
+Το Meta Business Suite δεν βγάζει αυτό το token. Ανοίξτε άλλη καρτέλα στο **developers.facebook.com** (με τον ίδιο λογαριασμό).
+1. developers.facebook.com → **My Apps** → η εφαρμογή σας (ή **Create App** → τύπος **Business**) → **Instagram** → **API setup with Instagram login**.
 2. Στο βήμα **«Generate access tokens»** πατάτε **Add account** και συνδέετε το @myzodiacmaps.
 3. Πατάτε **Generate token** δίπλα στον λογαριασμό και εγκρίνετε. Βγαίνει ένα μακρύ κείμενο που ξεκινά με **IG**.
 4. Αν ο αριθμός λογαριασμού εκεί δεν είναι 17841453052345222, σημειώστε τον.
