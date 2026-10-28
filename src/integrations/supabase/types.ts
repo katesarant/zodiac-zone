@@ -179,6 +179,45 @@ export type Database = {
         }
         Relationships: []
       }
+      instagram_reels_queue: {
+        Row: {
+          caption: string
+          created_at: string
+          error: string | null
+          id: string
+          ig_media_id: string | null
+          published_at: string | null
+          scheduled_for: string
+          status: string
+          theme: string | null
+          video_url: string
+        }
+        Insert: {
+          caption?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          ig_media_id?: string | null
+          published_at?: string | null
+          scheduled_for: string
+          status?: string
+          theme?: string | null
+          video_url: string
+        }
+        Update: {
+          caption?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          ig_media_id?: string | null
+          published_at?: string | null
+          scheduled_for?: string
+          status?: string
+          theme?: string | null
+          video_url?: string
+        }
+        Relationships: []
+      }
       interpretations: {
         Row: {
           chart_hash: string
