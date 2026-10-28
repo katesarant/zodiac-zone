@@ -17,18 +17,22 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ElIndexRouteImport } from './routes/el.index'
 import { Route as ElAnalitikaRouteImport } from './routes/el.analitika'
 import { Route as ElEpikoinoniaRouteImport } from './routes/el.epikoinonia'
+import { Route as ElGenethliosChartisDoreanRouteImport } from './routes/el.genethlios-chartis-dorean'
 import { Route as ElOroiChrisisRouteImport } from './routes/el.oroi-chrisis'
 import { Route as ElPolitikiAporritouRouteImport } from './routes/el.politiki-aporritou'
 import { Route as ElPwsDiavazwGenethlioChartiRouteImport } from './routes/el.pws-diavazw-genethlio-charti'
 import { Route as ElSchetikaRouteImport } from './routes/el.schetika'
+import { Route as ElSeTiZodioEinaiISeliniMouRouteImport } from './routes/el.se-ti-zodio-einai-i-selini-mou'
 import { Route as ElTiOroskopoEhoRouteImport } from './routes/el.ti-oroskopo-eho'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAnalyticsRouteImport } from './routes/en.analytics'
+import { Route as EnBirthChartCalculatorRouteImport } from './routes/en.birth-chart-calculator'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnHowToReadBirthChartRouteImport } from './routes/en.how-to-read-birth-chart'
 import { Route as EnPrivacyRouteImport } from './routes/en.privacy'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
+import { Route as EnWhatIsMyMoonSignRouteImport } from './routes/en.what-is-my-moon-sign'
 import { Route as EnWhatIsMyRisingSignRouteImport } from './routes/en.what-is-my-rising-sign'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiPublicGenerateHoroscopesRouteImport } from './routes/api/public/generate-horoscopes'
@@ -89,6 +93,12 @@ const ElEpikoinoniaRoute = ElEpikoinoniaRouteImport.update({
   path: '/epikoinonia',
   getParentRoute: () => ElRoute,
 } as any)
+const ElGenethliosChartisDoreanRoute =
+  ElGenethliosChartisDoreanRouteImport.update({
+    id: '/genethlios-chartis-dorean',
+    path: '/genethlios-chartis-dorean',
+    getParentRoute: () => ElRoute,
+  } as any)
 const ElOroiChrisisRoute = ElOroiChrisisRouteImport.update({
   id: '/oroi-chrisis',
   path: '/oroi-chrisis',
@@ -110,6 +120,12 @@ const ElSchetikaRoute = ElSchetikaRouteImport.update({
   path: '/schetika',
   getParentRoute: () => ElRoute,
 } as any)
+const ElSeTiZodioEinaiISeliniMouRoute =
+  ElSeTiZodioEinaiISeliniMouRouteImport.update({
+    id: '/se-ti-zodio-einai-i-selini-mou',
+    path: '/se-ti-zodio-einai-i-selini-mou',
+    getParentRoute: () => ElRoute,
+  } as any)
 const ElTiOroskopoEhoRoute = ElTiOroskopoEhoRouteImport.update({
   id: '/ti-oroskopo-eho',
   path: '/ti-oroskopo-eho',
@@ -130,6 +146,11 @@ const EnAnalyticsRoute = EnAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => EnRoute,
 } as any)
+const EnBirthChartCalculatorRoute = EnBirthChartCalculatorRouteImport.update({
+  id: '/birth-chart-calculator',
+  path: '/birth-chart-calculator',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnContactRoute = EnContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -148,6 +169,11 @@ const EnPrivacyRoute = EnPrivacyRouteImport.update({
 const EnTermsRoute = EnTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnWhatIsMyMoonSignRoute = EnWhatIsMyMoonSignRouteImport.update({
+  id: '/what-is-my-moon-sign',
+  path: '/what-is-my-moon-sign',
   getParentRoute: () => EnRoute,
 } as any)
 const EnWhatIsMyRisingSignRoute = EnWhatIsMyRisingSignRouteImport.update({
@@ -257,17 +283,21 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/analitika': typeof ElAnalitikaRoute
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
+  '/el/genethlios-chartis-dorean': typeof ElGenethliosChartisDoreanRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/se-ti-zodio-einai-i-selini-mou': typeof ElSeTiZodioEinaiISeliniMouRoute
   '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
+  '/en/birth-chart-calculator': typeof EnBirthChartCalculatorRoute
   '/en/contact': typeof EnContactRoute
   '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-moon-sign': typeof EnWhatIsMyMoonSignRoute
   '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
@@ -296,17 +326,21 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/analitika': typeof ElAnalitikaRoute
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
+  '/el/genethlios-chartis-dorean': typeof ElGenethliosChartisDoreanRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/se-ti-zodio-einai-i-selini-mou': typeof ElSeTiZodioEinaiISeliniMouRoute
   '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
+  '/en/birth-chart-calculator': typeof EnBirthChartCalculatorRoute
   '/en/contact': typeof EnContactRoute
   '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-moon-sign': typeof EnWhatIsMyMoonSignRoute
   '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el': typeof ElIndexRoute
   '/en': typeof EnIndexRoute
@@ -338,17 +372,21 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/el/analitika': typeof ElAnalitikaRoute
   '/el/epikoinonia': typeof ElEpikoinoniaRoute
+  '/el/genethlios-chartis-dorean': typeof ElGenethliosChartisDoreanRoute
   '/el/oroi-chrisis': typeof ElOroiChrisisRoute
   '/el/politiki-aporritou': typeof ElPolitikiAporritouRoute
   '/el/pws-diavazw-genethlio-charti': typeof ElPwsDiavazwGenethlioChartiRoute
   '/el/schetika': typeof ElSchetikaRoute
+  '/el/se-ti-zodio-einai-i-selini-mou': typeof ElSeTiZodioEinaiISeliniMouRoute
   '/el/ti-oroskopo-eho': typeof ElTiOroskopoEhoRoute
   '/en/about': typeof EnAboutRoute
   '/en/analytics': typeof EnAnalyticsRoute
+  '/en/birth-chart-calculator': typeof EnBirthChartCalculatorRoute
   '/en/contact': typeof EnContactRoute
   '/en/how-to-read-birth-chart': typeof EnHowToReadBirthChartRoute
   '/en/privacy': typeof EnPrivacyRoute
   '/en/terms': typeof EnTermsRoute
+  '/en/what-is-my-moon-sign': typeof EnWhatIsMyMoonSignRoute
   '/en/what-is-my-rising-sign': typeof EnWhatIsMyRisingSignRoute
   '/el/': typeof ElIndexRoute
   '/en/': typeof EnIndexRoute
@@ -381,17 +419,21 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/el/analitika'
     | '/el/epikoinonia'
+    | '/el/genethlios-chartis-dorean'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
+    | '/el/se-ti-zodio-einai-i-selini-mou'
     | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
+    | '/en/birth-chart-calculator'
     | '/en/contact'
     | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-moon-sign'
     | '/en/what-is-my-rising-sign'
     | '/el/'
     | '/en/'
@@ -420,17 +462,21 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/el/analitika'
     | '/el/epikoinonia'
+    | '/el/genethlios-chartis-dorean'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
+    | '/el/se-ti-zodio-einai-i-selini-mou'
     | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
+    | '/en/birth-chart-calculator'
     | '/en/contact'
     | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-moon-sign'
     | '/en/what-is-my-rising-sign'
     | '/el'
     | '/en'
@@ -461,17 +507,21 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/el/analitika'
     | '/el/epikoinonia'
+    | '/el/genethlios-chartis-dorean'
     | '/el/oroi-chrisis'
     | '/el/politiki-aporritou'
     | '/el/pws-diavazw-genethlio-charti'
     | '/el/schetika'
+    | '/el/se-ti-zodio-einai-i-selini-mou'
     | '/el/ti-oroskopo-eho'
     | '/en/about'
     | '/en/analytics'
+    | '/en/birth-chart-calculator'
     | '/en/contact'
     | '/en/how-to-read-birth-chart'
     | '/en/privacy'
     | '/en/terms'
+    | '/en/what-is-my-moon-sign'
     | '/en/what-is-my-rising-sign'
     | '/el/'
     | '/en/'
@@ -567,6 +617,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ElEpikoinoniaRouteImport
       parentRoute: typeof ElRoute
     }
+    '/el/genethlios-chartis-dorean': {
+      id: '/el/genethlios-chartis-dorean'
+      path: '/genethlios-chartis-dorean'
+      fullPath: '/el/genethlios-chartis-dorean'
+      preLoaderRoute: typeof ElGenethliosChartisDoreanRouteImport
+      parentRoute: typeof ElRoute
+    }
     '/el/oroi-chrisis': {
       id: '/el/oroi-chrisis'
       path: '/oroi-chrisis'
@@ -593,6 +650,13 @@ declare module '@tanstack/react-router' {
       path: '/schetika'
       fullPath: '/el/schetika'
       preLoaderRoute: typeof ElSchetikaRouteImport
+      parentRoute: typeof ElRoute
+    }
+    '/el/se-ti-zodio-einai-i-selini-mou': {
+      id: '/el/se-ti-zodio-einai-i-selini-mou'
+      path: '/se-ti-zodio-einai-i-selini-mou'
+      fullPath: '/el/se-ti-zodio-einai-i-selini-mou'
+      preLoaderRoute: typeof ElSeTiZodioEinaiISeliniMouRouteImport
       parentRoute: typeof ElRoute
     }
     '/el/ti-oroskopo-eho': {
@@ -623,6 +687,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnAnalyticsRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/birth-chart-calculator': {
+      id: '/en/birth-chart-calculator'
+      path: '/birth-chart-calculator'
+      fullPath: '/en/birth-chart-calculator'
+      preLoaderRoute: typeof EnBirthChartCalculatorRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/contact': {
       id: '/en/contact'
       path: '/contact'
@@ -649,6 +720,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/en/terms'
       preLoaderRoute: typeof EnTermsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/what-is-my-moon-sign': {
+      id: '/en/what-is-my-moon-sign'
+      path: '/what-is-my-moon-sign'
+      fullPath: '/en/what-is-my-moon-sign'
+      preLoaderRoute: typeof EnWhatIsMyMoonSignRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/what-is-my-rising-sign': {
@@ -790,10 +868,12 @@ declare module '@tanstack/react-router' {
 interface ElRouteChildren {
   ElAnalitikaRoute: typeof ElAnalitikaRoute
   ElEpikoinoniaRoute: typeof ElEpikoinoniaRoute
+  ElGenethliosChartisDoreanRoute: typeof ElGenethliosChartisDoreanRoute
   ElOroiChrisisRoute: typeof ElOroiChrisisRoute
   ElPolitikiAporritouRoute: typeof ElPolitikiAporritouRoute
   ElPwsDiavazwGenethlioChartiRoute: typeof ElPwsDiavazwGenethlioChartiRoute
   ElSchetikaRoute: typeof ElSchetikaRoute
+  ElSeTiZodioEinaiISeliniMouRoute: typeof ElSeTiZodioEinaiISeliniMouRoute
   ElTiOroskopoEhoRoute: typeof ElTiOroskopoEhoRoute
   ElIndexRoute: typeof ElIndexRoute
   ElZodiaIndexRoute: typeof ElZodiaIndexRoute
@@ -807,10 +887,12 @@ interface ElRouteChildren {
 const ElRouteChildren: ElRouteChildren = {
   ElAnalitikaRoute: ElAnalitikaRoute,
   ElEpikoinoniaRoute: ElEpikoinoniaRoute,
+  ElGenethliosChartisDoreanRoute: ElGenethliosChartisDoreanRoute,
   ElOroiChrisisRoute: ElOroiChrisisRoute,
   ElPolitikiAporritouRoute: ElPolitikiAporritouRoute,
   ElPwsDiavazwGenethlioChartiRoute: ElPwsDiavazwGenethlioChartiRoute,
   ElSchetikaRoute: ElSchetikaRoute,
+  ElSeTiZodioEinaiISeliniMouRoute: ElSeTiZodioEinaiISeliniMouRoute,
   ElTiOroskopoEhoRoute: ElTiOroskopoEhoRoute,
   ElIndexRoute: ElIndexRoute,
   ElZodiaIndexRoute: ElZodiaIndexRoute,
@@ -826,10 +908,12 @@ const ElRouteWithChildren = ElRoute._addFileChildren(ElRouteChildren)
 interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
   EnAnalyticsRoute: typeof EnAnalyticsRoute
+  EnBirthChartCalculatorRoute: typeof EnBirthChartCalculatorRoute
   EnContactRoute: typeof EnContactRoute
   EnHowToReadBirthChartRoute: typeof EnHowToReadBirthChartRoute
   EnPrivacyRoute: typeof EnPrivacyRoute
   EnTermsRoute: typeof EnTermsRoute
+  EnWhatIsMyMoonSignRoute: typeof EnWhatIsMyMoonSignRoute
   EnWhatIsMyRisingSignRoute: typeof EnWhatIsMyRisingSignRoute
   EnIndexRoute: typeof EnIndexRoute
   EnZodiacIndexRoute: typeof EnZodiacIndexRoute
@@ -843,10 +927,12 @@ interface EnRouteChildren {
 const EnRouteChildren: EnRouteChildren = {
   EnAboutRoute: EnAboutRoute,
   EnAnalyticsRoute: EnAnalyticsRoute,
+  EnBirthChartCalculatorRoute: EnBirthChartCalculatorRoute,
   EnContactRoute: EnContactRoute,
   EnHowToReadBirthChartRoute: EnHowToReadBirthChartRoute,
   EnPrivacyRoute: EnPrivacyRoute,
   EnTermsRoute: EnTermsRoute,
+  EnWhatIsMyMoonSignRoute: EnWhatIsMyMoonSignRoute,
   EnWhatIsMyRisingSignRoute: EnWhatIsMyRisingSignRoute,
   EnIndexRoute: EnIndexRoute,
   EnZodiacIndexRoute: EnZodiacIndexRoute,
