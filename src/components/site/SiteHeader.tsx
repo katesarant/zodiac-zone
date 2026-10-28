@@ -53,7 +53,7 @@ export function SiteHeader() {
             <Link
               to="/my-charts"
               aria-current={chartsActive ? "page" : undefined}
-              className={`inline-flex items-center justify-center min-h-11 rounded-lg border px-4 py-2 text-sm font-semibold transition-all duration-200 ${chartsActive ? "border-primary bg-primary text-primary-foreground shadow-md" : "border-primary/70 bg-primary/90 text-primary-foreground hover:bg-primary"}`}
+              className="inline-flex items-center justify-center min-h-11 rounded-lg border border-primary bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-200 hover:brightness-110"
             >
               {t.myCharts}
             </Link>
