@@ -2,7 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { athensToday, json, requireCronSecret } from "@/lib/stories/cron.server";
 
-const GRAPH = "https://graph.facebook.com/v21.0";
+// Tokens from "Instagram login" start with IG and use graph.instagram.com; Facebook-login tokens (EAA) use graph.facebook.com.
+let GRAPH = "https://graph.facebook.com/v21.0";
+function useGraphFor(token: string) {
+  GRAPH = token.startsWith("IG") ? "https://graph.instagram.com/v21.0" : "https://graph.facebook.com/v21.0";
+}
 
 async function graph(method: "GET" | "POST", path: string, params: Record<string, string>) {
   const qs = new URLSearchParams(params).toString();
@@ -33,6 +37,7 @@ export const Route = createFileRoute("/api/public/publish-reels")({
           .select("ig_user_id, access_token, enabled")
           .maybeSingle();
         if (!config?.enabled) return json({ ok: true, skipped: "instagram disabled" });
+        if (config?.access_token) useGraphFor(config.access_token);
         if (!config.ig_user_id || !config.access_token) {
           return json({ error: "instagram account not configured" }, 500);
         }
