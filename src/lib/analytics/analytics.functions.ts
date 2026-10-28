@@ -112,6 +112,12 @@ export const getAnalytics = createServerFn({ method: "POST" })
       igByDay.set(post.day, entry);
     }
 
+    const { data: reels } = await supabaseAdmin
+      .from("instagram_reels_queue")
+      .select("scheduled_for, theme, status, error")
+      .order("scheduled_for", { ascending: false })
+      .limit(14);
+
     const { data: horoscopes } = await supabaseAdmin
       .from("horoscopes")
       .select("period, lang, key, generated_at")
@@ -133,6 +139,12 @@ export const getAnalytics = createServerFn({ method: "POST" })
         .map(([day, v]) => ({ day, ...v }))
         .sort((a, b) => b.day.localeCompare(a.day))
         .slice(0, 14),
+      reels: (reels ?? []).map((r) => ({
+        day: r.scheduled_for,
+        theme: r.theme,
+        status: r.status,
+        error: r.error,
+      })),
       horoscopes: (horoscopes ?? []).map((h) => ({
         period: h.period,
         lang: h.lang,
