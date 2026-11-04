@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Blocked / waiting on user
-- Email access: user cannot sign in to aik33sant@gmail.com (no password). Decide: Google account recovery, or switch the site to a different email they can access. Affects contact-form delivery, Gmail connector, Search Console ownership, Meta/Instagram setup.
+- Email access: resolved — user now has both aik33sant@gmail.com and homebankofficial.app@gmail.com.
 - Instagram token (starts with "IG") not saved yet → then secure form, enable auto-posts, promo Reel publishes at 19:00.
 - Facebook page: user will create it with their own accessible email.
 - AdSense ca-pub-ID not received yet.
