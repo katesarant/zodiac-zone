@@ -3,6 +3,7 @@
 ## Blocked / waiting on user
 - Email access: resolved — user now has both aik33sant@gmail.com and homebankofficial.app@gmail.com.
 - Instagram token (starts with "IG") not saved yet → then secure form, enable auto-posts, promo Reel publishes at 19:00.
+- Instagram setup screenshot: user is configuring Facebook Login for Business with a system-user token; confirm the next permissions screen before collecting credentials.
 - Facebook page: user will create it with their own accessible email.
 - AdSense ca-pub-ID not received yet.
 - Publish current state to myzodiacmaps.gr (tab active-on-load + Greek uppercase without tonos are not live).
