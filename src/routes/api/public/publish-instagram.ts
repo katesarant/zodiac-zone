@@ -46,6 +46,7 @@ export const Route = createFileRoute("/api/public/publish-instagram")({
           .maybeSingle();
 
         if (!config?.enabled) return json({ ok: true, skipped: "instagram disabled", day });
+        if (process.env.INSTAGRAM_ACCESS_TOKEN) config.access_token = process.env.INSTAGRAM_ACCESS_TOKEN;
         if (config?.access_token) useGraphFor(config.access_token);
         if (!config.ig_user_id || !config.access_token) {
           return json({ error: "instagram account not configured" }, 500);
