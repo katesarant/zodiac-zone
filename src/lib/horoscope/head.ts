@@ -12,8 +12,9 @@ function alternates(elPath: string, enPath: string, current: string) {
   ];
 }
 
-function metaFor(title: string, description: string) {
+function metaFor(title: string, description: string, path: string) {
   return [
+    { property: "og:url", content: `${SITE_URL}${path}` },
     { title },
     { name: "description", content: description },
     { property: "og:title", content: title },
@@ -31,7 +32,7 @@ export function zodiacIndexHead(lang: Lang) {
       ? "Daily, monthly and yearly readings of the sky for all twelve zodiac signs."
       : "Ημερήσια, μηνιαία και ετήσια ανάγνωση του ουρανού για τα δώδεκα ζώδια.";
   return {
-    meta: metaFor(title, description),
+    meta: metaFor(title, description, zodiacIndexPath(lang)),
     links: alternates(zodiacIndexPath("el"), zodiacIndexPath("en"), zodiacIndexPath(lang)),
   };
 }
@@ -70,7 +71,7 @@ export function readingHead(opts: {
     : periodPath(signIndex, "en", period);
 
   return {
-    meta: metaFor(title, description),
+    meta: metaFor(title, description, lang === "el" ? elPath : enPath),
     links: alternates(elPath, enPath, lang === "el" ? elPath : enPath),
   };
 }
@@ -85,7 +86,7 @@ export function signLandingHead(lang: Lang, signIndex: number, key: string | nul
       ? `${sign} today, this month and this year — readings of the sky, updated daily.`
       : `${sign} σήμερα, τον μήνα και τη χρονιά — ανάγνωση του ουρανού, με ημερήσια ενημέρωση.`;
   return {
-    meta: metaFor(title, description),
+    meta: metaFor(title, description, signPath(signIndex, lang)),
     links: alternates(signPath(signIndex, "el"), signPath(signIndex, "en"), signPath(signIndex, lang)),
   };
 }
