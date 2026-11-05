@@ -19,6 +19,7 @@ export function sitePageHead(key: SitePageKey, lang: Lang) {
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}${current}` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
