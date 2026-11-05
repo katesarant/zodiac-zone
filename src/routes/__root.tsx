@@ -101,6 +101,8 @@ function NotFoundComponent() {
         >
           MyZodiacMaps
         </p>
+        <title>Η σελίδα δεν βρέθηκε (404) | MyZodiacMaps</title>
+        <meta name="robots" content="noindex, follow" />
 
         <h1
           className="mt-6 font-display font-semibold leading-none text-primary"
