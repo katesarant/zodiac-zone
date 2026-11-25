@@ -15,6 +15,13 @@
       "when": 1795584689086,
       "tag": "0001_restrict_interpretation_cache_access",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795585217761,
+      "tag": "0002_protect_analytics_password_access",
+      "breakpoints": true
     }
   ]
 }

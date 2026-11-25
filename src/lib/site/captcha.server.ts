@@ -11,6 +11,7 @@ function b64url(bytes: Uint8Array) {
 
 async function sign(payload: string) {
   const secret = process.env["CONTACT_CAPTCHA_SECRET"] ?? "";
+  if (!secret) throw new Error("captcha_unavailable");
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(secret),
@@ -25,12 +26,15 @@ async function sign(payload: string) {
 export type Challenge = { token: string; question: string };
 
 export async function createChallenge(lang: "el" | "en"): Promise<Challenge> {
-  const a = 1 + Math.floor(Math.random() * 9);
-  const b = 1 + Math.floor(Math.random() * 9);
-  const plus = Math.random() < 0.5;
+  const random = crypto.getRandomValues(new Uint8Array(3));
+  const a = 1 + (random[0] ?? 0) % 9;
+  const b = 1 + (random[1] ?? 0) % 9;
+  const plus = (random[2] ?? 0) % 2 === 0;
   const answer = plus ? a + b : Math.max(a, b) - Math.min(a, b);
-  const payload = `${answer}.${Date.now()}`;
-  const token = `${b64url(new TextEncoder().encode(payload))}.${await sign(payload)}`;
+  const nonce = b64url(crypto.getRandomValues(new Uint8Array(24)));
+  const payload = `v2.${nonce}.${Date.now()}`;
+  // Only a keyed proof is exposed, never the answer or an unkeyed answer hash.
+  const token = `${payload}.${await sign(`${payload}.${answer}`)}`;
 
   const op = plus ? "+" : "−";
   const [x, y] = plus ? [a, b] : [Math.max(a, b), Math.min(a, b)];
@@ -41,25 +45,21 @@ export async function createChallenge(lang: "el" | "en"): Promise<Challenge> {
 }
 
 export async function verifyChallenge(token: string, answer: string): Promise<boolean> {
-  const [encoded, sig] = String(token).split(".");
-  if (!encoded || !sig) return false;
-
-  let payload: string;
-  try {
-    const bin = atob(encoded.replace(/-/g, "+").replace(/_/g, "/"));
-    payload = new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
-  } catch {
-    return false;
-  }
-
-  if ((await sign(payload)) !== sig) return false;
-
-  const [expected, issuedAt] = payload.split(".");
+  const parts = String(token).split(".");
+  const [version, nonce, issuedAt, sig] = parts;
+  const submitted = String(answer).trim();
+  if (parts.length !== 4 || version !== "v2" || !nonce || !issuedAt || !sig) return false;
+  if (!/^[A-Za-z0-9_-]{32}$/.test(nonce) || !/^\d{13}$/.test(issuedAt)
+      || !/^[A-Za-z0-9_-]{43}$/.test(sig) || !/^\d{1,3}$/.test(submitted)) return false;
   const issued = Number(issuedAt);
   if (!Number.isFinite(issued)) return false;
 
   const age = Date.now() - issued;
   if (age > TTL_MS || age < MIN_MS) return false;
 
-  return String(answer).trim() === expected;
+  try {
+    return (await sign(`v2.${nonce}.${issuedAt}.${submitted}`)) === sig;
+  } catch {
+    return false;
+  }
 }

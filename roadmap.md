@@ -1,5 +1,10 @@
 # Roadmap
 
+## Selected security fixes
+- [x] Remove contact challenge answer disclosure and verify valid/invalid submissions.
+- [x] Restrict direct dashboard password access and verify both dashboard languages.
+- [x] Review intentional public forecasts without disabling visitor access.
+
 ## Blocked / waiting on user
 - Email access: resolved — user now has both aik33sant@gmail.com and homebankofficial.app@gmail.com.
 - Instagram token (starts with "IG") not saved yet → then secure form, enable auto-posts, promo Reel publishes at 19:00.
