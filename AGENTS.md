@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep page titles, descriptions and social-preview content on leaf content routes, not the root layout, so unrelated pages cannot inherit a homepage preview; omit explicit social images when no displayed page image qualifies.
+- Keep the interpretation cache server-only with no browser-role grants or read policies; validated chart-content lookups preserve generation without exposing the full cache.
