@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep page titles, descriptions and social-preview content on leaf content routes, not the root layout, so unrelated pages cannot inherit a homepage preview; omit explicit social images when no displayed page image qualifies.

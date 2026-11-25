@@ -12,14 +12,14 @@ function alternates(elPath: string, enPath: string, current: string) {
   ];
 }
 
-function metaFor(title: string, description: string, path: string) {
+function metaFor(title: string, description: string, path: string, type = "article") {
   return [
     { property: "og:url", content: `${SITE_URL}${path}` },
     { title },
     { name: "description", content: description },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
-    { property: "og:type", content: "article" },
+    { property: "og:type", content: type },
     { name: "twitter:card", content: "summary_large_image" },
   ];
 }
@@ -32,7 +32,7 @@ export function zodiacIndexHead(lang: Lang) {
       ? "Daily, monthly and yearly readings of the sky for all twelve zodiac signs."
       : "Ημερήσια, μηνιαία και ετήσια ανάγνωση του ουρανού για τα δώδεκα ζώδια.";
   return {
-    meta: metaFor(title, description, zodiacIndexPath(lang)),
+    meta: metaFor(title, description, zodiacIndexPath(lang), "website"),
     links: alternates(zodiacIndexPath("el"), zodiacIndexPath("en"), zodiacIndexPath(lang)),
   };
 }
@@ -45,16 +45,20 @@ export function readingHead(opts: {
   archiveKey?: string;
 }) {
   const { lang, signIndex, period, key } = opts;
-  const sign = tSign(SIGNS[signIndex]!, lang);
+  const signName = SIGNS[signIndex];
+  if (!signName) return { meta: [{ name: "robots", content: "noindex" }] };
+  const sign = tSign(signName, lang);
   const when = key ? formatLongDate(key, lang) : "";
   const suffix =
     period === "daily"
-      ? when
+      ? opts.archiveKey
+        ? lang === "en" ? `daily archive ${formatLongDate(opts.archiveKey, lang)}` : `ημερήσιο αρχείο ${formatLongDate(opts.archiveKey, lang)}`
+        : lang === "en" ? `today${when ? ` — ${when}` : ""}` : `σήμερα${when ? ` — ${when}` : ""}`
       : period === "month"
         ? lang === "en"
           ? `month ${when}`
           : `μήνας ${when}`
-        : when;
+        : lang === "en" ? `year ${when}` : `έτος ${when}`;
   const title = `${sign} — ${suffix} | MyZodiacMaps`;
   const description =
     lang === "en"
@@ -77,7 +81,9 @@ export function readingHead(opts: {
 }
 
 export function signLandingHead(lang: Lang, signIndex: number, key: string | null) {
-  const sign = tSign(SIGNS[signIndex]!, lang);
+  const signName = SIGNS[signIndex];
+  if (!signName) return { meta: [{ name: "robots", content: "noindex" }] };
+  const sign = tSign(signName, lang);
   const when = key ? formatLongDate(key, lang) : "";
   const title =
     lang === "en" ? `${sign} horoscope — ${when} | MyZodiacMaps` : `${sign} σήμερα — ${when} | MyZodiacMaps`;
@@ -86,7 +92,7 @@ export function signLandingHead(lang: Lang, signIndex: number, key: string | nul
       ? `${sign} today, this month and this year — readings of the sky, updated daily.`
       : `${sign} σήμερα, τον μήνα και τη χρονιά — ανάγνωση του ουρανού, με ημερήσια ενημέρωση.`;
   return {
-    meta: metaFor(title, description, signPath(signIndex, lang)),
+    meta: metaFor(title, description, signPath(signIndex, lang), "website"),
     links: alternates(signPath(signIndex, "el"), signPath(signIndex, "en"), signPath(signIndex, lang)),
   };
 }

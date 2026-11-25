@@ -11,10 +11,10 @@ export const Route = createFileRoute("/el/")({
         content:
           "Υπολόγισε τον γενέθλιο χάρτη σου και δες ψυχολογική ερμηνεία για πλανήτες, όψεις και σύνθεση, στα ελληνικά.",
       },
-      { property: "og:title", content: "Αστρολογικός Χάρτης & Ερμηνεία — MyZodiacMaps" },
+      { property: "og:title", content: "Δωρεάν γενέθλιος χάρτης και ερμηνεία στα ελληνικά — MyZodiacMaps" },
       {
         property: "og:description",
-        content: "Γενέθλιος χάρτης, όψεις και σύνθεση με καθαρή, ψυχολογική ερμηνεία στα ελληνικά.",
+        content: "Βάλε ημερομηνία, ώρα και τόπο γέννησης για να υπολογίσεις τον χάρτη σου. Δες Ήλιο, Σελήνη, Ωροσκόπο και ψυχολογική ερμηνεία πλανητών και όψεων στα ελληνικά.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://myzodiacmaps.gr/el" },

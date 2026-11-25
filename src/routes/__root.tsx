@@ -192,30 +192,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "google-site-verification", content: "AMdJtDUMPkvdibozIDQ7ShSFw4zJaI__oalITbAD0lA" },
-      { title: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
-      {
-        name: "description",
-        content:
-          "Υπολόγισε δωρεάν τον γενέθλιο χάρτη σου και διάβασε αναλυτική ερμηνεία για Ήλιο, Σελήνη, Ωροσκόπο, οίκους και όψεις — στα ελληνικά και στα αγγλικά.",
-      },
       { name: "theme-color", content: "#1c1733" },
 
       { property: "og:site_name", content: "MyZodiacMaps" },
-      { property: "og:title", content: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
-      {
-        property: "og:description",
-        content: "Υπολόγισε δωρεάν τον γενέθλιο χάρτη σου και διάβασε αναλυτική ερμηνεία για Ήλιο, Σελήνη, Ωροσκόπο, οίκους και όψεις — στα ελληνικά και στα αγγλικά.",
-      },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "el_GR" },
       { property: "og:locale:alternate", content: "en_US" },
 
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "MyZodiacMaps — Ο γενέθλιος χάρτης σου" },
-
-      { name: "twitter:description", content: "Υπολόγισε δωρεάν τον γενέθλιο χάρτη σου και διάβασε αναλυτική ερμηνεία για Ήλιο, Σελήνη, Ωροσκόπο, οίκους και όψεις — στα ελληνικά και στα αγγλικά." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d39cb7075a47cd88ac627a67d1c08491/id-preview-fd0fb1c4--784450e4-7580-4233-a756-96940d87fc5b.lovable.app-1786543112671.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d39cb7075a47cd88ac627a67d1c08491/id-preview-fd0fb1c4--784450e4-7580-4233-a756-96940d87fc5b.lovable.app-1786543112671.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
